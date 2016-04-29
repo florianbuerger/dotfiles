@@ -1,2 +1,4 @@
-# dotfiles
-Bash &amp; vim
+```
+brew install stow
+stow <program>
+```
