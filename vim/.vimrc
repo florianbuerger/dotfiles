@@ -2,6 +2,9 @@
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'dag/vim-fish'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'scrooloose/syntastic'
 call plug#end()
 
 set shell=$SHELL
@@ -82,3 +85,7 @@ nnoremap ; :
 
 " Save file when focus is lost
 au FocusLost * :wa
+
+" Enable JSX syntax and indent in JS files
+let g:jsx_ext_required = 0
+
