@@ -15,6 +15,8 @@ elif [ -f /etc/bash_completion ]; then
     source /etc/bash_completion
 fi
 
+export PATH=$HOME/.bin:$PATH
+
 # Enable z
 if which brew > /dev/null && [ -f "$(brew --prefix)/etc/profile.d/z.sh" ]; then
     source "$(brew --prefix)/etc/profile.d/z.sh"
@@ -63,7 +65,7 @@ alias dd="cd ~/Dropbox"
 alias sudo='sudo '
 
 # git
-alias g='tig status'
+alias g='git status -sb'
 alias gc='git commit -v'
 alias gcm='git commit -m'
 alias gco='git checkout'
@@ -101,3 +103,5 @@ alias gup='open -a GitUp `git rev-parse --show-toplevel`'
 # Focus
 alias focus='open focus://toggle'
 
+### Added by the Bluemix CLI
+source /usr/local/Bluemix/bx/bash_autocomplete
