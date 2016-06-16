@@ -8,8 +8,7 @@ alias ls="ls -F"
 
 # Git
 alias gsu='git submodule update --init --recursive'
-alias gs='git status'
-compdef _git gs=git-status
+alias gs='git status -sb'
 alias gut='git'
 alias cleanup_branches='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 
@@ -26,7 +25,8 @@ alias bm='bin/m'
 # Mac OS X
 alias o='open .'
 alias screensaver='/System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine'
-
+alias hide_desktop_icons='defaults write com.apple.finder CreateDesktop -bool false && killall Finder'
+alias show_desktop_icons='defaults write com.apple.finder CreateDesktop -bool true && killall Finder'
 # Commands starting with % for pasting from web
 alias %=' '
 alias $=' '
