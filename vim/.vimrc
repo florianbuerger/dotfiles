@@ -1,10 +1,11 @@
 " Enable vim-plug
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
-Plug 'dag/vim-fish'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/syntastic'
+Plug 'scrooloose/nerdcommenter'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 call plug#end()
 
 set shell=$SHELL
@@ -37,9 +38,15 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Wrap like a proper text editor
+set formatoptions=l
+set lbr
+
 "
 " NERDTree
 "
+let g:NERDTreeWinSize=40
+
 " Auto open when opening vim without a file
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -52,6 +59,9 @@ map <C-n> :NERDTreeToggle<CR>
 
 " Treat Fastfile, Snapfile, Podfile as ruby
 au BufRead,BufNewFile Podfile,Fastfile,Snapfile set filetype=ruby
+
+" Enable markdown
+au BufNewFile,BufFilePre,BufRead *.md,*.markdown set filetype=markdown
 
 " Search for all lowercase -> case insensitive, 
 " case-sensitive if one character in search input 
@@ -86,6 +96,6 @@ nnoremap ; :
 " Save file when focus is lost
 au FocusLost * :wa
 
-" Enable JSX syntax and indent in JS files
-let g:jsx_ext_required = 0
-
+" Enable YAML frontmatter in markdown files
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_folding_disabled = 1 " disable folding
