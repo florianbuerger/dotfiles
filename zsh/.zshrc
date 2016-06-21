@@ -24,6 +24,3 @@ zstyle ':completion:*' insert-tab pending
 
 # Load files
 for file (~/.zsh/*.zsh) source $file
-
-export NVM_DIR="/Users/soffes/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
