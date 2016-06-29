@@ -1,0 +1,1 @@
+. ~/.fastlane/completions/completion.sh
