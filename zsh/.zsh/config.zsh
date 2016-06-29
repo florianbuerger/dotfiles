@@ -1,8 +1,9 @@
 # Editor
-export EDITOR='vim'
+export EDITOR='nvim'
 
 # Paths
-export PATH="$HOME/.bin:/usr/local/bin:/usr/local/sbin:$PATH"
+export GEM_HOME=$HOME/.gem
+export PATH="$HOME/.bin:$GEM_HOME/bin:usr/local/bin:/usr/local/sbin:$PATH"
 
 # Colors
 export CLICOLOR=1

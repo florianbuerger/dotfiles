@@ -28,6 +28,9 @@ set cursorline
 set ruler
 set relativenumber
 set undofile
+set backupdir=~/.vim/backup/
+set directory=~/.vim/swap/
+set undodir=~/.vim/undo/
 
 " Use `jj` for escape
 imap jj <Esc>

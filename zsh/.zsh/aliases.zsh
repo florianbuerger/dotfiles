@@ -5,6 +5,7 @@ alias ....='cd ../../..'
 
 # ls
 alias ls="ls -F"
+alias cat="ccat"
 
 # Git
 alias gsu='git submodule update --init --recursive'
@@ -15,7 +16,7 @@ alias gd='git diff'
 alias gca='git add -A && git commit'
 
 # Editor
-alias s='subl .'
+alias e='neovim'
 
 # Rails
 alias tlog='tail -f log/development.log'
