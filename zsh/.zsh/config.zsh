@@ -1,5 +1,5 @@
 # Editor
-export EDITOR='nvim'
+export EDITOR='vim'
 
 # Paths
 export GEM_HOME=$HOME/.gem

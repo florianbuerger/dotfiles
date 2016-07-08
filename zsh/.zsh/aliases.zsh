@@ -36,3 +36,4 @@ alias $=' '
 
 # Xcode
 alias ddd='rm -rf ~/Library/Developer/Xcode/DerivedData'
+alias format_using_spacecommander='"/Users/florian/Code/OpenSource/spacecommander"/format-objc-files.sh -s'
