@@ -1,3 +1,5 @@
 vim/.vim/plugged
 fish_history
 /vim/.vim/undo
+/vim/.vim/swap
+/vim/.vim/.netrwhist
