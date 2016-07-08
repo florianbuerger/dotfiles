@@ -6,6 +6,7 @@ Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdcommenter'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+Plug 'ctrlpvim/ctrlp.vim'
 call plug#end()
 
 set shell=$SHELL
@@ -76,12 +77,15 @@ au BufNewFile,BufFilePre,BufRead *.md,*.markdown set filetype=markdown
 " is uppercase
 set ignorecase
 set smartcase
+
 " Show results as soon as you type
 set showmatch
 set incsearch
 set hlsearch
+
 " Clear search results with ,<space>
 nnoremap <leader><space> :noh<cr>
+
 " Use tab to highlight matching brackets
 nnoremap <tab> %
 vnoremap <tab> %
@@ -95,8 +99,6 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
-nnoremap j gj
-nnoremap k gk
 
 " Use ; for : 
 nnoremap ; :
@@ -107,3 +109,7 @@ au FocusLost * :wa
 " Enable YAML frontmatter in markdown files
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_folding_disabled = 1 " disable folding
+
+" CtrlP
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
