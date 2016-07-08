@@ -32,6 +32,11 @@ set backupdir=~/.vim/backup/
 set directory=~/.vim/swap/
 set undodir=~/.vim/undo/
 
+" Start scrolling when we're getting close to margins
+set scrolloff=10
+set sidescrolloff=15
+set sidescroll=1
+
 " Use `jj` for escape
 imap jj <Esc>
 
