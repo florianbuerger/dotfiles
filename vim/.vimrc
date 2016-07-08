@@ -46,6 +46,10 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Open new split on bottom or right
+set splitbelow
+set splitright
+
 " Wrap like a proper text editor
 set formatoptions=l
 set lbr
