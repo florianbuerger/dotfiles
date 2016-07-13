@@ -17,7 +17,8 @@ elif [ -f /etc/bash_completion ]; then
     source /etc/bash_completion
 fi
 
-export PATH=$HOME/.bin:$PATH
+export GEM_HOME=$HOME/.gem
+export PATH="$HOME/.bin:$GEM_HOME/bin:usr/local/bin:/usr/local/sbin:$PATH"
 
 # Enable z
 if which brew > /dev/null && [ -f "$(brew --prefix)/etc/profile.d/z.sh" ]; then
