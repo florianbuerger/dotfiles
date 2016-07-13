@@ -97,9 +97,3 @@ alias gup='open -a GitUp `git rev-parse --show-toplevel`'
 
 # Focus
 alias focus='open focus://toggle'
-
-### Added by the Bluemix CLI
-source /usr/local/Bluemix/bx/bash_autocomplete
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
