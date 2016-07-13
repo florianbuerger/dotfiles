@@ -1,12 +1,10 @@
 " Enable vim-plug
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdcommenter'
-Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mhinz/vim-startify'
 call plug#end()
 
 set shell=$SHELL
@@ -112,4 +110,4 @@ let g:vim_markdown_folding_disabled = 1 " disable folding
 
 " CtrlP
 let g:ctrlp_map = '<c-p>'
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|_site)|(\.(swp|ico|git|svn))$'
