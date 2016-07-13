@@ -29,14 +29,6 @@ fi
 # generate that file
 . ~/.fastlane/completions/completion.sh
 
-# Open Xcode project or workspace from current directory in active xcode
-function x() {
-    local xcode="open -a $(xcode-select -p | awk -F'/' '{print $3}')"
-    local project="$(ls | grep '.*\.xcworkspace$')"
-    [[ -z $project ]] && project="$(ls | grep '.*\.xcodeproj$')"
-    [[ -n $project ]] && $xcode $project
-}
-
 # Git completion and branch info in prompt
 source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
 source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
