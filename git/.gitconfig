@@ -1,0 +1,39 @@
+[user]
+	name = Florian Buerger
+	email = florian@florianbuerger.com
+
+[alias]
+	c = commit -v
+	d = diff
+	dc = diff --cached
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	a = add -p
+	ca = commit -a
+
+[core]
+	editor = subl -w
+	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	excludesfile = ~/.gitignore
+
+[push]
+	default = matching
+
+[pager]
+	log = diff-highlight | less
+	show = diff-highlight | less
+	diff = diff-highlight | less
+
+[interactive]
+	diffFilter = diff-highlight
+[merge]
+	ff = false
+	tool = opendiff
+[mergetool]
+	keepBackup = false
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[credential]
+	helper = osxkeychain
