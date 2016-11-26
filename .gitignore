@@ -3,3 +3,4 @@ fish_history
 /vim/.vim/undo
 /vim/.vim/swap
 /vim/.vim/.netrwhist
+*.sublime-workspace

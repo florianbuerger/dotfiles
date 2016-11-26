@@ -18,22 +18,18 @@
 [push]
 	default = matching
 
-[pager]
-	log = diff-highlight | less
-	show = diff-highlight | less
-	diff = diff-highlight | less
-
-[interactive]
-	diffFilter = diff-highlight
 [merge]
 	ff = false
 	tool = opendiff
+
 [mergetool]
 	keepBackup = false
+
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+
 [credential]
 	helper = osxkeychain
