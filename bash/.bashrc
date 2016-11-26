@@ -1,11 +1,12 @@
-if which rbenv > /dev/null; then
-	eval "$(rbenv init -)"
-fi
 export CLICOLOR=1
-export EDITOR="vim"
+export EDITOR="nano"
 
 # Case-insensitive globbing (used in pathname expansion)
 set completion-ignore-case On
+
+# Ruby
+export GEM_HOME=$HOME/.gem
+export PATH=$GEM_HOME/bin:$PATH
 
 # Android env
 export ANDROID_HOME=/usr/local/opt/android-sdk
@@ -17,8 +18,7 @@ elif [ -f /etc/bash_completion ]; then
     source /etc/bash_completion
 fi
 
-export GEM_HOME=$HOME/.gem
-export PATH="$HOME/.bin:$GEM_HOME/bin:usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="$HOME/.bin:usr/local/bin:/usr/local/sbin:$PATH"
 
 # Enable z
 if which brew > /dev/null && [ -f "$(brew --prefix)/etc/profile.d/z.sh" ]; then
@@ -54,7 +54,7 @@ alias ll="ls -lahL"
 # Shortcuts
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
-alias dd="cd ~/Dropbox"
+alias dg="cd ~/Google Drive"
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
@@ -71,13 +71,14 @@ alias gd='git diff'
 alias gP='git push'
 alias gp='git pull --rebase'
 alias gg='git log --graph --oneline --decorate --date=relative --all'
+alias gs='git status -sb'
 
 # system
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 alias hide-desktop-icons="defaults write com.apple.finder CreateDesktop -bool false; killall Finder;"
 alias show-desktop-icons="defaults write com.apple.finder CreateDesktop -bool true; killall Finder;"
 alias screensaver='/System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app/Contents/MacOS/creenSaverEngine'
-alias serve='python -m SimpleHTTPServer'
+alias serve='python -m SimpleHTTPServer && open http://localhost:8000'
 
 # Ruby
 alias be='bundle exec'
@@ -86,14 +87,7 @@ alias bi='bundle install'
 # Xcode
 alias ddd='rm -rf ~/Library/Developer/Xcode/DerivedData'
 alias bump='agvtool bump -all'
-alias format-objc='/Users/florian/Code/OpenSource/spacecommander/format-objc-files.sh -s'
-
-
-# Carthage
-alias cus='carthage update --platform iOS --use-ssh'
-
-# GitUp
-alias gup='open -a GitUp `git rev-parse --show-toplevel`'
+alias spacecommander='~/Code/Vendor/spacecommander/format-objc-files.sh -s'
 
 # Focus
 alias focus='open focus://toggle'
