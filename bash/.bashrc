@@ -1,6 +1,9 @@
 export CLICOLOR=1
 export EDITOR="nano"
 
+# Homebrew
+export PATH="$HOME/.bin:usr/local/bin:/usr/local/sbin:$PATH"
+
 # Case-insensitive globbing (used in pathname expansion)
 set completion-ignore-case On
 
@@ -8,8 +11,9 @@ set completion-ignore-case On
 export GEM_HOME=$HOME/.gem
 export PATH=$GEM_HOME/bin:$PATH
 
-# Android env
-export ANDROID_HOME=/usr/local/opt/android-sdk
+# Android
+export ANDROID_HOME="/usr/local/opt/android-sdk/"
+export PATH=$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH
 
 # Add tab completion for many Bash commands
 if which brew > /dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
@@ -17,8 +21,6 @@ if which brew > /dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
 elif [ -f /etc/bash_completion ]; then
     source /etc/bash_completion
 fi
-
-export PATH="$HOME/.bin:usr/local/bin:/usr/local/sbin:$PATH"
 
 # Enable z
 if which brew > /dev/null && [ -f "$(brew --prefix)/etc/profile.d/z.sh" ]; then
