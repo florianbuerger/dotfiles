@@ -86,6 +86,10 @@ alias serve='python -m SimpleHTTPServer && open http://localhost:8000'
 alias be='bundle exec'
 alias bi='bundle install'
 
+# radio
+alias radio-frisky='mplayer http://stream2.friskyradio.com/frisky_mp3_hi/;*3'
+alias radio-clubsandwich='mplayer http://fluxfm.hoerradar.de/flux-clubsandwich-mp3-hq'
+
 # Xcode
 alias ddd='rm -rf ~/Library/Developer/Xcode/DerivedData'
 alias bump='agvtool bump -all'
