@@ -49,14 +49,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ,,='cd ..'
 alias ,,,='cd ../..'alias ll="ls -la"
-alias console="tail -40 -f /var/log/system.log"
-alias cat='ccat'
 alias ll="ls -lahL"
-
-# Shortcuts
-alias dl="cd ~/Downloads"
-alias dt="cd ~/Desktop"
-alias dg="cd ~/Google Drive"
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
