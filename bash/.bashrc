@@ -1,19 +1,30 @@
+export GREP_OPTIONS='--color=auto'
 export CLICOLOR=1
-export EDITOR="nano"
+export EDITOR="vim"
 
 # Homebrew
-export PATH="$HOME/.bin:usr/local/bin:/usr/local/sbin:$PATH"
+export PATH=$HOME/.bin:usr/local/bin:/usr/local/sbin:$PATH
+
+# Python user install on macOS
+export PATH=$HOME/Library/Python/2.7/bin:usr/local/bin:/usr/local/sbin:$PATH
 
 # Case-insensitive globbing (used in pathname expansion)
 set completion-ignore-case On
 
 # Ruby
-export GEM_HOME=$HOME/.gem
-export PATH=$GEM_HOME/bin:$PATH
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+source /usr/local/opt/chruby/share/chruby/auto.sh
 
 # Android
-export ANDROID_HOME="/usr/local/opt/android-sdk/"
+export ANDROID_HOME=/usr/local/opt/android-sdk/
 export PATH=$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH
+
+# Go
+export GOPATH=$HOME/Code/
+export PATH=$GOPATH/bin:$PATH
+
+# User grc for more colors :)
+source "`brew --prefix`/etc/grc.bashrc"
 
 # Add tab completion for many Bash commands
 if which brew > /dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
@@ -90,3 +101,7 @@ alias spacecommander='~/Code/Vendor/spacecommander/format-objc-files.sh -s'
 
 # Focus
 alias focus='open focus://toggle'
+
+# node
+export NVM_DIR="/Users/florian/.nvm"
+alias loadnvm="[ -s '$NVM_DIR/nvm.sh' ] && . '$NVM_DIR/nvm.sh' && nvm use --lts"

@@ -1,4 +1,9 @@
+# dotfiles
+
+## Installation
+
+The program `stow` is required. If you don't have it installed, run `brew install stow`.
+
 ```
-brew install stow
-stow <program>
+sh install.sh
 ```
