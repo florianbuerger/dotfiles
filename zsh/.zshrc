@@ -1,26 +1,31 @@
-# Set Apple Terminal.app resume directory
-if [[ $TERM_PROGRAM == "Apple_Terminal" ]] && [[ -z "$INSIDE_EMACS" ]] {
-  function chpwd {
-    local SEARCH=' '
-    local REPLACE='%20'
-    local PWD_URL="file://$HOSTNAME${PWD//$SEARCH/$REPLACE}"
-    printf '\e]7;%s\a' "$PWD_URL"
-  }
+ZSH_HOME=~/Code/Personal/dotfiles/zsh
 
-  chpwd
-}
+source $ZSH_HOME/antigen.zsh
 
-# Load functions and completion
-fpath=(~/.zsh/functions $fpath)
-autoload -U compinit
-compinit
-autoload -U ~/.zsh/functions/*(:t)
+antigen bundle robbyrussell/oh-my-zsh lib/
 
-# Matches case insensitive for lowercase
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# Theme
+antigen theme jdavis/zsh-files themes/jdavis
 
-# Pasting with tabs doesn't perform completion
-zstyle ':completion:*' insert-tab pending
+# Plugins
+antigen bundle git
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle rupa/z
+antigen bundle ssh-agent
+antigen bundle node
+antigen bundle npm
+antigen bundle brew
+antigen bundle brew-cask
+antigen bundle gem
+antigen bundle osx
 
-# Load files
-for file (~/.zsh/*.zsh) source $file
+# For sudo-ing aliases
+# https://wiki.archlinux.org/index.php/Sudo#Passing_aliases
+alias sudo='sudo '
+
+# radio
+alias radio-frisky='mplayer http://stream2.friskyradio.com/frisky_mp3_hi/;*3'
+alias radio-clubsandwich='mplayer http://fluxfm.hoerradar.de/flux-clubsandwich-mp3-hq'
+alias radio-pure='mplayer http://www.radionetz.de:8000/purefm-bln.mp3'
+alias radio-minimal='mplayer http://stream1.laut.fm/minimalcalling'
+alias radio-smash='mplayer http://uk1.internet-radio.com:8106/;'
