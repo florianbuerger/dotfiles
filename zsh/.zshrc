@@ -10,6 +10,10 @@ if [[ $TERM_PROGRAM == "Apple_Terminal" ]] && [[ -z "$INSIDE_EMACS" ]] {
   chpwd
 }
 
+export GREP_OPTIONS='--color=auto'
+export CLICOLOR=1
+export EDITOR="vim"
+
 # Load functions and completion
 fpath=(~/.zsh/functions $fpath)
 autoload -U compinit

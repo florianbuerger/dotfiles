@@ -1,0 +1,12 @@
+{
+  "html": {
+    "indent_size": 2
+  },
+  "css": {
+    "newline_between_rules": false,
+    "indent_size": 2
+  },
+  "js": {
+    "indent_size": 2
+  }
+}
