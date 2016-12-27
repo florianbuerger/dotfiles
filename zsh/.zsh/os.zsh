@@ -5,6 +5,15 @@ source "`brew --prefix`/etc/grc.bashrc"
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias ll='ls -laHl'
+
+# ls after cd
+function chpwd() {
+    emulate -L zsh
+    ls -a
+}
+setopt auto_cd # don't need to type 'cd'
+
 
 # Mac OS X
 alias o='open .'

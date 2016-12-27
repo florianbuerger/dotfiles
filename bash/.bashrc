@@ -46,21 +46,13 @@ fi
 source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
 source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
 
-BLUE=$(tput setaf 4)
-RESET=$(tput sgr0)
-if [ "$SSH_CONNECTION" ]; then 
-    PS1='\[$BLUE\]\u@\h:\W$(__git_ps1 "(%s)")\$ \[$RESET\]'
-else
-    PS1='\[$BLUE\]\W$(__git_ps1 "(%s)")\$ \[$RESET\]'
-fi
-
 # osx
 alias o='open .'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ,,='cd ..'
-alias ,,,='cd ../..'alias ll="ls -la"
-alias ll="ls -lahL"
+alias ,,,='cd ../..'
+alias ll="ls -la"
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '

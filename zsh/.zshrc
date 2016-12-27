@@ -12,7 +12,7 @@ if [[ $TERM_PROGRAM == "Apple_Terminal" ]] && [[ -z "$INSIDE_EMACS" ]] {
 
 export GREP_OPTIONS='--color=auto'
 export CLICOLOR=1
-export EDITOR="vim"
+export EDITOR="mate"
 
 # Load functions and completion
 fpath=(~/.zsh/functions $fpath)
