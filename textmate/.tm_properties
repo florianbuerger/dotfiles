@@ -1,0 +1,59 @@
+# Settings
+
+encoding         = UTF-8
+fontName         = "SF Mono Regular"
+fontSize         = 14
+lineEndings      = '\n'
+showInvisibles   = false
+softWrap         = true
+tabSize          = 2
+
+# Hide log, vendor and tmp directories from search popups.
+
+myExtraExcludes = "log,vendor,tmp,_site"
+excludeInFileChooser  = "{$excludeInFileChooser,$myExtraExcludes}" 
+excludeInFolderSearch = "{$excludeInFolderSearch,$myExtraExcludes}" 
+fileBrowserGlob  = "{*,.tm_properties,.htaccess}"
+
+# Variables
+
+PATH   = "$PATH:$HOME/.bin"
+TM_GIT = "/usr/local/bin/git"
+TM_RUBY = "/usr/local/bin/ruby"
+
+[ text ]
+spellChecking    = true
+softWrap         = false
+wrapColumn       = "Use Window Frame"
+softTabs         = true
+tabSize          = 2
+
+[ text.plain ]
+spellChecking    = true
+softWrap         = true
+wrapColumn       = "Use Window Frame"
+softTabs         = false
+tabSize          = 4
+
+[ text.html.markdown ]
+spellChecking    = true
+softWrap         = true
+wrapColumn       = 80
+softTabs         = false
+tabSize          = 4
+
+[ source ]
+softWrap         = true
+wrapColumn       = "Use Window Frame"
+softTabs         = true
+tabSize          = 2
+
+[ source.plist ]
+softTabs       = false
+tabSize        = 4
+
+[ source.tm-properties ]
+spellChecking  = false
+
+[ "{Capfile,Gemfile,Gemfile.lock,Guardfile,Fastfile,Appfile,Deliverfile}" ]
+fileType         = source.ruby
