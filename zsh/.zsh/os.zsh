@@ -7,14 +7,6 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ll='ls -laHl'
 
-# ls after cd
-function chpwd() {
-    emulate -L zsh
-    ls -a
-}
-setopt auto_cd # don't need to type 'cd'
-
-
 # Mac OS X
 alias o='open .'
 alias screensaver='/System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine'
