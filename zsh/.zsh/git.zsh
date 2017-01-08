@@ -1,3 +1,6 @@
+# alias hub to git
+eval "$(hub alias -s)"
+
 alias g='git status -sb'
 alias gc='git commit -v'
 alias gcm='git commit -m'
