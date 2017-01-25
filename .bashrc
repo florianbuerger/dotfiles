@@ -315,6 +315,7 @@ alias gP='git push'
 alias gp='git pull --rebase'
 alias gg='git log --graph --oneline --decorate --date=relative --all'
 alias gs='git status -sb'
+alias gam='git commit -A && git commit --amend --no-edit'
 
 # Copy my public key to the system clipboard.
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
@@ -327,6 +328,9 @@ alias show-desktop-icons="defaults write com.apple.finder CreateDesktop -bool tr
 
 # Start a web server using python in the current directory
 alias serve='python -m SimpleHTTPServer && open http://localhost:8000'
+
+# update ALL THE THINGS
+alias update='brew upgrade -all && gem update && gem clean && mas upgrade && softwareupdate --install --all'
 
 # Simplify bundler for ruby projects
 alias be='bundle exec'
