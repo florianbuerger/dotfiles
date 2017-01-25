@@ -13,7 +13,8 @@ tabSize          = 2
 myExtraExcludes = "log,vendor,tmp,_site"
 excludeInFileChooser  = "{$excludeInFileChooser,$myExtraExcludes}" 
 excludeInFolderSearch = "{$excludeInFolderSearch,$myExtraExcludes}" 
-fileBrowserGlob  = "{*,.tm_properties,.htaccess}"
+fileBrowserGlob  = "{*,.tm_properties,.htaccess,.*}"
+exclude = "{$exclude,.git}" 
 
 # Variables
 

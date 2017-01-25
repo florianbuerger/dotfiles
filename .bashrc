@@ -139,16 +139,16 @@ PATH+=:usr/local/bin:/usr/local/sbin
 PATH+=:$HOME/Library/Python/2.7/bin
 
 # Android
-export ANDROID_HOME=/usr/local/opt/android-sdk/
+export ANDROID_HOME=/Users/florian/Library/Android/sdk
 PATH+=:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
 # Go
-export GOPATH=$HOME/Code/
+export GOPATH=$HOME/Code
 PATH+=:$GOPATH/bin
 
 # Ruby
-export GEM_HOME=$HOME/gems
-PATH+=:$HOME/gems/bin
+export GEM_HOME=$HOME/.gem
+PATH+=:$GEM_HOME/bin
 
 # Finally append system path
 PATH+=:$SYSTEM_PATH
@@ -176,28 +176,12 @@ export HISTSIZE=150
 export LANG='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
 
-# Set colors for ls command.
-#   1.  directory: ex
-#   2.  symbolic link: fx
-#   3.  socket: gx
-#   4.  pipe: bx
-#   5.  executable: cx
-#   6.  block special: aH
-#   7.  character special: aA
-#   8.  executable with setuid bit set: cA
-#   9.  executable with setgid bit set: cH
-#   10. directory writable to others, with sticky bit: eA
-#   11. directory writable to others, without sticky bit: eH
+# Use colors
 export CLICOLOR=1
-export LSCOLOR='exfxgxbxcxaHaAcAcHeAeH'
 export GREP_OPTIONS='--color=auto'
 
 # Add tab completion for many Bash commands
-if which brew > /dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
-    source "$(brew --prefix)/etc/bash_completion";
-elif [ -f /etc/bash_completion ]; then
-    source /etc/bash_completion
-fi
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
 # Enable z
 if which brew > /dev/null && [ -f "$(brew --prefix)/etc/profile.d/z.sh" ]; then
@@ -226,10 +210,7 @@ function git_dirty {
     if [[ $status =~ ${dirty} ]]; then echo $'\e[31m';
         
     # Next check if changes have been staged.
-    elif [[ $status =~ ${commit} ]]; then echo $'\e[36m';
-    
-    # Check if its ahead of remote.
-    elif [[ $status =~ ${push} ]]; then echo $'\e[33m';
+    elif [[ $status =~ ${commit} ]]; then echo $'\e[35m';
     
     # Default to clean.
     else echo $'\e[1;32m';
@@ -254,11 +235,33 @@ function git_branch {
     unset IFS
 }
 
-# Begin appending information to PS1
-export PS1=$'\n'
+# Colors
+#   0: reset
+#   1: bold text
+#   30: black text
+#   31: red text
+#   32: green text
+#   33: yellow text
+#   34: blue text
+#   35: magenta text
+#   36: cyan text
+#   37: white text
+#   39: default text color
+#   40: black background
+#   41: red background
+#   42: green background
+#   43: yellow background
+#   44: blue background
+#   45: magenta background
+#   46: cyan background
+#   47: white background
+#   49: default background color
 
-# Add red working directory: '\w'
-PS1+=$'\e[1;31m\w\e[0m'
+# Begin appending information to PS1
+export PS1=$''
+
+# Add cyan working directory: '\w'
+PS1+=$'\e[1;36m\w\e[0m'
 
 # Add git information
 PS1+='$(git_branch) '
@@ -312,6 +315,7 @@ alias gP='git push'
 alias gp='git pull --rebase'
 alias gg='git log --graph --oneline --decorate --date=relative --all'
 alias gs='git status -sb'
+alias gam='git commit -A && git commit --amend --no-edit'
 
 # Copy my public key to the system clipboard.
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
@@ -324,6 +328,9 @@ alias show-desktop-icons="defaults write com.apple.finder CreateDesktop -bool tr
 
 # Start a web server using python in the current directory
 alias serve='python -m SimpleHTTPServer && open http://localhost:8000'
+
+# update ALL THE THINGS
+alias update='brew upgrade -all && gem update && gem clean && mas upgrade && softwareupdate --install --all'
 
 # Simplify bundler for ruby projects
 alias be='bundle exec'
@@ -348,3 +355,5 @@ alias focus='open focus://toggle'
 # a lot, this is only loaded when needed.
 export NVM_DIR="/Users/florian/.nvm"
 alias loadnvm="[ -s '$NVM_DIR/nvm.sh' ] && . '$NVM_DIR/nvm.sh' && nvm use --lts"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
