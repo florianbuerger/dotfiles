@@ -146,12 +146,12 @@ PATH+=:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 export GOPATH=$HOME/Code
 PATH+=:$GOPATH/bin
 
-# Ruby
-export GEM_HOME=$HOME/.gem
-PATH+=:$GEM_HOME/bin
-
 # Finally append system path
 PATH+=:$SYSTEM_PATH
+
+# Ruby
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
 
 # Set TextMate to be the default editor
 export EDITOR='mate'
@@ -315,7 +315,7 @@ alias gP='git push'
 alias gp='git pull --rebase'
 alias gg='git log --graph --oneline --decorate --date=relative --all'
 alias gs='git status -sb'
-alias gam='git commit -A && git commit --amend --no-edit'
+alias gam='git add -A && git commit --amend --no-edit'
 
 # Copy my public key to the system clipboard.
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
@@ -356,4 +356,3 @@ alias focus='open focus://toggle'
 export NVM_DIR="/Users/florian/.nvm"
 alias loadnvm="[ -s '$NVM_DIR/nvm.sh' ] && . '$NVM_DIR/nvm.sh' && nvm use --lts"
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
