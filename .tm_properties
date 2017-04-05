@@ -10,7 +10,7 @@ tabSize          = 2
 
 # Hide log, vendor and tmp directories from search popups.
 
-myExtraExcludes = "log,vendor,tmp,_site"
+myExtraExcludes = "log,vendor,tmp,_site,node_modules"
 excludeInFileChooser  = "{$excludeInFileChooser,$myExtraExcludes}" 
 excludeInFolderSearch = "{$excludeInFolderSearch,$myExtraExcludes}" 
 fileBrowserGlob  = "{*,.tm_properties,.htaccess,.*}"

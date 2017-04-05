@@ -1,25 +1,25 @@
 CURRENT_DIR := $(shell pwd)
 
-default: bash git nano textmate ruby tools
+default: git shell vim textmate ruby bin
 	
 git:
 	ln -sFf $(CURRENT_DIR)/.gitconfig $(HOME)/.gitconfig
+	ln -sFf $(CURRENT_DIR)/.gitignore_global $(HOME)/.gitignore_global
 
-bash:
-	ln -sFf $(CURRENT_DIR)/.bashrc $(HOME)/.bashrc
-	ln -sFf $(CURRENT_DIR)/.bash_profile $(HOME)/.bash_profile
+shell:
+	ln -sFf $(CURRENT_DIR)/.zshrc $(HOME)/.zshrc
 	ln -sFf $(CURRENT_DIR)/.hushlogin $(HOME)/.hushlogin
 	ln -sFf $(CURRENT_DIR)/.inputrc $(HOME)/.inputrc
-	ln -sFf $(CURRENT_DIR)/.profile $(HOME)/.profile
+	ln -sFf $(CURRENT_DIR)/.zsh $(HOME)/.zsh
 	
-nano:
-	ln -sFf $(CURRENT_DIR)/.nanorc $(HOME)/.nanorc
-	
+vim:
+	ln -sFf $(CURRENT_DIR)/.vimrc $(HOME)/.vimrc
+
 textmate:
 	ln -sFf $(CURRENT_DIR)/.tm_properties $(HOME)/.tm_properties
-	
+
 ruby:
 	ln -sFf $(CURRENT_DIR)/.gemrc $(HOME)/.gemrc
-	
-tools:
+
+bin:
 	ln -sFf $(CURRENT_DIR)/.bin $(HOME)/.bin
