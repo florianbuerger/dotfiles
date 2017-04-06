@@ -8,10 +8,19 @@
 	editor = vim
 
 [push]
-	default = matching
+	default = simple
+	followTags = true
+
+[diff]
+	tool = icdiff
+[difftool]
+	prompt = false
+[difftool "icdiff"]
+	cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
 
 [merge]
-	ff = false
+	ff = only
+	conflictstyle = diff3
 	tool = opendiff
 
 [mergetool]
@@ -25,3 +34,15 @@
 
 [credential]
 	helper = osxkeychain
+
+[alias]
+	prune = fetch --prune
+	undo = reset --soft HEAD^
+	stash-all = stash save --include-untracked
+	glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+
+[status]
+	showUntrackedFiles = all
+
+[transfer]
+	fsckobjects = true
