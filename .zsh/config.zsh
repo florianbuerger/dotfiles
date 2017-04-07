@@ -1,9 +1,6 @@
 # Editor
 export EDITOR='vim'
 
-# Paths
-export PATH="$HOME/.bin:/usr/local/bin:/usr/local/sbin:$PATH"
-
 # Colors
 export CLICOLOR=1
 autoload colors; colors;

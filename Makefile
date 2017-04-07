@@ -7,6 +7,7 @@ git:
 	ln -sFf $(CURRENT_DIR)/.gitignore_global $(HOME)/.gitignore_global
 
 shell:
+	ln -sFf $(CURRENT_DIR)/.zshenv $(HOME)/.zshenv
 	ln -sFf $(CURRENT_DIR)/.zshrc $(HOME)/.zshrc
 	ln -sFf $(CURRENT_DIR)/.hushlogin $(HOME)/.hushlogin
 	ln -sFf $(CURRENT_DIR)/.inputrc $(HOME)/.inputrc
