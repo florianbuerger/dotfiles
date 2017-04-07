@@ -22,5 +22,12 @@ function git_prompt_info() {
   echo " $(parse_git_dirty)${ref#refs/heads/}%{$reset_color%}"
 }
 
-PROMPT='%{$fg[blue]%}%c%{$reset_color%}$ '
+function machine_info() {
+	if [[ -n "$SSH_CONNCETION" ]]; then
+		local user=`whoami`
+		echo "%{$fg[cyan]%}$user@%m:%{$reset_color%}"
+	fi
+}
+
+PROMPT='$(machine_info)%{$fg[blue]%}%c%{$reset_color%}$ '
 RPROMPT='$(git_prompt_info)'
