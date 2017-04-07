@@ -23,7 +23,7 @@ function git_prompt_info() {
 }
 
 function machine_info() {
-	if [[ -n "$SSH_CONNCETION" ]]; then
+	if [[ -n "$SSH_CLIENT" ]]; then
 		local user=`whoami`
 		echo "%{$fg[cyan]%}$user@%m:%{$reset_color%}"
 	fi
