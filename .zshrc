@@ -1,7 +1,3 @@
-export LANG=en_US.UTF-8
-export LANGUAGE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-
 # Load functions and completion
 fpath=(~/.zsh/functions /usr/local/share/zsh-completions /usr/local/share/zsh/site-functions $fpath)
 autoload -U compinit
