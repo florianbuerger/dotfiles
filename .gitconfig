@@ -19,7 +19,6 @@
 	cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
 
 [merge]
-	ff = only
 	conflictstyle = diff3
 	tool = opendiff
 
