@@ -17,7 +17,7 @@ alias hide_desktop_icons='defaults write com.apple.finder CreateDesktop -bool fa
 alias show_desktop_icons='defaults write com.apple.finder CreateDesktop -bool true && killall Finder'
 alias server='open http://localhost:8000 && python -m SimpleHTTPServer'
 alias flushdns='dscacheutil -flushcache && sudo killall -HUP mDNSResponder && echo "Be sure to reset Google Chrome as well: 'chrome://net-internals/#dns'"'
-alias focus='open focus://focus'
+alias f='open focus://toggle'
 
 # Commands starting with % for pasting from web
 alias %=' '
