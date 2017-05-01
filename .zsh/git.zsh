@@ -13,3 +13,4 @@ alias gcams='"/Users/florian/Code/Vendor/spacecommander"/format-objc-files.sh -s
 alias gg='git log --graph --abbrev-commit --decorate --format=oneline'
 alias gt='gittower .'
 alias gp='git push'
+alias gup='git pull --rebase && git push'
