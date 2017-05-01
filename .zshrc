@@ -12,3 +12,8 @@ zstyle ':completion:*' insert-tab pending
 
 # Load files
 for file (~/.zsh/*.zsh) source $file
+
+# Local secrets
+if [[ -a ~/.secrets ]]; then
+	source ~/.secrets
+fi
