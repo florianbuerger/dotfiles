@@ -28,3 +28,4 @@ alias ddd='rm -rf ~/Library/Developer/Xcode/DerivedData'
 alias xcode-beta='sudo xcode-select -s /Applications/Xcode-beta.app'
 alias xcode='sudo xcode-select -s /Applications/Xcode.app'
 alias bump='agvtool next-version -all'
+alias swiftformat="/usr/local/bin/swiftformat --indent 4"
