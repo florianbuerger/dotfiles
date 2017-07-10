@@ -10,7 +10,7 @@ set gray (set_color -o black)
 # set __fish_git_prompt_showstashstate 'no'
 # set __fish_git_prompt_showuntrackedfiles 'no'
 # set __fish_git_prompt_showupstream 'yes'
-set __fish_git_prompt_color_branch grey
+set __fish_git_prompt_color_branch magenta
 set __fish_git_prompt_color_upstream_ahead green
 set __fish_git_prompt_color_upstream_behind red
 
