@@ -29,3 +29,6 @@ alias xcode-beta='sudo xcode-select -s /Applications/Xcode-beta.app'
 alias xcode='sudo xcode-select -s /Applications/Xcode.app'
 alias bump='agvtool next-version -all'
 alias swiftformat="/usr/local/bin/swiftformat --indent 4"
+
+# Brew
+alias brewup='brew update && brew doctor && brew outdated && brew upgrade && brew cleanup -s --prune=1'
