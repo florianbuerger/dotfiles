@@ -1,8 +1,16 @@
 syntax on
 filetype plugin indent on
-set tabstop=2
-set shiftwidth=2
-set expandtab
+set background=light
+
+set number
+set laststatus=2
+set modelines=5
+set vb t_vb=
+set ts=2 sts=2 sw=2 expandtab
+set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
+set incsearch
+set nojoinspaces
+set display+=lastline
 
 " Change cursor depending on mode 
 if has("autocmd")
@@ -15,3 +23,5 @@ if has("autocmd")
     \ endif
   au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
 endif
+
+au BufRead, BufNewFile Podfile,Fastfile,Appfile,Deliverfile set filetype=ruby
