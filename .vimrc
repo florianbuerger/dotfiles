@@ -11,6 +11,7 @@ set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 set incsearch
 set nojoinspaces
 set display+=lastline
+set backspace=indent,eol,start
 
 " Change cursor depending on mode 
 if has("autocmd")
@@ -24,4 +25,4 @@ if has("autocmd")
   au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
 endif
 
-au BufRead, BufNewFile Podfile,Fastfile,Appfile,Deliverfile set filetype=ruby
+au BufRead,BufNewFile Podfile,Fastfile,Appfile,Deliverfile set filetype=ruby
