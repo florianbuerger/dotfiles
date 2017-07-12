@@ -17,3 +17,5 @@ for file (~/.zsh/*.zsh) source $file
 if [[ -a ~/.secrets ]]; then
 	source ~/.secrets
 fi
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
