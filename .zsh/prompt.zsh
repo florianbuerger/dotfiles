@@ -29,5 +29,5 @@ function machine_info() {
 	fi
 }
 
-PROMPT='🐶 $(machine_info)%{$fg[blue]%}%c%{$reset_color%}: '
+PROMPT='$(machine_info)%{$fg[blue]%}%c%{$reset_color%}$ '
 RPROMPT='$(git_prompt_info)'
