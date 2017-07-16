@@ -4,20 +4,15 @@ set c_light (set_color aaa)
 set c_green (set_color green)
 set c_magenta (set_color magenta)
 
-# Fish git prompt
-# set __fish_git_prompt_showdirtystate 'false'
 set __fish_git_prompt_color_branch aaa
-
-# Status Chars
-# set __fish_git_prompt_char_dirtystate '*'
+set separator "$c_reset :: "
 
 function fish_prompt
 
   printf "%s" $c_reset
 
-  set separator "$c_reset :: "
 
-# User & hose only when in SSH
+# User & host only when in SSH
 if begin; set -q SSH_CLIENT; or set -q SSH_TTY; end 
   printf "%s%s" $c_bold (whoami)
   printf "%s" $separator
