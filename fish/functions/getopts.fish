@@ -1,0 +1,1 @@
+/Users/florian/.config/fisherman/getopts/getopts.fish
