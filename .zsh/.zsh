@@ -1,1 +1,0 @@
-/Users/florian/Code/Personal/dotfiles/.zsh
