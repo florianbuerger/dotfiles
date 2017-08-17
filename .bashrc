@@ -25,9 +25,6 @@ export PATH=$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH
 export GOPATH=$HOME/Code/
 export PATH=$GOPATH/bin:$PATH
 
-# User grc for more colors :)
-source "`brew --prefix`/etc/grc.bashrc"
-
 # Add tab completion for many Bash commands
 if which brew > /dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
     source "$(brew --prefix)/etc/bash_completion";
@@ -55,7 +52,8 @@ if [ "$SSH_CONNECTION" ]; then
     # PS1='\[$PROMPT_COLOR\]\u@\h:\W$(__git_ps1 "(%s)")\$ \[$RESET\]'
     PS1='\[$PROMPT_COLOR\]\u@\h:\W\$ \[$RESET\]'
 else
-    PS1='\[$PROMPT_COLOR\]\W\$ \[$RESET\]'
+    # PS1='\[$PROMPT_COLOR\]\W\$ \[$RESET\]'
+    PS1='\[$PROMPT_COLOR\]\u@\h:\W\$ \[$RESET\]'
 fi
 
 # osx
