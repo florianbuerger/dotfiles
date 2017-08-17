@@ -26,16 +26,10 @@ export GOPATH=$HOME/Code/
 export PATH=$GOPATH/bin:$PATH
 
 # Add tab completion for many Bash commands
-if which brew > /dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
-    source "$(brew --prefix)/etc/bash_completion";
-elif [ -f /etc/bash_completion ]; then
-    source /etc/bash_completion
-fi
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
 # Enable z
-if which brew > /dev/null && [ -f "$(brew --prefix)/etc/profile.d/z.sh" ]; then
-    source "$(brew --prefix)/etc/profile.d/z.sh"
-fi
+. /usr/local/etc/profile.d/z.sh
 
 # Autocompletion for fastlane; run fastlane enable_auto_complet to
 # generate that file
@@ -49,11 +43,9 @@ alias gca='git add -A && git commit -v'
 PROMPT_COLOR=$(tput setaf 6)
 RESET=$(tput sgr0)
 if [ "$SSH_CONNECTION" ]; then 
-    # PS1='\[$PROMPT_COLOR\]\u@\h:\W$(__git_ps1 "(%s)")\$ \[$RESET\]'
     PS1='\[$PROMPT_COLOR\]\u@\h:\W\$ \[$RESET\]'
 else
-    # PS1='\[$PROMPT_COLOR\]\W\$ \[$RESET\]'
-    PS1='\[$PROMPT_COLOR\]\u@\h:\W\$ \[$RESET\]'
+    PS1='\[$PROMPT_COLOR\]\W\$ \[$RESET\]'
 fi
 
 # osx
