@@ -25,4 +25,6 @@ if has("autocmd")
   au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
 endif
 
+" Replace all instances of selected word
+nnoremap <c-n> :%s///g<left><left>
 au BufRead,BufNewFile Podfile,Fastfile,Appfile,Deliverfile set filetype=ruby

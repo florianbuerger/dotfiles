@@ -13,12 +13,18 @@ zsh:
 	ln -sFf $(CURRENT_DIR)/.inputrc $(HOME)/.inputrc
 	ln -sFf $(CURRENT_DIR)/.zsh $(HOME)/.zsh
 
+bash:
+	ln -sFf $(CURRENT_DIR)/.bashrc $(HOME)/.bashrc
+	ln -sFf $(CURRENT_DIR)/.inputrc $(HOME)/.inputrc
+	ln -sFf $(CURRENT_DIR)/.bash_profile $(HOME)/.bash_profile
+
 fish:
 	mkdir -p $(HOME)/.config
 	ln -sFf $(CURRENT_DIR)/fish $(HOME)/.config/fish
 	
 vim:
 	ln -sFf $(CURRENT_DIR)/.vimrc $(HOME)/.vimrc
+	ln -sFf $(CURRENT_DIR)/.vim $(HOME)/.vim
 
 textmate:
 	ln -sFf $(CURRENT_DIR)/.tm_properties $(HOME)/.tm_properties
