@@ -1,5 +1,6 @@
 # Editor
 alias e='$EDITOR'
+alias vim='nvim'
 
 # cd
 alias ..='cd ..'
