@@ -71,7 +71,6 @@ alias gd='git diff'
 alias gP='git push'
 alias gp='git pull --rebase'
 alias gg='git log --graph --oneline --decorate --date=relative --all'
-alias gs='git status -sb'
 
 # system
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
@@ -95,6 +94,8 @@ alias radio-smash='mplayer http://uk1.internet-radio.com:8106/;'
 alias ddd='rm -rf ~/Library/Developer/Xcode/DerivedData'
 alias bump='agvtool bump -all'
 alias spacecommander='~/Code/Vendor/spacecommander/format-objc-files.sh -s'
+alias xcode-beta='sudo xcode-select -s /Applications/Xcode-beta.app'
+alias xcode-release='sudo xcode-select -s /Applications/Xcode.app'
 
 # Focus
 alias focus='open focus://toggle'
@@ -108,3 +109,6 @@ alias loadnvm="[ -s '$NVM_DIR/nvm.sh' ] && . '$NVM_DIR/nvm.sh' && nvm use --lts"
 
 # Neovim ftw
 alias vim=nvim
+
+# UPDATE ALLL THE THINGS
+alias update_everything='gem update && gem clean && brew update && brew upgrade && brew prune && brew cleanup && mas upgrade'
