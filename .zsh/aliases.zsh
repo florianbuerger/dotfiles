@@ -7,7 +7,8 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 
 # ls
-alias ls="ls -F"
+alias ls="ls -FAG"
+alias la="ls -lhFAG"
 alias cat="ccat"
 
 # Mac OS X
@@ -30,5 +31,8 @@ alias xcode-release='sudo xcode-select -s /Applications/Xcode.app'
 alias bump='agvtool next-version -all'
 alias swiftformat="/usr/local/bin/swiftformat --indent 4"
 
-# Brew
-alias brewup='brew update && brew doctor && brew outdated && brew upgrade && brew cleanup -s --prune=1'
+# Neovim ftw
+[ -x /usr/local/bin/nvim ] && alias vim=nvim
+
+# UPDATE ALLL THE THINGS
+alias update_everything='gem update && gem clean && brew update && brew upgrade && brew prune && brew cleanup && mas upgrade'

@@ -13,6 +13,9 @@ set nojoinspaces
 set display+=lastline
 set backspace=indent,eol,start
 
+" Enable fzf
+set rtp+=/usr/local/opt/fzf
+
 " Change cursor depending on mode 
 if has("autocmd")
   au VimEnter,InsertLeave * silent execute '!echo -ne "\e[2 q"' | redraw!
