@@ -3,42 +3,44 @@ export CLICOLOR=1
 export EDITOR="nvim"
 alias e='$EDITOR'
 
-# Homebrew
-export PATH=$HOME/.bin:usr/local/bin:/usr/local/sbin:$PATH
-
-# Python user install on macOS
-export PATH=$HOME/Library/Python/2.7/bin:usr/local/bin:/usr/local/sbin:$PATH
+if [ "$(uname)" == "Darwin" ]; then
+	# Homebrew
+	export PATH=$HOME/.bin:usr/local/bin:/usr/local/sbin:$PATH
+	# Python user install on macOS
+	export PATH=$HOME/Library/Python/2.7/bin:usr/local/bin:/usr/local/sbin:$PATH
+fi
 
 # Case-insensitive globbing (used in pathname expansion)
 set completion-ignore-case On
 
 # Ruby
-export GEM_HOME=$HOME/.gem
-export PATH=$GEM_HOME/bin:$PATH 
+if [ -f /usr/local/opt/chruby/share/chruby/chruby.sh ]; then
+	source /usr/local/opt/chruby/share/chruby/chruby.sh
+	source /usr/local/opt/chruby/share/chruby/auto.sh
+fi
 alias be='bundle exec'
 
 # Android
-export ANDROID_HOME=/usr/local/opt/android-sdk/
-export PATH=$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH
-
-# Go
-export GOPATH=$HOME/Code/
-export PATH=$GOPATH/bin:$PATH
+if [ -d /usr/local/opt/android-sdk/ ]; then
+	export ANDROID_HOME=/usr/local/opt/android-sdk/
+	export PATH=$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH
+fi
 
 # Add tab completion for many Bash commands
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
 # Enable z
-. /usr/local/etc/profile.d/z.sh
+[ -f /usr/local/etc/profile.d/z.sh ] && . /usr/local/etc/profile.d/z.sh
 
 # Autocompletion for fastlane; run fastlane enable_auto_complet to
 # generate that file
-. ~/.fastlane/completions/completion.sh
+[ -f ~/.fastlane/completions/completion.sh ] && . ~/.fastlane/completions/completion.sh
 
 # Git completion and branch info in prompt
-source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
-source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
-alias gca='git add -A && git commit -v'
+if [ -d /Applications/Xcode.app ]; then
+	source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
+	# source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
+fi
 
 PROMPT_COLOR=$(tput setaf 6)
 RESET=$(tput sgr0)
@@ -64,6 +66,7 @@ alias g='git status -sb'
 alias gc='git commit -v'
 alias gcm='git commit -m'
 alias gco='git checkout'
+alias gca='git add -A && git commit -v'
 alias gcam='git add -A; git commit -m'
 alias cleanup_branches='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 alias t='gittower .'
@@ -71,7 +74,6 @@ alias gd='git diff'
 alias gP='git push'
 alias gp='git pull --rebase'
 alias gg='git log --graph --oneline --decorate --date=relative --all'
-alias gs='git status -sb'
 
 # system
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
@@ -95,6 +97,8 @@ alias radio-smash='mplayer http://uk1.internet-radio.com:8106/;'
 alias ddd='rm -rf ~/Library/Developer/Xcode/DerivedData'
 alias bump='agvtool bump -all'
 alias spacecommander='~/Code/Vendor/spacecommander/format-objc-files.sh -s'
+alias xcode-beta='sudo xcode-select -s /Applications/Xcode-beta.app'
+alias xcode-release='sudo xcode-select -s /Applications/Xcode.app'
 
 # Focus
 alias focus='open focus://toggle'
@@ -107,4 +111,7 @@ alias loadnvm="[ -s '$NVM_DIR/nvm.sh' ] && . '$NVM_DIR/nvm.sh' && nvm use --lts"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Neovim ftw
-alias vim=nvim
+[ -x /usr/local/bin/nvim ] && alias vim=nvim
+
+# UPDATE ALLL THE THINGS
+alias update_everything='gem update && gem clean && brew update && brew upgrade && brew prune && brew cleanup && mas upgrade'
