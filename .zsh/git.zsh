@@ -15,3 +15,8 @@ alias gg='git log --graph --abbrev-commit --decorate --format=oneline'
 alias gt='gittower .'
 alias gp='git push'
 alias gup='git pull --rebase && git push'
+
+# git-flow completions
+if [[ -f /usr/local/share/zsh/site-functions/git-flow-completion.zsh ]]; then 
+	source /usr/local/share/zsh/site-functions/git-flow-completion.zsh
+fi
