@@ -1,4 +1,3 @@
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
+eval "$(rbenv init -)"
 
 alias be='bundle exec'
