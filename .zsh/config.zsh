@@ -1,5 +1,5 @@
 # Editor
-export EDITOR='vim'
+export EDITOR='nvim'
 
 # Colors
 export CLICOLOR=1
@@ -13,6 +13,9 @@ REPORTTIME=10 # print elapsed time when more than 10 seconds
 # Quote pasted URLs
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
+
+# allow sudo for aliases
+alias sudo='sudo '
 
 # Misc options
 setopt NO_BG_NICE # don't nice background tasks
