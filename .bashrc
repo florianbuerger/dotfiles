@@ -39,7 +39,7 @@ fi
 # Git completion and branch info in prompt
 if [ -d /Applications/Xcode.app ]; then
 	source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
-	# source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
+	source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
 fi
 
 PROMPT_COLOR=$(tput setaf 6)
@@ -47,7 +47,7 @@ RESET=$(tput sgr0)
 if [ "$SSH_CONNECTION" ]; then 
     PS1='\[$PROMPT_COLOR\]\u@\h:\W\$ \[$RESET\]'
 else
-    PS1='\[$PROMPT_COLOR\]\W\$ \[$RESET\]'
+    PS1='\[$PROMPT_COLOR\]\W$(__git_ps1 "(%s)")\$ \[$RESET\]'
 fi
 
 # osx

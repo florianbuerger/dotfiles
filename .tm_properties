@@ -1,8 +1,8 @@
 # Settings
 
 encoding         = UTF-8
-fontName         = "SF Mono Regular"
-fontSize         = 14
+fontName         = "Inconsolata"
+fontSize         = 16
 lineEndings      = '\n'
 showInvisibles   = false
 softWrap         = true

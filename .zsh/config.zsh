@@ -1,5 +1,5 @@
 # Editor
-export EDITOR='nvim'
+export EDITOR='vim'
 
 # Colors
 export CLICOLOR=1
