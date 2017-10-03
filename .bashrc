@@ -115,3 +115,8 @@ alias loadnvm="[ -s '$NVM_DIR/nvm.sh' ] && . '$NVM_DIR/nvm.sh' && nvm use --lts"
 
 # UPDATE ALLL THE THINGS
 alias update_everything='gem update && gem clean && brew update && brew upgrade && brew prune && brew cleanup && mas upgrade'
+
+# Use colored cat
+if hash ccat 2>/dev/null; then
+	alias cat=ccat
+fi
