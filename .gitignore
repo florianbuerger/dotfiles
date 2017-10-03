@@ -7,3 +7,4 @@ fish_history
 *.sublime-workspace
 config/fish/fishd.*
 fish/fishd.*
+/.vim/.netrwhist
