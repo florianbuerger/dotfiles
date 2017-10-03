@@ -13,8 +13,18 @@ set nojoinspaces
 set display+=lastline
 set backspace=indent,eol,start
 
-" Enable fzf
+" Leader ,
+let mapleader=" "
+map <leader>f :FZF<cr>
+
+" If installed using Homebrew
 set rtp+=/usr/local/opt/fzf
+
+" Font in MacVim
+if has("gui_running")
+    set guifont=Inconsolata:h16
+    set linespace=4
+endif
 
 " Change cursor depending on mode 
 if has("autocmd")
