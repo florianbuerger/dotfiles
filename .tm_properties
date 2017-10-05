@@ -1,8 +1,8 @@
 # Settings
 
 encoding         = UTF-8
-fontName         = "Inconsolata"
-fontSize         = 16
+fontName         = "Input"
+fontSize         = 14
 lineEndings      = '\n'
 showInvisibles   = false
 softWrap         = true
