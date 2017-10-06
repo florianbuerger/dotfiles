@@ -5,6 +5,5 @@ function fish_right_prompt
       set_color red -o
     end
     echo -n (git branch | grep '*' | cut -c3-)
-    echo -n " "
   end
 end
