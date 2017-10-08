@@ -1,25 +1,31 @@
 " vim plug
 call plug#begin()
+Plug 'sjl/gundo.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline'
 call plug#end()
 
-syntax on
-filetype plugin indent on
+" enable ruler and line numbers
+set ruler
+set number
+
+" enable solarized theme
+syntax enable
 let g:solarized_termtrans=1
 set background=dark
 colorscheme solarized
 
-set number
-set laststatus=2
-set modelines=5
-set vb t_vb=
-set ts=4 sts=4 sw=4 expandtab
-set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
-set nojoinspaces
-set incsearch
-set hlsearch "Highlight search matches
+" Allow backspace to cross lines
 set backspace=indent,eol,start
+
+" soft tabs ftw
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+
+" Use space as leader
+let mapleader = "\<Space>"
 
 " airline config
 set noshowmode
@@ -28,44 +34,64 @@ let g:airline_powerline_fonts=1
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 let g:airline_skip_empty_sections=1
 
-" Leader ,
-let mapleader=" "
-map <leader>f :FZF<cr>
+" jk is escape
+inoremap jk <esc>
 
-" If installed using Homebrew
-set rtp+=/usr/local/opt/fzf
+" toggle gundo, undo on steriods
+nnoremap <leader>u :GundoToggle<CR>
+let g:gundo_close_on_revert=1 " Close Gundo window when reverting
 
-" Font in MacVim
-if has("gui_running")
-    set guifont=Inconsolata:h16
-    set linespace=4
-endif
+" wrap text
+set tw=100
+set formatoptions+=t
 
-" Clear search with ,<space>
-nnoremap <silent><leader><leader> :noh<return>
+" ignore case of searches
+set ignorecase
 
-" Change cursor depending on mode 
-if has("autocmd")
-  au VimEnter,InsertLeave * silent execute '!echo -ne "\e[2 q"' | redraw!
-  au InsertEnter,InsertChange *
-    \ if v:insertmode == 'i' | 
-    \   silent execute '!echo -ne "\e[6 q"' | redraw! |
-    \ elseif v:insertmode == 'r' |
-    \   silent execute '!echo -ne "\e[4 q"' | redraw! |
-    \ endif
-  au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
-endif
+" highlight dynamically as pattern is typed
+set incsearch
+set hlsearch
+nnoremap <leader><space> :nohlsearch<CR>
 
-" Replace all instances of selected word
-nnoremap <c-n> :%s///g<left><left>
-au BufRead,BufNewFile Podfile,Fastfile,Appfile,Deliverfile set filetype=ruby
+" show the filename in the window titlebar
+set title
+
+" don’t reset cursor to start of line when moving around
+set nostartofline
+
+" show the (partial) command as it’s being typed
+set showcmd
+
+" don’t reset cursor to start of line when moving around
+set nostartofline
+
+" don’t add empty newlines at the end of files
+set noeol
+
+" start scrolling three lines before the horizontal window border
+set scrolloff=3
+
+" disable cursorline in insert mode
+set cul
+autocmd InsertEnter,InsertLeave * set nocul!
 
 " nicer netrw
 let g:netrw_banner=0
 let g:netrw_liststyle=3
 let g:netrw_list_hide='.*\.swp$,\~$,\.orig$'
 
-" disable cursorline in insert mode
-set cul
-autocmd InsertEnter,InsertLeave * set nocul!
+" move vertically by visual line
+nnoremap j gj
+nnoremap k gk
 
+" strip trailing spaces
+fun! <SID>StripTrailingWhitespaces()
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
+endfun
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+" insert HTML template in new HTML files
+:autocmd BufNewFile *.html 0r ~/.vim/templates/html.tpl
