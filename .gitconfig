@@ -5,6 +5,7 @@
 [core]
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	excludesfile = /Users/florian/.gitignore_global
+	mergeoptions = --no-edit
 
 [push]
 	default = simple
