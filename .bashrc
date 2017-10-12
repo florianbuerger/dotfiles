@@ -1,6 +1,6 @@
 export GREP_OPTIONS='--color=auto'
 export CLICOLOR=1
-export EDITOR="nvim"
+export EDITOR="vim"
 alias e='$EDITOR'
 
 if [ "$(uname)" == "Darwin" ]; then
@@ -14,10 +14,7 @@ fi
 set completion-ignore-case On
 
 # Ruby
-if [ -f /usr/local/opt/chruby/share/chruby/chruby.sh ]; then
-	source /usr/local/opt/chruby/share/chruby/chruby.sh
-	source /usr/local/opt/chruby/share/chruby/auto.sh
-fi
+eval "$(rbenv init -)"
 alias be='bundle exec'
 
 # Android
@@ -42,12 +39,17 @@ if [ -d /Applications/Xcode.app ]; then
 	source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
 fi
 
-PROMPT_COLOR=$(tput setaf 6)
+PROMPT_COLOR=$(tput setaf 4)
 RESET=$(tput sgr0)
+
+# DIR='\[\e[37m\]\W\[\e[m\]'
+# GIT_INFO='$(__git_ps1 "(%s)")'
+# SSH="\[\e[37m\]\u@\h:\[\e[m\]"
+
 if [ "$SSH_CONNECTION" ]; then 
-    PS1='\[$PROMPT_COLOR\]\u@\h:\W\$ \[$RESET\]'
+	export PS1='\[\e[37m\]\u@\h:\[\e[m\]\[\e[37m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
 else
-    PS1='\[$PROMPT_COLOR\]\W$(__git_ps1 "(%s)")\$ \[$RESET\]'
+	export PS1='\[\e[37m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
 fi
 
 # osx
@@ -63,6 +65,7 @@ alias sudo='sudo '
 
 # git
 alias g='git status -sb'
+alias gs='git status -sb'
 alias gc='git commit -v'
 alias gcm='git commit -m'
 alias gco='git checkout'
