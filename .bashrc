@@ -47,7 +47,7 @@ RESET=$(tput sgr0)
 # SSH="\[\e[37m\]\u@\h:\[\e[m\]"
 
 if [ "$SSH_CONNECTION" ]; then 
-	export PS1='\[\e[37m\]\u@\h:\[\e[m\]\[\e[37m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
+	export PS1='\[\e[34m\]\u@\h:\[\e[m\]\[\e[37m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
 else
 	export PS1='\[\e[37m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
 fi

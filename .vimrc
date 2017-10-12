@@ -1,19 +1,14 @@
 " vim plug
 call plug#begin()
 Plug 'sjl/gundo.vim'
-Plug 'altercation/vim-colors-solarized'
-Plug 'vim-airline/vim-airline'
 call plug#end()
 
 " enable ruler and line numbers
 set ruler
 set number
 
-" enable solarized theme
+" enable theme
 syntax enable
-let g:solarized_termtrans=1
-set background=dark
-colorscheme solarized
 
 " Allow backspace to cross lines
 set backspace=indent,eol,start
@@ -27,12 +22,9 @@ set expandtab
 " Use space as leader
 let mapleader = "\<Space>"
 
-" airline config
-set noshowmode
+" status line config
+set showmode
 set laststatus=2
-let g:airline_powerline_fonts=1
-let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
-let g:airline_skip_empty_sections=1
 
 " jk is escape
 inoremap jk <esc>
@@ -40,10 +32,6 @@ inoremap jk <esc>
 " toggle gundo, undo on steriods
 nnoremap <leader>u :GundoToggle<CR>
 let g:gundo_close_on_revert=1 " Close Gundo window when reverting
-
-" wrap text
-set tw=100
-set formatoptions+=t
 
 " ignore case of searches
 set ignorecase
@@ -69,29 +57,15 @@ set nostartofline
 set noeol
 
 " start scrolling three lines before the horizontal window border
-set scrolloff=3
+set scrolloff=5
 
 " disable cursorline in insert mode
 set cul
 autocmd InsertEnter,InsertLeave * set nocul!
 
-" nicer netrw
-let g:netrw_banner=0
-let g:netrw_liststyle=3
-let g:netrw_list_hide='.*\.swp$,\~$,\.orig$'
-
 " move vertically by visual line
 nnoremap j gj
 nnoremap k gk
 
-" strip trailing spaces
-fun! <SID>StripTrailingWhitespaces()
-  let l = line(".")
-  let c = col(".")
-  %s/\s\+$//e
-  call cursor(l, c)
-endfun
-autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-
-" insert HTML template in new HTML files
-:autocmd BufNewFile *.html 0r ~/.vim/templates/html.tpl
+" Format JSON files
+map <leader>jt  :%!python -m json.tool<CR>
