@@ -18,9 +18,10 @@ eval "$(rbenv init -)"
 alias be='bundle exec'
 
 # Android
-if [ -d /usr/local/opt/android-sdk/ ]; then
-	export ANDROID_HOME=/usr/local/opt/android-sdk/
-	export PATH=$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH
+if [ -d $HOME/Library/Android/sdk ]; then
+	export ANDROID_HOME=$HOME/Library/Android/sdk
+	export PATH=$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH
+	alias emulator=$ANDROID_HOME/tools/emulator
 fi
 
 # Add tab completion for many Bash commands
@@ -47,7 +48,7 @@ RESET=$(tput sgr0)
 # SSH="\[\e[37m\]\u@\h:\[\e[m\]"
 
 if [ "$SSH_CONNECTION" ]; then 
-	export PS1='\[\e[34m\]\u@\h:\[\e[m\]\[\e[37m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
+	export PS1='\[\e[32m\]\u@\h:\[\e[m\]\[\e[37m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
 else
 	export PS1='\[\e[37m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
 fi
