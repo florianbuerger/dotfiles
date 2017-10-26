@@ -12,18 +12,14 @@
 	followTags = true
 
 [diff]
-	tool = icdiff
-[difftool]
-	prompt = false
-[difftool "icdiff"]
-	cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
-
+	tool = Kaleidoscope
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [merge]
-	conflictstyle = diff3
-	tool = opendiff
-
-[mergetool]
-	keepBackup = false
+	tool = Kaleidoscope
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
 
 [filter "lfs"]
 	process = git-lfs filter-process
@@ -39,13 +35,6 @@
 	undo = reset --soft HEAD^
 	stash-all = stash save --include-untracked
     glog = log --graph --pretty=format:\"%C(yellow)%h%Creset %ad  %s%C(cyan)%d%Creset %C(green)[%an]%Creset\" --date=short
+
 [status]
 	showUntrackedFiles = all
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-[commit]
-	template = /Users/florian/.stCommitMsg

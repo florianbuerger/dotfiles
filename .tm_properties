@@ -1,7 +1,7 @@
 # Settings
 
 encoding         = UTF-8
-fontName         = "Input"
+fontName         = "SF Mono Regular"
 fontSize         = 14
 lineEndings      = '\n'
 showInvisibles   = false

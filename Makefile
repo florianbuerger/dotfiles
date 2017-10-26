@@ -1,6 +1,6 @@
 CURRENT_DIR := $(shell pwd)
 
-default: git fish vim ruby bin
+default: git vim ruby bin
 	
 git:
 	ln -sFf $(CURRENT_DIR)/.gitconfig $(HOME)/.gitconfig
