@@ -1,7 +1,7 @@
 # Load functions and completion
 fpath=(~/.zsh/functions /usr/local/share/zsh-completions /usr/local/share/zsh/site-functions $fpath)
 autoload -U compinit
-compinit
+compinit -u
 autoload -U ~/.zsh/functions/*(:t)
 
 # Matches case insensitive for lowercase
