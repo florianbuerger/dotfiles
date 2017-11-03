@@ -11,9 +11,9 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' insert-tab pending
 
 # force US UTF8
-export LANG=en_US.UTF-8
-export LANGUAGE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
 
 # Load files
 for file (~/.zsh/*.zsh) source $file
