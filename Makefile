@@ -1,6 +1,6 @@
 CURRENT_DIR := $(shell pwd)
 
-default: git vim ruby bin
+default: git vim ruby bin zsh tmux
 	
 git:
 	ln -sFf $(CURRENT_DIR)/.gitconfig $(HOME)/.gitconfig
@@ -32,3 +32,9 @@ ruby:
 
 bin:
 	ln -sFf $(CURRENT_DIR)/.bin $(HOME)/.bin
+
+android:
+	ln -sFf $(CURRENT_DIR)/android/advancedFeatures.ini $(HOME)/.android/advancedFeatures.ini
+
+tmux:
+	ln -sFf $(CURRENT_DIR)/.tmux.conf $(HOME)/.tmux.conf
