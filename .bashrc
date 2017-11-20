@@ -14,8 +14,10 @@ fi
 set completion-ignore-case On
 
 # Ruby
-eval "$(rbenv init -)"
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+source /usr/local/opt/chruby/share/chruby/auto.sh
 alias be='bundle exec'
+alias bi='bundle install'
 
 # Android
 if [ -d $HOME/Library/Android/sdk ]; then
@@ -40,17 +42,14 @@ if [ -d /Applications/Xcode.app ]; then
 	source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
 fi
 
-PROMPT_COLOR=$(tput setaf 4)
-RESET=$(tput sgr0)
-
 # DIR='\[\e[37m\]\W\[\e[m\]'
 # GIT_INFO='$(__git_ps1 "(%s)")'
 # SSH="\[\e[37m\]\u@\h:\[\e[m\]"
 
-if [ "$SSH_CONNECTION" ]; then 
-	export PS1='\[\e[32m\]\u@\h:\[\e[m\]\[\e[37m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
+if [ "$SSH_CONNECTION" ]; then
+	export PS1='\[\e[32m\]\u@\h:\[\e[m\]\[\e[36m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
 else
-	export PS1='\[\e[37m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
+	export PS1='\[\e[36m\] λ \W$(__git_ps1 " (%s)"):\[\e[m\] '
 fi
 
 # osx
@@ -78,6 +77,7 @@ alias gd='git diff'
 alias gP='git push'
 alias gp='git pull --rebase'
 alias gg='git log --graph --oneline --decorate --date=relative --all'
+alias gt='gittower .'
 
 # system
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
@@ -85,10 +85,6 @@ alias hide-desktop-icons="defaults write com.apple.finder CreateDesktop -bool fa
 alias show-desktop-icons="defaults write com.apple.finder CreateDesktop -bool true; killall Finder;"
 alias screensaver='/System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app/Contents/MacOS/creenSaverEngine'
 alias serve='python -m SimpleHTTPServer && open http://localhost:8000'
-
-# Ruby
-alias be='bundle exec'
-alias bi='bundle install'
 
 # radio
 alias radio-frisky='mplayer http://stream2.friskyradio.com/frisky_mp3_hi/;*3'
@@ -104,18 +100,12 @@ alias spacecommander='~/Code/Vendor/spacecommander/format-objc-files.sh -s'
 alias xcode-beta='sudo xcode-select -s /Applications/Xcode-beta.app'
 alias xcode-release='sudo xcode-select -s /Applications/Xcode.app'
 
-# Focus
-alias focus='open focus://toggle'
-
 # node
 export NVM_DIR="/Users/florian/.nvm"
 alias loadnvm="[ -s '$NVM_DIR/nvm.sh' ] && . '$NVM_DIR/nvm.sh' && nvm use --lts"
 
 # load fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# Neovim ftw
-[ -x /usr/local/bin/nvim ] && alias vim=nvim
 
 # UPDATE ALLL THE THINGS
 alias update_everything='gem update && gem clean && brew update && brew upgrade && brew prune && brew cleanup && mas upgrade'
@@ -124,3 +114,6 @@ alias update_everything='gem update && gem clean && brew update && brew upgrade 
 if hash ccat 2>/dev/null; then
 	alias cat=ccat
 fi
+
+# iTerm integration
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"

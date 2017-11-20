@@ -1,7 +1,7 @@
 CURRENT_DIR := $(shell pwd)
 
-default: git vim ruby bin zsh tmux
-	
+default: git vim ruby bin bash tmux lldbinit
+
 git:
 	ln -sFf $(CURRENT_DIR)/.gitconfig $(HOME)/.gitconfig
 	ln -sFf $(CURRENT_DIR)/.gitignore_global $(HOME)/.gitignore_global
@@ -19,7 +19,7 @@ bash:
 fish:
 	mkdir -p $(HOME)/.config
 	ln -sFf $(CURRENT_DIR)/fish $(HOME)/.config/fish
-	
+
 vim:
 	ln -sFf $(CURRENT_DIR)/.vimrc $(HOME)/.vimrc
 	ln -sFf $(CURRENT_DIR)/.vim $(HOME)/.vim
@@ -38,3 +38,6 @@ android:
 
 tmux:
 	ln -sFf $(CURRENT_DIR)/.tmux.conf $(HOME)/.tmux.conf
+
+lldb:
+	ln -sFf $(CURRENT_DIR)/.lldbinit $(HOME)/.lldbinit
