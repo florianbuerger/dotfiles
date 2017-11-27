@@ -47,9 +47,9 @@ fi
 # SSH="\[\e[37m\]\u@\h:\[\e[m\]"
 
 if [ "$SSH_CONNECTION" ]; then
-	export PS1='\[\e[32m\]\u@\h:\[\e[m\]\[\e[36m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
+	export PS1='\[\e[32m\]\u@\h:\[\e[m\]\[\e[34m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
 else
-	export PS1='\[\e[36m\] λ \W$(__git_ps1 " (%s)"):\[\e[m\] '
+  export PS1='\[\e[m\]\[\e[34m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
 fi
 
 # osx
@@ -108,7 +108,7 @@ alias loadnvm="[ -s '$NVM_DIR/nvm.sh' ] && . '$NVM_DIR/nvm.sh' && nvm use --lts"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # UPDATE ALLL THE THINGS
-alias update_everything='gem update && gem clean && brew update && brew upgrade && brew prune && brew cleanup && mas upgrade'
+alias update_everything='gem update && gem clean && brew update && brew upgrade && brew prune && brew cleanup'
 
 # Use colored cat
 if hash ccat 2>/dev/null; then
