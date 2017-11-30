@@ -4,10 +4,10 @@ export EDITOR="vim"
 alias e='$EDITOR'
 
 if [ "$(uname)" == "Darwin" ]; then
-	# Homebrew
-	export PATH=$HOME/.bin:usr/local/bin:/usr/local/sbin:$PATH
 	# Python user install on macOS
-	export PATH=$HOME/Library/Python/2.7/bin:usr/local/bin:/usr/local/sbin:$PATH
+	export PATH=$HOME/Library/Python/2.7/bin:$PATH
+	# Homebrew
+	export PATH=$HOME/.bin:/usr/local/bin:/usr/local/sbin:$PATH
 fi
 
 # Case-insensitive globbing (used in pathname expansion)
@@ -108,7 +108,7 @@ alias loadnvm="[ -s '$NVM_DIR/nvm.sh' ] && . '$NVM_DIR/nvm.sh' && nvm use --lts"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # UPDATE ALLL THE THINGS
-alias update_everything='gem update && gem clean && brew update && brew upgrade && brew prune && brew cleanup'
+alias update_everything='gem update && gem clean && brew update && brew upgrade && brew prune && brew cleanup && sudo softwareupdate -ia'
 
 # Use colored cat
 if hash ccat 2>/dev/null; then
@@ -117,3 +117,6 @@ fi
 
 # iTerm integration
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+# Reset dns cache
+alias flushdns='dscacheutil -flushcache && sudo killall -HUP mDNSResponder && echo "Be sure to reset Google Chrome as well: 'chrome://net-internals/#dns'"'
