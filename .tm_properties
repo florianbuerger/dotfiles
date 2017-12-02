@@ -1,8 +1,8 @@
 # Settings
 
 encoding         = UTF-8
-fontName         = "SF Mono Regular"
-fontSize         = 13
+fontName         = "IBM Plex Mono"
+fontSize         = 14
 lineEndings      = '\n'
 showInvisibles   = false
 softWrap         = false
