@@ -1,6 +1,6 @@
 CURRENT_DIR := $(shell pwd)
 
-default: git vim ruby bin bash tmux lldbinit
+default: git vim ruby bin bash tmux lldb npm android
 
 git:
 	ln -sFf $(CURRENT_DIR)/.gitconfig $(HOME)/.gitconfig
@@ -15,6 +15,7 @@ zsh:
 bash:
 	ln -sFf $(CURRENT_DIR)/.bashrc $(HOME)/.bashrc
 	ln -sFf $(CURRENT_DIR)/.bash_profile $(HOME)/.bash_profile
+	ln -sFf $(CURRENT_DIR)/.inputrc $(HOME)/.inputrc
 
 fish:
 	mkdir -p $(HOME)/.config
@@ -41,3 +42,6 @@ tmux:
 
 lldb:
 	ln -sFf $(CURRENT_DIR)/.lldbinit $(HOME)/.lldbinit
+
+npm:
+	ln -sFf $(CURRENT_DIR)/.npmrc $(HOME)/.npmrc
