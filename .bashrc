@@ -4,9 +4,6 @@ export EDITOR="vim"
 alias e='$EDITOR'
 
 if [ "$(uname)" == "Darwin" ]; then
-	# Python user install on macOS
-	export PATH=$HOME/Library/Python/2.7/bin:$PATH
-	# Homebrew
 	export PATH=$HOME/.bin:/usr/local/bin:/usr/local/sbin:$PATH
 fi
 
@@ -14,8 +11,13 @@ fi
 set completion-ignore-case On
 
 # Ruby
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-source /usr/local/opt/chruby/share/chruby/auto.sh
+# source /usr/local/opt/chruby/share/chruby/chruby.sh
+# source /usr/local/opt/chruby/share/chruby/auto.sh
+if [ -d $HOME/.gem/ruby/2.3.0/bin ]; then
+  export GEM_HOME=$(ls -t -U | ruby -e 'puts Gem.user_dir')
+  export GEM_PATH=$GEM_HOME
+  export PATH=$HOME/.gem/ruby/2.3.0/bin:$GEM_HOME/bin:$PATH
+fi
 alias be='bundle exec'
 alias bi='bundle install'
 
@@ -25,6 +27,12 @@ if [ -d $HOME/Library/Android/sdk ]; then
 	export PATH=$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH
 	alias emulator=$ANDROID_HOME/tools/emulator
 fi
+
+# npm
+NPM_PACKAGES="${HOME}/.npm-packages"
+export PATH="$NPM_PACKAGES/bin:$PATH"
+unset MANPATH
+export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 # Add tab completion for many Bash commands
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
@@ -99,10 +107,6 @@ alias bump='agvtool bump -all'
 alias spacecommander='~/Code/Vendor/spacecommander/format-objc-files.sh -s'
 alias xcode-beta='sudo xcode-select -s /Applications/Xcode-beta.app'
 alias xcode-release='sudo xcode-select -s /Applications/Xcode.app'
-
-# node
-export NVM_DIR="/Users/florian/.nvm"
-alias loadnvm="[ -s '$NVM_DIR/nvm.sh' ] && . '$NVM_DIR/nvm.sh' && nvm use --lts"
 
 # load fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
