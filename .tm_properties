@@ -2,11 +2,11 @@
 
 encoding         = UTF-8
 fontName         = "SF Mono Regular"
-fontSize         = 14
+fontSize         = 13
 lineEndings      = '\n'
 showInvisibles   = false
-softWrap         = true
-tabSize          = 2
+softWrap         = false
+tabSize          = 4
 
 # Hide log, vendor and tmp directories from search popups.
 
@@ -18,16 +18,14 @@ exclude = "{$exclude,.git}"
 
 # Variables
 
-PATH   = "$PATH:$HOME/.bin"
-TM_GIT = "/usr/local/bin/git"
-TM_RUBY = "/usr/local/bin/ruby"
+TM_RUBY = "$HOME/.bin/ruby-shim"
 
 [ text ]
 spellChecking    = true
-softWrap         = false
+softWrap         = true
 wrapColumn       = "Use Window Frame"
 softTabs         = true
-tabSize          = 2
+tabSize          = 4
 
 [ text.plain ]
 spellChecking    = true
@@ -40,11 +38,11 @@ tabSize          = 4
 spellChecking    = true
 softWrap         = true
 wrapColumn       = 80
-softTabs         = false
+softTabs         = true
 tabSize          = 4
 
 [ source ]
-softWrap         = true
+softWrap         = false
 wrapColumn       = "Use Window Frame"
 softTabs         = true
 tabSize          = 2
