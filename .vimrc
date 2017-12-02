@@ -1,7 +1,6 @@
 " vim plug
 call plug#begin('~/.vim/plugged')
 Plug 'sjl/gundo.vim'
-Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
 " enable ruler and line numbers
@@ -10,9 +9,6 @@ set number
 
 " enable theme
 syntax enable
-colorscheme nord
-set background=dark
-set t_Co=256
 
 " Allow backspace to cross lines
 set backspace=indent,eol,start
