@@ -14,18 +14,13 @@ fi
 set completion-ignore-case On
 
 # Ruby
-# source /usr/local/opt/chruby/share/chruby/chruby.sh
-# source /usr/local/opt/chruby/share/chruby/auto.sh
-if [ -d $HOME/.gem/ruby/2.3.0/bin ]; then
-  export GEM_HOME=$(ls -t -U | ruby -e 'puts Gem.user_dir')
-  export GEM_PATH=$GEM_HOME
-  export PATH=$HOME/.gem/ruby/2.3.0/bin:$GEM_HOME/bin:$PATH
-fi
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+source /usr/local/opt/chruby/share/chruby/auto.sh
 alias be='bundle exec'
 alias bi='bundle install'
 
 # Android
-if [ -d $HOME/Library/Android/sdk ]; then
+if [ -d "$HOME/Library/Android/sdk" ]; then
 	export ANDROID_HOME=$HOME/Library/Android/sdk
 	export PATH=$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH
 	alias emulator=$ANDROID_HOME/tools/emulator
@@ -58,9 +53,9 @@ fi
 # SSH="\[\e[37m\]\u@\h:\[\e[m\]"
 
 if [ "$SSH_CONNECTION" ]; then
-	export PS1='\[\e[32m\]\u@\h:\[\e[m\]\[\e[34m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
+  PS1='\[\e[32m\]\u@\h:\[\e[m\]\[\e[34m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
 else
-  export PS1='\[\e[m\]\[\e[34m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
+  PS1='\[\e[m\]\[\e[34m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
 fi
 
 # osx
@@ -68,7 +63,7 @@ alias o='open .'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ,,='cd ..'
-alias ,,,='cd ../..'alias ll="ls -la"
+alias ,,,='cd ../..'
 alias ll="ls -lahL"
 
 # Enable aliases to be sudo’ed
@@ -96,6 +91,7 @@ alias hide-desktop-icons="defaults write com.apple.finder CreateDesktop -bool fa
 alias show-desktop-icons="defaults write com.apple.finder CreateDesktop -bool true; killall Finder;"
 alias screensaver='/System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app/Contents/MacOS/creenSaverEngine'
 alias serve='python -m SimpleHTTPServer && open http://localhost:8000'
+alias ic='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs'
 
 # radio
 alias radio-frisky='mplayer http://stream2.friskyradio.com/frisky_mp3_hi/;*3'
@@ -121,9 +117,6 @@ alias update_everything='gem update && gem clean && brew update && brew upgrade 
 if hash ccat 2>/dev/null; then
 	alias cat=ccat
 fi
-
-# iTerm integration
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
 # Reset dns cache
 alias flushdns='dscacheutil -flushcache && sudo killall -HUP mDNSResponder && echo "Be sure to reset Google Chrome as well: 'chrome://net-internals/#dns'"'
