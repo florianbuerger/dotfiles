@@ -10,11 +10,6 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # Pasting with tabs doesn't perform completion
 zstyle ':completion:*' insert-tab pending
 
-# force US UTF8
-export LC_ALL=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export LANGUAGE=en_US.UTF-8
-
 # Load files
 for file (~/.zsh/*.zsh) source $file
 
@@ -22,3 +17,7 @@ for file (~/.zsh/*.zsh) source $file
 if [[ -a ~/.secrets ]]; then
 	source ~/.secrets
 fi
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

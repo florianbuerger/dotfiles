@@ -1,5 +1,6 @@
 # Editor
 alias e='$EDITOR'
+alias vim='vim'
 
 # cd
 alias ..='cd ..'
@@ -29,6 +30,7 @@ alias xcode-beta='sudo xcode-select -s /Applications/Xcode-beta.app'
 alias xcode-release='sudo xcode-select -s /Applications/Xcode.app'
 alias bump='agvtool next-version -all'
 alias swiftformat="/usr/local/bin/swiftformat --indent 4"
+alias sp='/Users/florian/Code/Vendor/spacecommander/format-objc-files.sh -s'
 
 # UPDATE ALLL THE THINGS
 alias update_everything='gem update && gem clean && brew update && brew upgrade && brew prune && brew cleanup && mas upgrade'
