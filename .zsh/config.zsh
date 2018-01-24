@@ -4,7 +4,7 @@ export EDITOR='vim'
 # Colors
 export CLICOLOR=1
 autoload colors; colors;
-export LSCOLORS="Gxfxcxdxbxegedabagacad"
+#export LSCOLORS="Gxfxcxdxbxegedabagacad"
 setopt PROMPT_SUBST
 
 # Timer

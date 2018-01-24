@@ -14,3 +14,6 @@ hosts=($((
 ( [ -r .ssh/known_hosts ] && awk '{print $1}' .ssh/known_hosts | tr , '\n'); echo $basehost; ) | sort -u) )
 
 zstyle ':completion:*' hosts $hosts
+
+# brew install zsh-completions
+fpath=(/usr/local/share/zsh-completions $fpath)

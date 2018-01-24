@@ -3,7 +3,8 @@ export LANG=en_US.UTF-8
 
 export GREP_OPTIONS='--color=auto'
 export CLICOLOR=1
-export EDITOR="vim"
+# export EDITOR="vim"
+export EDITOR='mvim -f --nomru'
 alias e='$EDITOR'
 
 if [ "$(uname)" == "Darwin" ]; then
