@@ -10,7 +10,7 @@ zstyle ':vcs_info:git*' actionformats "%{$reset_color%}%{$fg[white]%}%b|%a%{$res
 function machine_info() {
   if [[ -n "$SSH_CLIENT" ]]; then
     local user=`whoami`
-    echo "%{$fg_bold[black]%}$user@%m%:{$reset_color%}"
+    echo "%{$fg_bold[black]%}$user@%m%:%{$reset_color%}"
   fi
 }
 
