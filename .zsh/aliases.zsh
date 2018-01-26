@@ -1,3 +1,11 @@
+# Misc
+if hash trash 2>/dev/null; then
+  alias cat=trash
+else
+  echo "Run 'brew install trash'!"
+fi
+alias rm='trash'
+
 # Editor
 alias e='$EDITOR'
 alias vim='vim'
