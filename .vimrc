@@ -1,6 +1,7 @@
 " vim plug
 call plug#begin('~/.vim/plugged')
-Plug 'sjl/gundo.vim'
+Plug 'plasticboy/vim-markdown'
+Plug 'junegunn/fzf'
 call plug#end()
 
 " enable ruler and line numbers
@@ -69,3 +70,12 @@ nnoremap k gk
 
 " Format JSON files
 map <leader>jt  :%!python -m json.tool<CR>
+
+" Change cursor in insert mode
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[1 q"
+
+let g:vim_markdown_folding_disabled = 1
+
+" CTRL+P for fzf
+nnoremap <C-p> :FZF<cr>

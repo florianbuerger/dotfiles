@@ -1,6 +1,20 @@
-function fish_prompt
-    set_color blue -o
-    echo -n (basename $PWD)
-    set_color normal -o
-    echo -n "\$ "
+function fish_prompt --description 'Write out the prompt'
+	set -l color_cwd
+    set -l suffix
+    switch "$USER"
+        case root toor
+            if set -q fish_color_cwd_root
+                set color_cwd $fish_color_cwd_root
+            else
+                set color_cwd $fish_color_cwd
+            end
+            set suffix '#'
+        case '*'
+            set color_cwd $fish_color_cwd
+            set suffix '$'
+    end
+
+    # TODO: Show hostname when in SSH session
+
+    echo -n -s (set_color $color_cwd) (prompt_pwd) (set_color normal) "$suffix "
 end

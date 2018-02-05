@@ -16,13 +16,12 @@ function machine_info() {
 
 function ruby_info() {
   # Show versions only for Ruby-specific folders
-  [[ -f Gemfile || -f Rakefile ]] || return
-
-  local ruby_version=$(chruby | sed -n -e 's/ \* //p')
-
-  [[ "${ruby_version}" == "system" ]] && return
-
-  echo "%{$reset_color%}%{$fg[red]%} $ruby_version %{$reset_color%}"
+  if [[ -f Gemfile || -f Rakefile ]]; then
+    local ruby_version=$(chruby | sed -n -e 's/ \* //p')
+    echo "%{$reset_color%}%{$fg[red]%} $ruby_version %{$reset_color%}"
+  else
+    echo ""
+  fi
 }
 
 PROMPT='$(machine_info)%{$fg[blue]%}%c%{$reset_color%}%{$reset_color%}\$ '

@@ -1,7 +1,7 @@
 # Settings
 
 encoding         = UTF-8
-fontName         = "IBM Plex Mono"
+fontName         = "SF Mono"
 fontSize         = 14
 lineEndings      = '\n'
 showInvisibles   = false
@@ -11,10 +11,10 @@ tabSize          = 4
 # Hide log, vendor and tmp directories from search popups.
 
 myExtraExcludes = "log,vendor,tmp,_site,node_modules"
-excludeInFileChooser  = "{$excludeInFileChooser,$myExtraExcludes}" 
-excludeInFolderSearch = "{$excludeInFolderSearch,$myExtraExcludes}" 
+excludeInFileChooser  = "{$excludeInFileChooser,$myExtraExcludes}"
+excludeInFolderSearch = "{$excludeInFolderSearch,$myExtraExcludes}"
 fileBrowserGlob  = "{*,.tm_properties,.htaccess,.*}"
-exclude = "{$exclude,.git}" 
+exclude = "{$exclude,.git}"
 
 # Variables
 

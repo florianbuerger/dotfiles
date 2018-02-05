@@ -1,6 +1,8 @@
 function update_everything
-	brew upgrade
-gem update
-gem clean
-mas upgrade
+  gem update
+  gem clean
+  brew update
+  brew upgrade
+  brew prune
+  brew cleanup
 end

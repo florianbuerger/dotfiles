@@ -1,9 +1,12 @@
 function fish_right_prompt
-  if git status >/dev/null ^/dev/null
-    set_color green -o
-    if not test (git status | tail -1) = "nothing to commit, working tree clean"
-      set_color red -o
-    end
-    echo -n (git branch | grep '*' | cut -c3-)
-  end
+	set -l git_branch (git branch ^/dev/null | sed -n '/\* /s///p')
+	echo -n -s $git_branch
+	
+	if test -f Gemfile; or test -f Rakefile
+		set -l ruby_version (chruby | sed -n -e 's/ \* //p')
+		set_color red
+		echo -n -s " $ruby_version"
+		set_color normal
+	end
 end
+

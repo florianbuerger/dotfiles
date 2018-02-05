@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+BUCKET_NAME='photos.florianbuerger.com'
+s3cmd sync --progress -M . s3://${BUCKET_NAME}/masters/ --exclude '*.*' --include '*.jpg' --include '*.jpeg' --verbose

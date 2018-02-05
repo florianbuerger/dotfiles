@@ -1,6 +1,11 @@
 CURRENT_DIR := $(shell pwd)
 
-default: git vim ruby bin bash tmux lldb npm android
+default: dir git vim ruby bin bash tmux lldb npm android wm
+
+dir:
+	mkdir -p $(HOME)/.config/nvim
+	mkdir -p $(HOME)/.config/alacritty/
+	mkdir -p $(HOME)/.config/fish
 
 git:
 	ln -sFf $(CURRENT_DIR)/.gitconfig $(HOME)/.gitconfig
@@ -18,12 +23,12 @@ bash:
 	ln -sFf $(CURRENT_DIR)/.inputrc $(HOME)/.inputrc
 
 fish:
-	mkdir -p $(HOME)/.config
 	ln -sFf $(CURRENT_DIR)/fish $(HOME)/.config/fish
 
 vim:
 	ln -sFf $(CURRENT_DIR)/.vimrc $(HOME)/.vimrc
 	ln -sFf $(CURRENT_DIR)/.vim $(HOME)/.vim
+	ln -sFf $(CURRENT_DIR)/.vimrc $(HOME)/config/nvim/init.vim
 
 textmate:
 	ln -sFf $(CURRENT_DIR)/.tm_properties $(HOME)/.tm_properties
@@ -45,3 +50,10 @@ lldb:
 
 npm:
 	ln -sFf $(CURRENT_DIR)/.npmrc $(HOME)/.npmrc
+
+alacritty:
+	ln -sFf $(CURRENT_DIR)/alacritty.yml $(HOME)/.config/alacritty/alacritty.yml
+
+wm:
+	ln -sFf $(CURRENT_DIR)/.chunkwmrc $(HOME)/.chunkwmrc
+	ln -sFf $(CURRENT_DIR)/.khdrc $(HOME)/.khdrc

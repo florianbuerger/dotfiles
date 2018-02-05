@@ -54,10 +54,12 @@ fi
 # SSH="\[\e[37m\]\u@\h:\[\e[m\]"
 
 if [ "$SSH_CONNECTION" ]; then
-  PS1='\[\e[32m\]\u@\h:\[\e[m\]\[\e[37m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
+  PS1='\[\e[32m\]\u@\h:\[\e[m\]\[\e[34m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
 else
-  PS1='\[\e[m\]\[\e[37m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
+  PS1='\[\e[m\]\[\e[34m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
 fi
+
+alias ta='tmux a'
 
 # osx
 alias o='open .'
