@@ -1,6 +1,6 @@
 CURRENT_DIR := $(shell pwd)
 
-default: dir git vim ruby bin bash tmux lldb npm android wm
+default: dir git vim ruby bin fish tmux lldb npm android wm
 
 dir:
 	mkdir -p $(HOME)/.config/nvim
@@ -57,3 +57,5 @@ alacritty:
 wm:
 	ln -sFf $(CURRENT_DIR)/.chunkwmrc $(HOME)/.chunkwmrc
 	ln -sFf $(CURRENT_DIR)/.khdrc $(HOME)/.khdrc
+
+.PHONY: fish
