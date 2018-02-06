@@ -1,8 +1,8 @@
 CURRENT_DIR := $(shell pwd)
 
-default: dir git vim ruby bin fish tmux lldb npm android wm
+default: git vim ruby bin zsh lldb npm android
 
-dir:
+dirs:
 	mkdir -p $(HOME)/.config/nvim
 	mkdir -p $(HOME)/.config/alacritty/
 	mkdir -p $(HOME)/.config/fish
@@ -12,10 +12,8 @@ git:
 	ln -sFf $(CURRENT_DIR)/.gitignore_global $(HOME)/.gitignore_global
 
 zsh:
-	ln -sFf $(CURRENT_DIR)/.zshenv $(HOME)/.zshenv
 	ln -sFf $(CURRENT_DIR)/.zshrc $(HOME)/.zshrc
 	ln -sFf $(CURRENT_DIR)/.hushlogin $(HOME)/.hushlogin
-	ln -sFf $(CURRENT_DIR)/.zsh $(HOME)/.zsh
 
 bash:
 	ln -sFf $(CURRENT_DIR)/.bashrc $(HOME)/.bashrc

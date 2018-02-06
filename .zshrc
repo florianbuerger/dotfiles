@@ -1,21 +1,275 @@
-# Load functions and completion
-fpath=(~/.zsh/functions /usr/local/share/zsh-completions /usr/local/share/zsh/site-functions $fpath)
-autoload -U compinit
-compinit -u
-autoload -U ~/.zsh/functions/*(:t)
+# ===================
+#   ENV
+# ===================
 
-# Matches case insensitive for lowercase
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export EDITOR='vim'
 
-# Pasting with tabs doesn't perform completion
-zstyle ':completion:*' insert-tab pending
+# Colors
+export CLICOLOR=1
+autoload colors; colors;
+export LSCOLORS="Gxfxcxdxbxegedabagacad"
+setopt PROMPT_SUBST
 
-# Load files
-for file (~/.zsh/*.zsh) source $file
+# Paths
+export PATH="$HOME/.bin:/usr/local/bin:/usr/local/sbin:~/.npm-packages/bin:$PATH"
 
-# Local secrets
-if [[ -a ~/.secrets ]]; then
-	source ~/.secrets
+# ===================
+#   AUTOCOMPLETION
+# ===================
+
+fpath=(/usr/local/share/zsh-completions /usr/local/share/zsh/site-functions $fpath)
+autoload -Uz compinit
+compinit
+
+zmodload -i zsh/complist
+
+WORDCHARS=''
+
+unsetopt menu_complete   # do not autoselect the first completion entry
+unsetopt flowcontrol
+setopt auto_menu         # show completion menu on successive tab press
+setopt complete_in_word
+setopt always_to_end
+
+# autocompletion with an arrow-key driven interface
+zstyle ':completion:*:*:*:*:*' menu select
+
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
+
+zstyle '*' single-ignored show
+
+# Automatically update PATH entries
+zstyle ':completion:*' rehash true
+
+# Keep directories and files separated
+zstyle ':completion:*' list-dirs-first true
+
+# git-flow completions
+if [[ -f /usr/local/share/zsh/site-functions/git-flow-completion.zsh ]]; then
+  source /usr/local/share/zsh/site-functions/git-flow-completion.zsh
 fi
 
+# Fastlane
+source ~/.fastlane/completions/completion.sh
+
+# =============
+#   ANDROID
+# =============
+
+export ANDROID_HOME='/Users/florian/Library/Android/sdk'
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
+alias emulator=$ANDROID_HOME/tools/emulator
+
+# ===================
+#   HISTORY
+# ===================
+
+HISTFILE=~/.zsh_history
+HISTSIZE=1000
+SAVEHIST=1000
+setopt HIST_VERIFY
+setopt SHARE_HISTORY # share history between sessions
+setopt EXTENDED_HISTORY # add timestamps to history
+setopt APPEND_HISTORY # adds history
+setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
+setopt HIST_IGNORE_ALL_DUPS  # don't record dupes in history
+setopt HIST_REDUCE_BLANKS
+
+# ===================
+#   ALIAS
+# ===================
+
+# Misc
+if hash trash 2>/dev/null; then
+  alias cat=trash
+else
+  echo "Run 'brew install trash'!"
+fi
+alias rm='trash'
+
+# Editor
+alias e='$EDITOR'
+alias vim='vim'
+
+# cd
+alias ..='cd ..'
+
+# ls
+alias la="ls -lhFAG"
+alias cat="ccat"
+
+# Mac OS X
+alias o='open .'
+alias screensaver='/System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine'
+alias hide_desktop_icons='defaults write com.apple.finder CreateDesktop -bool false && killall Finder'
+alias show_desktop_icons='defaults write com.apple.finder CreateDesktop -bool true && killall Finder'
+alias server='open http://localhost:8000 && python -m SimpleHTTPServer'
+alias flushdns='dscacheutil -flushcache && sudo killall -HUP mDNSResponder && echo "Be sure to reset Google Chrome as well: 'chrome://net-internals/#dns'"'
+alias f='open focus://toggle'
+alias icloud='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs'
+
+# Commands starting with % for pasting from web
+alias %=' '
+alias $=' '
+
+# Xcode
+alias ddd='rm -rf ~/Library/Developer/Xcode/DerivedData'
+alias xcode-beta='sudo xcode-select -s /Applications/Xcode-beta.app'
+alias xcode-release='sudo xcode-select -s /Applications/Xcode.app'
+alias bump='agvtool next-version -all'
+alias swiftformat="/usr/local/bin/swiftformat --indent 4"
+alias sp='/Users/florian/Code/Vendor/spacecommander/format-objc-files.sh -s'
+
+# UPDATE ALLL THE THINGS
+alias update_everything='gem update && gem clean && brew update && brew upgrade && brew prune && brew cleanup && mas upgrade'
+
+# Git
+alias gsu='git submodule update --init --recursive'
+alias gs='git status -sb'
+alias gut='git'
+alias cleanup_branches='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
+alias gd='git diff'
+alias gc='git commit'
+alias ga='git add -p'
+alias gca='git add -A && git commit'
+alias gcam='git add -A && git commit -m'
+alias gcams='"/Users/florian/Code/Vendor/spacecommander"/format-objc-files.sh -s && git add -A && git commit -m'
+alias gg='git log --graph --abbrev-commit --decorate --format=oneline'
+alias gt='gittower .'
+alias gp='git push'
+alias gup='git pull --rebase && git push'
+
+# ===================
+#   KEY BINDINGS
+# ===================
+
+bindkey '^[^[[D' backward-word
+bindkey '^[^[[C' forward-word
+bindkey '^[[5D' beginning-of-line
+bindkey '^[[5C' end-of-line
+bindkey '^[[3~' delete-char
+bindkey '^?' backward-delete-char
+
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
+
+# ===================
+#   NODEJS
+# ===================
+
+NPM_PACKAGES="${HOME}/.npm-packages"
+export PATH="$NPM_PACKAGES/bin:$PATH"
+unset MANPATH
+export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+
+export NVM_DIR="$HOME/.nvm"
+alias loadnvm=". $(brew --prefix nvm)/nvm.sh && nvm use --lts"
+export PATH=$PATH:$HOME/.yarn/bin
+
+# ===================
+#   PROMPT
+# ===================
+
+autoload -Uz vcs_info colors
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git*' check-for-changes true
+zstyle ':vcs_info:git*' stagedstr "%F{red}"
+zstyle ':vcs_info:git*' unstagedstr "%F{red}"
+precmd() {
+  vcs_info
+}
+
+zstyle ':vcs_info:git*' formats "%{$reset_color%}%F{green}%c%u%b%{$reset_color%}"
+zstyle ':vcs_info:git*' actionformats "%{$reset_color%}%F{green}%b|%a%{$reset_color%}"
+
+function machine_info() {
+  if [[ -n "$SSH_CLIENT" ]]; then
+    local user=`whoami`
+    echo "%{$fg_bold[black]%}$user@%m%:%{$reset_color%}"
+  fi
+}
+
+PROMPT='$(machine_info)%{$fg[blue]%}%c%{$reset_color%}%{$reset_color%}\$ '
+RPROMPT='${vcs_info_msg_0_}%{$reset_color%}'
+
+update_terminal_cwd() {
+    # Identify the directory using a "file:" scheme URL,
+    # including the host name to disambiguate local vs.
+    # remote connections. Percent-escape spaces.
+    local SEARCH=' '
+    local REPLACE='%20'
+    local PWD_URL="file://$HOSTNAME${PWD//$SEARCH/$REPLACE}"
+    printf '\e]7;%s\a' "$PWD_URL"
+
+    # tab_label=${PWD/${HOME}/\~} # use 'relative' path
+    # echo -ne "\e]2;${tab_label}\a" # set window title to full string
+    # echo -ne "\e]1;${tab_label: -24}\a" # set tab title to rightmost 24 characters
+}
+autoload add-zsh-hook
+add-zsh-hook chpwd update_terminal_cwd
+update_terminal_cwd
+
+# ===================
+#   RUBY
+# ===================
+
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+source /usr/local/opt/chruby/share/chruby/auto.sh
+
+alias be='bundle exec'
+alias bi='bundle install'
+
+# ===================
+#   MISC SETTINGS
+# ===================
+
+# automatically remove duplicates from these arrays
+typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
+
+# Timer
+REPORTTIME=10 # print elapsed time when more than 10 seconds
+
+# Quote pasted URLs
+autoload -U url-quote-magic
+zle -N self-insert url-quote-magic
+
+# allow sudo for aliases
+alias sudo='sudo '
+
+# Misc options
+setopt NO_BG_NICE # don't nice background tasks
+setopt NO_HUP
+setopt NO_LIST_BEEP
+setopt LOCAL_OPTIONS # allow functions to have local options
+setopt LOCAL_TRAPS # allow functions to have local traps
+setopt COMPLETE_IN_WORD
+
+# ===================
+#   TOOLS
+# ===================
+
+# fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# iOS simulator
+[ -f ~/.zsh/ios-simulator.zsh ] && source ~/.zsh/ios-simulator.zsh
+
+# z
+source `brew --prefix`/etc/profile.d/z.sh
+
+# ===================
+#   PRIVATE
+# ===================
+
+[ -r ~/.zsh_private ] && source ~/.zsh_private
