@@ -47,16 +47,18 @@ if [ -d /Applications/Xcode.app ]; then
 	source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
 fi
 
-# DIR='\[\e[37m\]\W\[\e[m\]'
-# GIT_INFO='$(__git_ps1 "(%s)")'
-# SSH="\[\e[37m\]\u@\h:\[\e[m\]"
+__iterm_profile() {
+    if [ "$SSH_CONNECTION" ]; then
+        echo -ne "\033]50;SetProfile=ssh\a"
+    else 
+        echo -ne "\033]50;SetProfile=default\a"
+    fi
+    # Title in iterm
+    echo -ne "\033]0;${PWD/#$HOME/~}\007"
+}
 
+PROMPT_COMMAND="__iterm_profile"
 if [ "$SSH_CONNECTION" ]; then
-    # Set tab color to red
-echo -e "\033]6;1;bg;red;brightness;255\a"
-
-# Set window profile ( in my case, Prod profile will make the background red)
-echo -e "\033]50;SetProfile=ssh\a"
   export PS1='\[$(tput setaf 2)\]\u@\h:\[$(tput setaf 5)\]\W$(__git_ps1 "(%s)")\\$ \[$(tput sgr0)\]'
 else
   export PS1='\[$(tput setaf 5)\]\W$(__git_ps1 "(%s)")\\$ \[$(tput sgr0)\]'
