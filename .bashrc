@@ -3,9 +3,7 @@ export LANG=en_US.UTF-8
 
 export GREP_OPTIONS='--color=auto'
 export CLICOLOR=1
-# export EDITOR="vim"
-export EDITOR='mvim -f --nomru'
-alias e='$EDITOR'
+export EDITOR="vim"
 
 if [ "$(uname)" == "Darwin" ]; then
 	export PATH=$HOME/.bin:/usr/local/bin:/usr/local/sbin:$PATH
@@ -54,9 +52,14 @@ fi
 # SSH="\[\e[37m\]\u@\h:\[\e[m\]"
 
 if [ "$SSH_CONNECTION" ]; then
-  PS1='\[\e[32m\]\u@\h:\[\e[m\]\[\e[34m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
+    # Set tab color to red
+echo -e "\033]6;1;bg;red;brightness;255\a"
+
+# Set window profile ( in my case, Prod profile will make the background red)
+echo -e "\033]50;SetProfile=ssh\a"
+  export PS1='\[$(tput setaf 2)\]\u@\h:\[$(tput setaf 5)\]\W$(__git_ps1 "(%s)")\\$ \[$(tput sgr0)\]'
 else
-  PS1='\[\e[m\]\[\e[34m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
+  export PS1='\[$(tput setaf 5)\]\W$(__git_ps1 "(%s)")\\$ \[$(tput sgr0)\]'
 fi
 
 alias ta='tmux a'

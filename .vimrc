@@ -79,3 +79,6 @@ let g:vim_markdown_folding_disabled = 1
 
 " CTRL+P for fzf
 nnoremap <C-p> :FZF<cr>
+
+" Fastlane, Cocoapods
+au BufNewFile,BufRead Podfile,*.podspec,Fastfile,Appfile,Deliverfile,Snapfile set filetype=ruby

@@ -31,3 +31,6 @@ abbr -a emulator $ANDROID_HOME/tools/emulator
 function fish_mode_prompt
   # NOOP - Disable vim mode indicator
 end
+
+# git
+abbr -a gs git status -sb

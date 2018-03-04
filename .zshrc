@@ -6,13 +6,13 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export EDITOR='vim'
+bindkey -e # restore emacs keybindings
 
 # Colors
 export CLICOLOR=1
 autoload colors; colors;
 export LSCOLORS="Gxfxcxdxbxegedabagacad"
 setopt PROMPT_SUBST
-
 # Paths
 export PATH="$HOME/.bin:/usr/local/bin:/usr/local/sbin:~/.npm-packages/bin:$PATH"
 
@@ -131,6 +131,7 @@ alias sp='/Users/florian/Code/Vendor/spacecommander/format-objc-files.sh -s'
 alias update_everything='gem update && gem clean && brew update && brew upgrade && brew prune && brew cleanup && mas upgrade'
 
 # Git
+alias git='hub'
 alias gsu='git submodule update --init --recursive'
 alias gs='git status -sb'
 alias gut='git'
@@ -190,18 +191,18 @@ precmd() {
   vcs_info
 }
 
-zstyle ':vcs_info:git*' formats "%{$reset_color%}%F{green}%c%u%b%{$reset_color%}"
-zstyle ':vcs_info:git*' actionformats "%{$reset_color%}%F{green}%b|%a%{$reset_color%}"
+zstyle ':vcs_info:git*' formats "%F{green}%c%u%b%f"
+zstyle ':vcs_info:git*' actionformats "%F{green}%b|%a%f"
 
 function machine_info() {
   if [[ -n "$SSH_CLIENT" ]]; then
     local user=`whoami`
-    echo "%{$fg_bold[black]%}$user@%m%:%{$reset_color%}"
+    echo "%{%F{green}%}$user@%F{yellow}%m%:%f"
   fi
 }
 
-PROMPT='$(machine_info)%{$fg[blue]%}%c%{$reset_color%}%{$reset_color%}\$ '
-RPROMPT='${vcs_info_msg_0_}%{$reset_color%}'
+PROMPT='$(machine_info)%F{white}\$%f '
+RPROMPT='${vcs_info_msg_0_}'
 
 update_terminal_cwd() {
     # Identify the directory using a "file:" scheme URL,
