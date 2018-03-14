@@ -3,11 +3,18 @@ export LANG=en_US.UTF-8
 
 export GREP_OPTIONS='--color=auto'
 export CLICOLOR=1
-export EDITOR="vim"
+export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 
 if [ "$(uname)" == "Darwin" ]; then
 	export PATH=$HOME/.bin:/usr/local/bin:/usr/local/sbin:$PATH
 fi
+
+if hash ccat 2>/dev/null; then
+    export EDITOR='mvim -f --nomru -c "au VimLeave * !open -a iTerm"'
+else
+    export EDITOR=vim
+fi
+alias e=$EDITOR
 
 # Case-insensitive globbing (used in pathname expansion)
 set completion-ignore-case On
@@ -50,7 +57,7 @@ fi
 __iterm_profile() {
     if [ "$SSH_CONNECTION" ]; then
         echo -ne "\033]50;SetProfile=ssh\a"
-    else 
+    else
         echo -ne "\033]50;SetProfile=default\a"
     fi
     # Title in iterm
@@ -59,9 +66,9 @@ __iterm_profile() {
 
 PROMPT_COMMAND="__iterm_profile"
 if [ "$SSH_CONNECTION" ]; then
-  export PS1='\[$(tput setaf 2)\]\u@\h:\[$(tput setaf 5)\]\W$(__git_ps1 "(%s)")\\$ \[$(tput sgr0)\]'
+  export PS1='\[$(tput setaf 2)\]\u@\h:\[$(tput setaf 4)\]\W$(__git_ps1 "(%s)")\\$ \[$(tput sgr0)\]'
 else
-  export PS1='\[$(tput setaf 5)\]\W$(__git_ps1 "(%s)")\\$ \[$(tput sgr0)\]'
+  export PS1='\[$(tput setaf 4)\]\W$(__git_ps1 "(%s)")\\$ \[$(tput sgr0)\]'
 fi
 
 alias ta='tmux a'
@@ -112,8 +119,12 @@ alias radio-smash='mplayer http://uk1.internet-radio.com:8106/;'
 alias ddd='rm -rf ~/Library/Developer/Xcode/DerivedData'
 alias bump='agvtool bump -all'
 alias spacecommander='~/Code/Vendor/spacecommander/format-objc-files.sh -s'
-alias xcode-beta='sudo xcode-select -s /Applications/Xcode-beta.app'
-alias xcode-release='sudo xcode-select -s /Applications/Xcode.app'
+alias xcode-beta='sudo xcode-select -s /Applications/Xcode-beta.app && ddd'
+alias xcode-release='sudo xcode-select -s /Applications/Xcode.app && ddd'
+alias bef='bundle exec fastlane'
+
+# load z
+[ -f /usr/local/etc/profile.d/z.sh ] && source /usr/local/etc/profile.d/z.sh
 
 # load fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
