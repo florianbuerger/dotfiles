@@ -2,7 +2,14 @@
 call plug#begin('~/.vim/plugged')
 Plug 'plasticboy/vim-markdown'
 Plug 'junegunn/fzf'
+Plug 'sjl/gundo.vim'
+Plug 'reedes/vim-pencil'
+Plug 'scrooloose/nerdcommenter'
+Plug 'Raimondi/delimitMate'
 call plug#end()
+
+set nocompatible
+filetype plugin indent on 
 
 " enable ruler and line numbers
 set ruler
@@ -82,3 +89,11 @@ nnoremap <C-p> :FZF<cr>
 
 " Fastlane, Cocoapods
 au BufNewFile,BufRead Podfile,*.podspec,Fastfile,Appfile,Deliverfile,Snapfile set filetype=ruby
+
+" penicl
+let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
+augroup pencil
+  autocmd!
+  autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType text         call pencil#init()
+augroup END
