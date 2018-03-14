@@ -2,7 +2,7 @@
 
 encoding         = UTF-8
 fontName         = "SF Mono"
-fontSize         = 14
+fontSize         = 13
 lineEndings      = '\n'
 showInvisibles   = false
 softWrap         = false

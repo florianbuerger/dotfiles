@@ -20,8 +20,7 @@ alias e=$EDITOR
 set completion-ignore-case On
 
 # Ruby
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-source /usr/local/opt/chruby/share/chruby/auto.sh
+eval "$(rbenv init -)"
 alias be='bundle exec'
 alias bi='bundle install'
 
@@ -40,13 +39,6 @@ export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 # Add tab completion for many Bash commands
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
-
-# Enable z
-[ -f /usr/local/etc/profile.d/z.sh ] && . /usr/local/etc/profile.d/z.sh
-
-# Autocompletion for fastlane; run fastlane enable_auto_complet to
-# generate that file
-[ -f ~/.fastlane/completions/completion.sh ] && . ~/.fastlane/completions/completion.sh
 
 # Git completion and branch info in prompt
 if [ -d /Applications/Xcode.app ]; then
@@ -125,9 +117,6 @@ alias bef='bundle exec fastlane'
 
 # load z
 [ -f /usr/local/etc/profile.d/z.sh ] && source /usr/local/etc/profile.d/z.sh
-
-# load fzf
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # UPDATE ALLL THE THINGS
 alias update_everything='gem update && gem clean && brew update && brew upgrade && brew prune && brew cleanup && sudo softwareupdate -ia'
