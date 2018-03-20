@@ -1,5 +1,5 @@
 abbr -a g git status
-abbr -a gs git status
+abbr -a gs git status -sb
 abbr -a gc git commit
 
 function gca
