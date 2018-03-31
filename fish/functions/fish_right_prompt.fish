@@ -5,10 +5,16 @@ function fish_right_prompt
 	set_color normal
 	
 	if test -f Gemfile; or test -f Rakefile
-		set -l ruby_version (chruby | sed -n -e 's/ \* //p')
-		set_color red
-		echo -n -s " $ruby_version"
-		set_color normal
+		set -l ruby_version (rbenv version | sed -e 's/ .*//')
+		if test -n $ruby_version
+			set_color red
+			echo -n -s " (ruby $ruby_version)"
+			set_color normal
+		end
+	end
+	
+	if set -q VIRTUAL_ENV
+	    echo -n -s (set_color -b blue white) "(" (basename "$VIRTUAL_ENV") ")" (set_color normal) " "
 	end
 end
 
