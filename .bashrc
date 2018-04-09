@@ -9,7 +9,7 @@ if [ "$(uname)" == "Darwin" ]; then
 	export PATH=$HOME/.bin:/usr/local/bin:/usr/local/sbin:$PATH
 fi
 
-if hash ccat 2>/dev/null; then
+if hash mvim 2>/dev/null; then
     export EDITOR='mvim -f --nomru -c "au VimLeave * !open -a iTerm"'
 else
     export EDITOR=vim
@@ -47,7 +47,7 @@ if [ -d /Applications/Xcode.app ]; then
 fi
 
 __iterm_profile() {
-    if [ "$SSH_CONNECTION" ]; then
+    if [ "$SSH_CLIENT" ]; then
         echo -ne "\033]50;SetProfile=ssh\a"
     else
         echo -ne "\033]50;SetProfile=default\a"
@@ -57,7 +57,7 @@ __iterm_profile() {
 }
 
 PROMPT_COMMAND="__iterm_profile"
-if [ "$SSH_CONNECTION" ]; then
+if [ "$SSH_CLIENT" ]; then
   export PS1='\[$(tput setaf 2)\]\u@\h:\[$(tput setaf 4)\]\W$(__git_ps1 "(%s)")\\$ \[$(tput sgr0)\]'
 else
   export PS1='\[$(tput setaf 4)\]\W$(__git_ps1 "(%s)")\\$ \[$(tput sgr0)\]'
