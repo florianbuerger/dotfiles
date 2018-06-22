@@ -81,6 +81,7 @@ map <leader>jt  :%!python -m json.tool<CR>
 " Change cursor in insert mode
 let &t_SI.="\e[5 q"
 let &t_EI.="\e[1 q"
+autocmd VimLeave * silent !echo -ne "\033[2 q"
 
 let g:vim_markdown_folding_disabled = 1
 
