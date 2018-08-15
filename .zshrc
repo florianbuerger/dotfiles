@@ -5,13 +5,13 @@
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-export EDITOR='vim'
+export EDITOR='nvim'
 bindkey -e # restore emacs keybindings
 
 # Colors
 export CLICOLOR=1
 autoload colors; colors;
-export LSCOLORS="Gxfxcxdxbxegedabagacad"
+# export LSCOLORS="Gxfxcxdxbxegedabagacad"
 setopt PROMPT_SUBST
 # Paths
 export PATH="$HOME/.bin:/usr/local/bin:/usr/local/sbin:~/.npm-packages/bin:$PATH"
@@ -55,9 +55,6 @@ zstyle ':completion:*' list-dirs-first true
 if [[ -f /usr/local/share/zsh/site-functions/git-flow-completion.zsh ]]; then
   source /usr/local/share/zsh/site-functions/git-flow-completion.zsh
 fi
-
-# Fastlane
-source ~/.fastlane/completions/completion.sh
 
 # =============
 #   ANDROID
@@ -225,8 +222,7 @@ update_terminal_cwd
 #   RUBY
 # ===================
 
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-source /usr/local/opt/chruby/share/chruby/auto.sh
+eval "$(rbenv init -)"
 
 alias be='bundle exec'
 alias bi='bundle install'
@@ -266,8 +262,8 @@ setopt COMPLETE_IN_WORD
 # iOS simulator
 [ -f ~/.zsh/ios-simulator.zsh ] && source ~/.zsh/ios-simulator.zsh
 
-# z
-source `brew --prefix`/etc/profile.d/z.sh
+# fasd
+eval "$(fasd --init auto)"
 
 # ===================
 #   PRIVATE
