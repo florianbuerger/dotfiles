@@ -13,8 +13,9 @@ export CLICOLOR=1
 autoload colors; colors;
 # export LSCOLORS="Gxfxcxdxbxegedabagacad"
 setopt PROMPT_SUBST
-# Paths
-export PATH="$HOME/.bin:/usr/local/bin:/usr/local/sbin:~/.npm-packages/bin:$PATH"
+
+typeset -U path
+path=(~/.bin /usr/local/sbin $path)
 
 # ===================
 #   AUTOCOMPLETION
@@ -61,7 +62,7 @@ fi
 # =============
 
 export ANDROID_HOME='/Users/florian/Library/Android/sdk'
-export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
+path+=($ANDROID_HOME/tools/bin $ANDROID_HOME/tools $ANDROID_HOME/platform-tools)
 alias emulator=$ANDROID_HOME/tools/emulator
 
 # ===================
@@ -144,6 +145,9 @@ alias gt='gittower .'
 alias gp='git push'
 alias gup='git pull --rebase && git push'
 
+alias ts='tmux new-session -s'
+alias ta='tmux attach -t'
+
 # ===================
 #   KEY BINDINGS
 # ===================
@@ -167,13 +171,13 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 # ===================
 
 NPM_PACKAGES="${HOME}/.npm-packages"
-export PATH="$NPM_PACKAGES/bin:$PATH"
+path+=($NPM_PACKAGES/bin)
 unset MANPATH
 export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 export NVM_DIR="$HOME/.nvm"
 alias loadnvm=". $(brew --prefix nvm)/nvm.sh && nvm use --lts"
-export PATH=$PATH:$HOME/.yarn/bin
+path+=(~/.yarn/bin)
 
 # ===================
 #   PROMPT
@@ -226,6 +230,11 @@ eval "$(rbenv init -)"
 
 alias be='bundle exec'
 alias bi='bundle install'
+
+# ===================
+# Python
+# ===================
+path+=(~/Library/Python/2.7/bin)
 
 # ===================
 #   MISC SETTINGS
