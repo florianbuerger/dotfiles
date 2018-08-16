@@ -26,7 +26,6 @@ fish:
 vim:
 	ln -sFf $(CURRENT_DIR)/.vimrc $(HOME)/.vimrc
 	ln -sFf $(CURRENT_DIR)/.vim $(HOME)/.vim
-	ln -sFf $(CURRENT_DIR)/.vimrc $(HOME)/config/nvim/init.vim
 
 textmate:
 	ln -sFf $(CURRENT_DIR)/.tm_properties $(HOME)/.tm_properties
@@ -55,5 +54,8 @@ alacritty:
 wm:
 	ln -sFf $(CURRENT_DIR)/.chunkwmrc $(HOME)/.chunkwmrc
 	ln -sFf $(CURRENT_DIR)/.khdrc $(HOME)/.khdrc
+
+neovim:
+	ln -sFf $(CURRENT_DIR)/.config/nvim/init.vim $(HOME)/.config/nvim/init.vim
 
 .PHONY: fish
