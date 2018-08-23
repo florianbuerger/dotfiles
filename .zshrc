@@ -11,11 +11,9 @@ bindkey -e # restore emacs keybindings
 # Colors
 export CLICOLOR=1
 autoload colors; colors;
-# export LSCOLORS="Gxfxcxdxbxegedabagacad"
 setopt PROMPT_SUBST
 
-typeset -U path
-path=(~/.bin /usr/local/sbin $path)
+path=(~/.bin /usr/local/sbin ~/.cargo/bin $path)
 
 # ===================
 #   AUTOCOMPLETION
@@ -144,6 +142,7 @@ alias gg='git log --graph --abbrev-commit --decorate --format=oneline'
 alias gt='gittower .'
 alias gp='git push'
 alias gup='git pull --rebase && git push'
+alias t='tig status'
 
 alias ts='tmux new-session -s'
 alias ta='tmux attach -t'
@@ -202,7 +201,7 @@ function machine_info() {
   fi
 }
 
-PROMPT='$(machine_info)%F{white}\$%f '
+PROMPT='$(machine_info)%F{blue}\$%f '
 RPROMPT='${vcs_info_msg_0_}'
 
 update_terminal_cwd() {
@@ -214,9 +213,9 @@ update_terminal_cwd() {
     local PWD_URL="file://$HOSTNAME${PWD//$SEARCH/$REPLACE}"
     printf '\e]7;%s\a' "$PWD_URL"
 
-    # tab_label=${PWD/${HOME}/\~} # use 'relative' path
-    # echo -ne "\e]2;${tab_label}\a" # set window title to full string
-    # echo -ne "\e]1;${tab_label: -24}\a" # set tab title to rightmost 24 characters
+    tab_label=${PWD/${HOME}/\~} # use 'relative' path
+    echo -ne "\e]2;${tab_label}\a" # set window title to full string
+    echo -ne "\e]1;${tab_label: -24}\a" # set tab title to rightmost 24 characters
 }
 autoload add-zsh-hook
 add-zsh-hook chpwd update_terminal_cwd

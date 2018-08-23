@@ -8,33 +8,33 @@ dirs:
 	mkdir -p $(HOME)/.config/fish
 
 git:
-	ln -sFf $(CURRENT_DIR)/.gitconfig $(HOME)/.gitconfig
-	ln -sFf $(CURRENT_DIR)/.gitignore_global $(HOME)/.gitignore_global
+	ln -sFf "$(CURRENT_DIR)/.gitconfig" $(HOME)/.gitconfig
+	ln -sFf "$(CURRENT_DIR)/.gitignore_global" $(HOME)/.gitignore_global
 
 zsh:
-	ln -sFf $(CURRENT_DIR)/.zshrc $(HOME)/.zshrc
-	ln -sFf $(CURRENT_DIR)/.hushlogin $(HOME)/.hushlogin
+	ln -sFf "$(CURRENT_DIR)/.zshrc" $(HOME)/.zshrc
+	ln -sFf "$(CURRENT_DIR)/.hushlogin" $(HOME)/.hushlogin
 
 bash:
-	ln -sFf $(CURRENT_DIR)/.bashrc $(HOME)/.bashrc
-	ln -sFf $(CURRENT_DIR)/.bash_profile $(HOME)/.bash_profile
-	ln -sFf $(CURRENT_DIR)/.inputrc $(HOME)/.inputrc
+	ln -sFf "$(CURRENT_DIR)/.bashrc" $(HOME)/.bashrc
+	ln -sFf "$(CURRENT_DIR)/.bash_profile" $(HOME)/.bash_profile
+	ln -sFf "$(CURRENT_DIR)/.inputrc" $(HOME)/.inputrc
 
 fish:
-	ln -sFf $(CURRENT_DIR)/fish $(HOME)/.config/fish
+	ln -sFf "$(CURRENT_DIR)/fish" $(HOME)/.config/fish
 
 vim:
-	ln -sFf $(CURRENT_DIR)/.vimrc $(HOME)/.vimrc
-	ln -sFf $(CURRENT_DIR)/.vim $(HOME)/.vim
+	ln -sFf "$(CURRENT_DIR)/.vimrc" $(HOME)/.vimrc
+	ln -sFf "$(CURRENT_DIR)/.vim" $(HOME)/.vim
 
 textmate:
 	ln -sFf $(CURRENT_DIR)/.tm_properties $(HOME)/.tm_properties
 
 ruby:
-	ln -sFf $(CURRENT_DIR)/.gemrc $(HOME)/.gemrc
+	ln -sFf "$(CURRENT_DIR)/.gemrc" $(HOME)/.gemrc
 
 bin:
-	ln -sFf $(CURRENT_DIR)/.bin $(HOME)/.bin
+	ln -sFf "$(CURRENT_DIR)/.bin" $(HOME)/.bin
 
 android:
 	ln -sFf $(CURRENT_DIR)/android/advancedFeatures.ini $(HOME)/.android/advancedFeatures.ini
@@ -56,6 +56,7 @@ wm:
 	ln -sFf $(CURRENT_DIR)/.khdrc $(HOME)/.khdrc
 
 neovim:
-	ln -sFf $(CURRENT_DIR)/.config/nvim/init.vim $(HOME)/.config/nvim/init.vim
+	mkdir -p $(HOME)/.config/nvim/
+	ln -sFf $(CURRENT_DIR)/init.vim $(HOME)/.config/nvim/init.vim
 
 .PHONY: fish
