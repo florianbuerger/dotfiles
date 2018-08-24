@@ -12,6 +12,7 @@ bindkey -e # restore emacs keybindings
 export CLICOLOR=1
 autoload colors; colors;
 setopt PROMPT_SUBST
+source "$HOME/.local/share/nvim/plugged/gruvbox/gruvbox_256palette.sh"
 
 path=(~/.bin /usr/local/sbin ~/.cargo/bin $path)
 
@@ -146,6 +147,10 @@ alias t='tig status'
 
 alias ts='tmux new-session -s'
 alias ta='tmux attach -t'
+
+" xterm-256color-italic will not be available on remote machines
+alias ssh='TERM=xterm-256color ssh'
+alias mosh='TERM=xterm-256color mosh'
 
 # ===================
 #   KEY BINDINGS
