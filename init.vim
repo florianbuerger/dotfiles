@@ -37,6 +37,10 @@ set scrolloff=5
 set foldmethod=marker
 set autoindent
 
+set wrap
+set linebreak
+set nolist
+
 " background
 set mouse=a
 set fileformats=unix
