@@ -3,6 +3,7 @@ Plug 'https://github.com/Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'https://github.com/tpope/vim-surround'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-unimpaired'
 
 " web
 Plug 'https://github.com/prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
@@ -13,11 +14,18 @@ Plug 'morhetz/gruvbox'
 call plug#end()
 
 " appearance
-set background=dark
+set termguicolors
+let g:gruvbox_italic=1
 colorscheme gruvbox
 
 set number
 set relativenumber
+" switch to normal line numbers in insert mode
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
 set cursorline
 set list
 set listchars=tab:▸\ ,eol:¬
@@ -86,13 +94,10 @@ function! Preserve(command)
   call setpos('.', cursor_position)
 endfunction
 
-" filetypes
 autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4
 autocmd Filetype ruby setlocal expandtab tabstop=2 shiftwidth=2
-autocmd Filetype markdown setlocal expandtab tabstop=4 shiftwidth=4
 autocmd Filetype c setlocal foldmethod=syntax foldnestmax=1
 autocmd BufWritePre *.js,*.jsx,*.json,*.css,*.scss,*.less,*.graphql PrettierAsync
-autocmd BufNewFile,BufRead AppFile,Fastfile,Deliverfile,Podfile,*.podspec set filetype=ruby
 
 " Since gruvbox inverts cursor color, it could be awkward to determine current position, when the search is highlighted. To get single cursor color while searching, map these gruvbox functions somewhere after unimpaired is loaded 
 
