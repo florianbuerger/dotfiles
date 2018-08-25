@@ -148,7 +148,7 @@ alias t='tig status'
 alias ts='tmux new-session -s'
 alias ta='tmux attach -t'
 
-" xterm-256color-italic will not be available on remote machines
+# xterm-256color-italic will not be available on remote machines
 alias ssh='TERM=xterm-256color ssh'
 alias mosh='TERM=xterm-256color mosh'
 
@@ -277,9 +277,3 @@ setopt COMPLETE_IN_WORD
 
 # fasd
 eval "$(fasd --init auto)"
-
-# ===================
-#   PRIVATE
-# ===================
-
-[ -r ~/.zsh_private ] && source ~/.zsh_private
