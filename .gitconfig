@@ -34,7 +34,7 @@
 	prune = fetch --prune
 	undo = reset --soft HEAD^
 	stash-all = stash save --include-untracked
-    glog = log --graph --pretty=format:\"%C(yellow)%h%Creset %ad  %s%C(cyan)%d%Creset %C(green)[%an]%Creset\" --date=short
+  glog = log --graph --pretty=format:\"%C(yellow)%h%Creset %ad  %s%C(cyan)%d%Creset %C(green)[%an]%Creset\" --date=short
 
 [status]
 	showUntrackedFiles = all

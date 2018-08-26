@@ -36,4 +36,7 @@ term:
 	tic -x tmux-256color.terminfo
 	tic -x xterm-256color-italic.terminfo
 
+tig:
+	ln -sFf $(CURRENT_DIR)/.tigrc $(HOME)/.tigrc
+
 .PHONY: zsh
