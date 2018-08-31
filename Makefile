@@ -1,6 +1,6 @@
 CURRENT_DIR := $(shell pwd)
 
-default: git ruby bin zsh lldb npm android neovim term
+default: git ruby bin zsh lldb npm android neovim term tmux
 
 git:
 	ln -sFf "$(CURRENT_DIR)/.gitconfig" $(HOME)/.gitconfig
@@ -14,7 +14,7 @@ ruby:
 	ln -sFf "$(CURRENT_DIR)/.gemrc" $(HOME)/.gemrc
 
 bin:
-	ln -sFf "$(CURRENT_DIR)/.bin" $(HOME)/.bin
+	ln -sFf "$(CURRENT_DIR)/.bin" $(HOME)
 
 android:
 	ln -sFf $(CURRENT_DIR)/android/advancedFeatures.ini $(HOME)/.android/advancedFeatures.ini

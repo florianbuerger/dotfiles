@@ -11,8 +11,10 @@ fi
 
 if hash mvim 2>/dev/null; then
     export EDITOR='mvim -f --nomru -c "au VimLeave * !open -a iTerm"'
+elif hash nvim 2>/dev/null; then
+    export EDITOR=nvim
 else
-    export EDITOR=vim
+	export EDITOR=vim
 fi
 alias e=$EDITOR
 
@@ -46,17 +48,6 @@ if [ -d /Applications/Xcode.app ]; then
 	source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
 fi
 
-__iterm_profile() {
-    if [ "$SSH_CLIENT" ]; then
-        echo -ne "\033]50;SetProfile=ssh\a"
-    else
-        echo -ne "\033]50;SetProfile=default\a"
-    fi
-    # Title in iterm
-    echo -ne "\033]0;${PWD/#$HOME/~}\007"
-}
-
-PROMPT_COMMAND="__iterm_profile"
 if [ "$SSH_CLIENT" ]; then
   export PS1='\[$(tput setaf 2)\]\u@\h:\[$(tput setaf 4)\]\W$(__git_ps1 "(%s)")\\$ \[$(tput sgr0)\]'
 else
@@ -115,16 +106,27 @@ alias xcode-beta='sudo xcode-select -s /Applications/Xcode-beta.app && ddd'
 alias xcode-release='sudo xcode-select -s /Applications/Xcode.app && ddd'
 alias bef='bundle exec fastlane'
 
-# load z
-[ -f /usr/local/etc/profile.d/z.sh ] && source /usr/local/etc/profile.d/z.sh
-
 # UPDATE ALLL THE THINGS
 alias update_everything='gem update && gem clean && brew update && brew upgrade && brew prune && brew cleanup && sudo softwareupdate -ia'
 
 # Use colored cat
-if hash ccat 2>/dev/null; then
-	alias cat=ccat
+if hash bat 2>/dev/null; then
+	alias cat=bat
+else
+	echo "Run brew install bat"
 fi
+
+# Better ping
+if hash prettyping 2>/dev/null; then
+	alias ping='prettyping --nolegend'
+else
+	echo "Run brew install prettyping"
+fi
+
+# fasd
+eval "$(fasd --init auto)"
 
 # Reset dns cache
 alias flushdns='dscacheutil -flushcache && sudo killall -HUP mDNSResponder && echo "Be sure to reset Google Chrome as well: 'chrome://net-internals/#dns'"'
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
