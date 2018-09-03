@@ -54,7 +54,8 @@ else
   export PS1='\[$(tput setaf 4)\]\W$(__git_ps1 "(%s)")\\$ \[$(tput sgr0)\]'
 fi
 
-alias ta='tmux a'
+alias ta='tmux a -t'
+alias ts='tmux new-session -s'
 
 # osx
 alias o='open .'

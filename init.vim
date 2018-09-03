@@ -4,8 +4,7 @@ Plug 'https://github.com/tpope/vim-surround'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-unimpaired'
-
-" web
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'https://github.com/prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
 Plug 'https://github.com/pangloss/vim-javascript'
 
