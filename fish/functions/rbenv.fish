@@ -1,0 +1,1 @@
+/Users/florian/.config/fisherman/rbenv/functions/rbenv.fish

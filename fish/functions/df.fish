@@ -1,0 +1,1 @@
+/Users/florian/.config/fisherman/grc/functions/df.fish

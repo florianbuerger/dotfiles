@@ -1,20 +1,21 @@
 set fish_greeting
 
-set -x EDITOR vim
+set -x LANG en_US.UTF-8
+
+set -x EDITOR nvim
 set -x MANPAGER vimpager
 
-set -x LANG en_US.UTF-8
-set -x LC_ALL en_US.UTF-8
-set -x LC_CTYPE en_US.UTF-8
+set -x FZF_DEFAULT_COMMAND 'ag -g ""'
 
-set -x PATH $HOME/.bin /usr/local/bin /usr/local/sbin $PATH
+set -gx PATH ~/.bin $PATH
 
-abbr -a be bundle exec
-abbr -a bi bundle install
-abbr -a bef bundle exec fastlane
-abbr -a bep bundle exec pod
+abbr -a ta tmux attach -t
+abbr -a ts tmux new-session -s
 
-# Local secrets (e.g. fastlane user/password)
-if test -e ~/.secrets.fish
-    . ~/.secrets.fish
+# Android
+if test -d ~/Library/Android/sdk
+  set -x ANDROID_HOME ~/Library/Android/sdk
+	set -x PATH $ANDROID_HOME/tools $ANDROID_HOME/tools/bin $ANDROID_HOME/platform-tools $PATH
+	alias emulator=$ANDROID_HOME/tools/emulator
 end
+

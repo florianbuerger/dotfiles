@@ -101,6 +101,7 @@ autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4
 autocmd Filetype ruby setlocal expandtab tabstop=2 shiftwidth=2
 autocmd Filetype c setlocal foldmethod=syntax foldnestmax=1
 autocmd BufWritePre *.js,*.jsx,*.json,*.css,*.scss,*.less,*.graphql PrettierAsync
+autocmd BufRead,BufNewFile AppFile,Fastfile,Deliverfile,Podfile, *.podspec set ft=ruby
 
 " Since gruvbox inverts cursor color, it could be awkward to determine current position, when the search is highlighted. To get single cursor color while searching, map these gruvbox functions somewhere after unimpaired is loaded 
 
