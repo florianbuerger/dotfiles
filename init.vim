@@ -13,9 +13,9 @@ Plug 'morhetz/gruvbox'
 call plug#end()
 
 " appearance
-set termguicolors
-let g:gruvbox_italic=1
-colorscheme gruvbox
+" set termguicolors
+" let g:gruvbox_italic=1
+" colorscheme gruvbox
 
 set number
 set relativenumber
@@ -105,9 +105,9 @@ autocmd BufRead,BufNewFile AppFile,Fastfile,Deliverfile,Podfile, *.podspec set f
 
 " Since gruvbox inverts cursor color, it could be awkward to determine current position, when the search is highlighted. To get single cursor color while searching, map these gruvbox functions somewhere after unimpaired is loaded 
 
-nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
-nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
-nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
+" nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
+" nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
+" nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
 
 " keys
 let mapleader = " "

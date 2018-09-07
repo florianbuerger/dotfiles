@@ -39,4 +39,7 @@ term:
 tig:
 	ln -sFf $(CURRENT_DIR)/.tigrc $(HOME)/.tigrc
 
+fish:
+	ln -sFf $(CURRENT_DIR)/fish $(HOME)/.config/fish
+
 .PHONY: zsh
