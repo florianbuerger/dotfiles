@@ -10,3 +10,7 @@
 ehthumbs.db
 Icon?
 Thumbs.db
+
+# VIM specific
+######################
+tags*

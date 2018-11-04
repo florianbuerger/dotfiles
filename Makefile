@@ -10,6 +10,11 @@ zsh:
 	ln -sFf "$(CURRENT_DIR)/.zshrc" $(HOME)/.zshrc
 	ln -sFf "$(CURRENT_DIR)/.hushlogin" $(HOME)/.hushlogin
 
+bash:
+	ln -sFf "$(CURRENT_DIR)/.bashrc" $(HOME)/.bashrc
+	ln -sFf "$(CURRENT_DIR)/.hushlogin" $(HOME)/.hushlogin
+	ln -sFf "$(CURRENT_DIR)/.bash_profile" $(HOME)/.bash_profile
+
 ruby:
 	ln -sFf "$(CURRENT_DIR)/.gemrc" $(HOME)/.gemrc
 

@@ -5,16 +5,15 @@
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-export EDITOR='nvim'
+export EDITOR='vim'
 bindkey -e # restore emacs keybindings
 
 # Colors
 export CLICOLOR=1
 autoload colors; colors;
 setopt PROMPT_SUBST
-source "$HOME/.local/share/nvim/plugged/gruvbox/gruvbox_256palette.sh"
 
-path=(~/.bin /usr/local/sbin ~/.cargo/bin $path)
+path=(~/.bin ~/Code/Vendor/depot_tools /usr/local/sbin ~/.cargo/bin /usr/local/bin $path)
 
 # ===================
 #   AUTOCOMPLETION
@@ -83,24 +82,11 @@ setopt HIST_REDUCE_BLANKS
 #   ALIAS
 # ===================
 
-# Misc
-if hash trash 2>/dev/null; then
-  alias cat=trash
-else
-  echo "Run 'brew install trash'!"
-fi
-alias rm='trash'
-
-# Editor
-alias e='$EDITOR'
-alias vim='vim'
-
 # cd
 alias ..='cd ..'
 
 # ls
 alias la="ls -lhFAG"
-alias cat="ccat"
 
 # Mac OS X
 alias o='open .'
@@ -109,7 +95,6 @@ alias hide_desktop_icons='defaults write com.apple.finder CreateDesktop -bool fa
 alias show_desktop_icons='defaults write com.apple.finder CreateDesktop -bool true && killall Finder'
 alias server='open http://localhost:8000 && python -m SimpleHTTPServer'
 alias flushdns='dscacheutil -flushcache && sudo killall -HUP mDNSResponder && echo "Be sure to reset Google Chrome as well: 'chrome://net-internals/#dns'"'
-alias f='open focus://toggle'
 alias icloud='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs'
 
 # Commands starting with % for pasting from web
@@ -174,57 +159,45 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 #   NODEJS
 # ===================
 
-NPM_PACKAGES="${HOME}/.npm-packages"
-path+=($NPM_PACKAGES/bin)
-unset MANPATH
-export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
-
 export NVM_DIR="$HOME/.nvm"
-alias loadnvm=". $(brew --prefix nvm)/nvm.sh && nvm use --lts"
+. "/usr/local/opt/nvm/nvm.sh"
 path+=(~/.yarn/bin)
 
-# ===================
-#   PROMPT
-# ===================
+# # ===================
+# #   PROMPT
+# # ===================
+# autoload -Uz vcs_info
+# setopt prompt_subst
+# zstyle ':vcs_info:*' enable git
+# zstyle ':vcs_info:git*' formats "%F{green}%c%u%b%f"
+# zstyle ':vcs_info:git*' actionformats "%F{green}%b|%a%f"
 
-autoload -Uz vcs_info colors
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git*' check-for-changes true
-zstyle ':vcs_info:git*' stagedstr "%F{red}"
-zstyle ':vcs_info:git*' unstagedstr "%F{red}"
-precmd() {
-  vcs_info
-}
+# function machine_info() {
+#   if [[ -n "$SSH_CLIENT" ]]; then
+#     local user=`whoami`
+#     echo "%{%F{green}%}$user@%F{yellow}%m%:%f"
+#   fi
+# }
 
-zstyle ':vcs_info:git*' formats "%F{green}%c%u%b%f"
-zstyle ':vcs_info:git*' actionformats "%F{green}%b|%a%f"
+# PROMPT='$(machine_info)%F{cyan}%2~\$%f '
+# RPROMPT='${vcs_info_msg_0_}'
 
-function machine_info() {
-  if [[ -n "$SSH_CLIENT" ]]; then
-    local user=`whoami`
-    echo "%{%F{green}%}$user@%F{yellow}%m%:%f"
-  fi
-}
-
-PROMPT='$(machine_info)%F{blue}\$%f '
-RPROMPT='${vcs_info_msg_0_}'
-
-update_terminal_cwd() {
-    # Identify the directory using a "file:" scheme URL,
-    # including the host name to disambiguate local vs.
-    # remote connections. Percent-escape spaces.
-    local SEARCH=' '
-    local REPLACE='%20'
-    local PWD_URL="file://$HOSTNAME${PWD//$SEARCH/$REPLACE}"
-    printf '\e]7;%s\a' "$PWD_URL"
-
-    tab_label=${PWD/${HOME}/\~} # use 'relative' path
-    echo -ne "\e]2;${tab_label}\a" # set window title to full string
-    echo -ne "\e]1;${tab_label: -24}\a" # set tab title to rightmost 24 characters
-}
-autoload add-zsh-hook
-add-zsh-hook chpwd update_terminal_cwd
-update_terminal_cwd
+# update_terminal_cwd() {
+#     # Identify the directory using a "file:" scheme URL,
+#     # including the host name to disambiguate local vs.
+#     # remote connections. Percent-escape spaces.
+#     # local SEARCH=' '
+#     # local REPLACE='%20'
+#     # local PWD_URL="file://$HOSTNAME${PWD//$SEARCH/$REPLACE}"
+#     # printf '\e]7;%s\a' "$PWD_URL"
+#     window_title="\033]0;"$*"\007"
+#     echo -ne "$window_title"
+# }
+# autoload add-zsh-hook
+# add-zsh-hook chpwd update_terminal_cwd
+# # add-zsh-hook precmd vcs_info
+# update_terminal_cwd
+#
 
 # ===================
 #   RUBY
@@ -264,16 +237,36 @@ setopt NO_LIST_BEEP
 setopt LOCAL_OPTIONS # allow functions to have local options
 setopt LOCAL_TRAPS # allow functions to have local traps
 setopt COMPLETE_IN_WORD
+setopt extended_glob
 
 # ===================
 #   TOOLS
 # ===================
 
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # iOS simulator
 [ -f ~/.zsh/ios-simulator.zsh ] && source ~/.zsh/ios-simulator.zsh
 
-# fasd
-eval "$(fasd --init auto)"
+# ===================
+#   PROMPT
+# ===================
+
+# Set Spaceship ZSH as a prompt
+autoload -U promptinit; promptinit
+prompt spaceship
+
+SPACESHIP_NODE_DEFAULT_VERSION=10.11.0
+SPACESHIP_BATTERY_THRESHOLD=30
+SPACESHIP_CHAR_SYMBOL='λ '
+
+case $TERM in
+  xterm*)
+    precmd () {
+      print -Pn "\e]2;%~\a"
+      print -Pn "\e]1;${PWD##*/}\a"
+    }
+    ;;
+esac
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

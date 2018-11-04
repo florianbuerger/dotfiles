@@ -5,19 +5,20 @@
 [core]
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	excludesfile = /Users/florian/.gitignore_global
-	pager = diff-so-fancy | less --tabs=4 -RFX
 
 [push]
 	default = simple
-	followTags = true
 
 [diff]
 	tool = Kaleidoscope
 	colorMoved = zebra
+
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+
 [merge]
 	tool = opendiff
+
 [mergetool "Kaleidoscope"]
 	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
 	trustExitCode = true
@@ -35,22 +36,14 @@
 	prune = fetch --prune
 	undo = reset --soft HEAD^
 	stash-all = stash save --include-untracked
-  glog = log --graph --pretty=format:\"%C(yellow)%h%Creset %ad  %s%C(cyan)%d%Creset %C(green)[%an]%Creset\" --date=short
+ 	glog = log --graph --pretty=format:\"%C(yellow)%h%Creset %ad  %s%C(cyan)%d%Creset %C(green)[%an]%Creset\" --date=short
 
 [status]
 	showUntrackedFiles = all
+
 [color]
 	status = always
 	ui = true
-[color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
-[color "diff"]
-	meta = yellow
-	frag = magenta bold
-	commit = yellow bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
+
+[hub]
+	host = ghe-us.microsoft.com
