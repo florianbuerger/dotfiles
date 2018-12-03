@@ -3,26 +3,26 @@ export LANG=en_US.UTF-8
 
 export GREP_OPTIONS='--color=auto'
 export CLICOLOR=1
-export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
+export HISTCONTROL=ignoreboth:erasedups
 
 if [ "$(uname)" == "Darwin" ]; then
 	export PATH=$HOME/.bin:/usr/local/bin:/usr/local/sbin:$PATH
 fi
 
-if hash mvim 2>/dev/null; then
-    export EDITOR='mvim -f --nomru -c "au VimLeave * !open -a iTerm"'
-elif hash nvim 2>/dev/null; then
-    export EDITOR=nvim
-else
-	export EDITOR=vim
-fi
-alias e=$EDITOR
+# Force qt@5.5 & mysql@5 for HockeyApp
+export PATH=/usr/local/opt/mysql@5.5/bin:/usr/local/opt/qt@5.5/bin:$PATH
+
+# Load ssh agent
+[ -z "$SSH_AUTH_SOCK" ] && eval "$(ssh-agent -s)"
+ssh-add -A 2>/dev/null;
+
+export VISUAL=vim
+alias e=$VISUAL
 
 # Case-insensitive globbing (used in pathname expansion)
 set completion-ignore-case On
 
 # Ruby
-eval "$(rbenv init -)"
 alias be='bundle exec'
 alias bi='bundle install'
 
@@ -33,12 +33,6 @@ if [ -d "$HOME/Library/Android/sdk" ]; then
 	alias emulator=$ANDROID_HOME/tools/emulator
 fi
 
-# npm
-NPM_PACKAGES="${HOME}/.npm-packages"
-export PATH="$NPM_PACKAGES/bin:$PATH"
-unset MANPATH
-export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
-
 # Add tab completion for many Bash commands
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
@@ -48,15 +42,7 @@ if [ -d /Applications/Xcode.app ]; then
 	source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
 fi
 
-if [ "$SSH_CLIENT" ]; then
-  export PS1='\[$(tput setaf 2)\]\u@\h:\[$(tput setaf 4)\]\W$(__git_ps1 "(%s)")\\$ \[$(tput sgr0)\]'
-else
-  export PS1='\[$(tput setaf 4)\]\W$(__git_ps1 "(%s)")\\$ \[$(tput sgr0)\]'
-fi
-
-alias ta='tmux a -t'
-alias ts='tmux new-session -s'
-
+alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
 # osx
 alias o='open .'
 alias ..='cd ..'
@@ -76,7 +62,7 @@ alias gcm='git commit -m'
 alias gco='git checkout'
 alias gca='git add -A && git commit -v'
 alias gcam='git add -A; git commit -m'
-alias cleanup_branches='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
+alias cleanup_branches='git branch --merged | egrep -v "(^\*|master|develop)" | xargs git branch -d'
 alias t='gittower .'
 alias gd='git diff'
 alias gP='git push'
@@ -110,24 +96,46 @@ alias bef='bundle exec fastlane'
 # UPDATE ALLL THE THINGS
 alias update_everything='gem update && gem clean && brew update && brew upgrade && brew prune && brew cleanup && sudo softwareupdate -ia'
 
-# Use colored cat
-if hash bat 2>/dev/null; then
-	alias cat=bat
-else
-	echo "Run brew install bat"
-fi
+# Node
+alias nr='npm run'
 
-# Better ping
-if hash prettyping 2>/dev/null; then
-	alias ping='prettyping --nolegend'
-else
-	echo "Run brew install prettyping"
-fi
-
-# fasd
-eval "$(fasd --init auto)"
+# fastlane
+alias f='bundle exec fastlane'
 
 # Reset dns cache
 alias flushdns='dscacheutil -flushcache && sudo killall -HUP mDNSResponder && echo "Be sure to reset Google Chrome as well: 'chrome://net-internals/#dns'"'
 
+# fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+function p() {
+  cd ~/Code/`find ~/Code -type d -maxdepth 2 -depth 2 -print | cut -d '/' -f5,6 | fzf -1 -q "$1"`
+}
+
+# asdf version manager
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
+
+# iTerm2 shell integration
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+# Correct iTerm title
+export PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/~}\007"'
+
+# Prompt
+# BOLD=\[\e[1m\]
+# RESET_BOLD=\[\e[21m\]
+# ITALIC=\[\e[3m\]
+# RESET_ITALIC=\[\e[0m\]
+# CYAN=\[$(tput setaf 6)\]
+# WHITE=\[\e[37m\]
+# BLUE=\[\e[34m\]
+# RED=\[\e[31m\]
+# RESET=\[\e[m\]
+# PROMPT_DIRTRIM=2
+if [ "$SSH_CLIENT" ]; then
+  PS1="\[\e[31m\]\u@\h\[\e[m\]:\[\e[37m\]\W\[\e[m\]\\$ "
+else
+  PS1="\[\e[36m\]\W\[\e[m\]\\$ "
+fi
+
+export ONI_NEOVIM_PATH=/usr/local/bin/nvim
