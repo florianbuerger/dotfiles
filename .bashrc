@@ -16,8 +16,11 @@ export PATH=/usr/local/opt/mysql@5.5/bin:/usr/local/opt/qt@5.5/bin:$PATH
 [ -z "$SSH_AUTH_SOCK" ] && eval "$(ssh-agent -s)"
 ssh-add -A 2>/dev/null;
 
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
 export VISUAL=vim
-alias e=$VISUAL
 
 # Case-insensitive globbing (used in pathname expansion)
 set completion-ignore-case On
@@ -37,9 +40,9 @@ fi
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
 # Git completion and branch info in prompt
-if [ -d /Applications/Xcode.app ]; then
-	source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
-	source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
+XCODE="$(xcode-select -p)"
+if [ -d $XCODE ]; then
+	source $XCODE/usr/share/git-core/git-completion.bash
 fi
 
 alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
@@ -55,6 +58,7 @@ alias ll="ls -lahL"
 alias sudo='sudo '
 
 # git
+alias git='hub'
 alias g='git status -sb'
 alias gs='git status -sb'
 alias gc='git commit -v'
@@ -62,13 +66,15 @@ alias gcm='git commit -m'
 alias gco='git checkout'
 alias gca='git add -A && git commit -v'
 alias gcam='git add -A; git commit -m'
-alias cleanup_branches='git branch --merged | egrep -v "(^\*|master|develop)" | xargs git branch -d'
-alias t='gittower .'
 alias gd='git diff'
 alias gP='git push'
 alias gp='git pull --rebase'
 alias gg='git log --graph --oneline --decorate --date=relative --all'
 alias gt='gittower .'
+alias gst='git stash'
+alias gsta='git stash apply'
+alias gstc='git stash clear'
+alias cleanup_branches='git branch --merged | egrep -v "(^\*|master|develop)" | xargs git branch -d'
 
 # system
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
@@ -115,27 +121,14 @@ function p() {
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 
-# iTerm2 shell integration
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
-# Correct iTerm title
-export PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/~}\007"'
-
 # Prompt
-# BOLD=\[\e[1m\]
-# RESET_BOLD=\[\e[21m\]
-# ITALIC=\[\e[3m\]
-# RESET_ITALIC=\[\e[0m\]
-# CYAN=\[$(tput setaf 6)\]
-# WHITE=\[\e[37m\]
-# BLUE=\[\e[34m\]
-# RED=\[\e[31m\]
-# RESET=\[\e[m\]
-# PROMPT_DIRTRIM=2
 if [ "$SSH_CLIENT" ]; then
   PS1="\[\e[31m\]\u@\h\[\e[m\]:\[\e[37m\]\W\[\e[m\]\\$ "
 else
   PS1="\[\e[36m\]\W\[\e[m\]\\$ "
 fi
 
-export ONI_NEOVIM_PATH=/usr/local/bin/nvim
+# force new line when the previous output didn't include it
+# https://unix.stackexchange.com/questions/60459/how-to-make-bash-put-prompt-on-a-new-line-after-cat-command
+shopt -s promptvars
+PS1='$(printf "%$((COLUMNS-1))s\r")'$PS1
