@@ -1,1 +1,0 @@
-/Users/florian/.config/fisherman/grc/functions/mtr.fish

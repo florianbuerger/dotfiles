@@ -1,1 +1,0 @@
-/Users/florian/.config/fisherman/gruvbox/functions/theme_gruvbox.fish

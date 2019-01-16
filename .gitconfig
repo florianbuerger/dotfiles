@@ -5,23 +5,13 @@
 [core]
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	excludesfile = /Users/florian/.gitignore_global
+	editor = ~/.bin/subl -n -w
 
 [push]
 	default = simple
 
-[diff]
-	tool = Kaleidoscope
-	colorMoved = zebra
-
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-
 [merge]
 	tool = opendiff
-
-[mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustExitCode = true
 
 [filter "lfs"]
 	process = git-lfs filter-process
@@ -37,6 +27,9 @@
 	undo = reset --soft HEAD^
 	stash-all = stash save --include-untracked
  	glog = log --graph --pretty=format:\"%C(yellow)%h%Creset %ad  %s%C(cyan)%d%Creset %C(green)[%an]%Creset\" --date=short
+    branch-name = "!git rev-parse --abbrev-ref HEAD"
+    publish = "!git push -u origin $(git branch-name)"
+    unmerged = "branch --no-merged"
 
 [status]
 	showUntrackedFiles = all
@@ -47,3 +40,7 @@
 
 [hub]
 	host = ghe-us.microsoft.com
+[diff]
+	tool = opendiff
+[mergetool]
+	keepBackup = false

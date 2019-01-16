@@ -1,1 +1,0 @@
-/Users/florian/.config/fisherman/fnm/conf.d/fnm.fish

@@ -1,6 +1,6 @@
 CURRENT_DIR := $(shell pwd)
 
-default: git ruby bin zsh lldb npm android neovim term tmux
+default: git ruby bin fish lldb npm android term tmux
 
 git:
 	ln -sFf "$(CURRENT_DIR)/.gitconfig" $(HOME)/.gitconfig
@@ -34,17 +34,18 @@ npm:
 	ln -sFf $(CURRENT_DIR)/.npmrc $(HOME)/.npmrc
 
 neovim:
-	mkdir -p $(HOME)/.config/nvim/
-	ln -sFf $(CURRENT_DIR)/init.vim $(HOME)/.config/nvim/init.vim
-
-term: 
-	tic -x tmux-256color.terminfo
-	tic -x xterm-256color-italic.terminfo
+	mkdir -p $(HOME)/.config/nvim
+	ln -sFf $(CURRENT_DIR)/nvim/init.vim $(HOME)/.config/nvim/init.vim
 
 tig:
 	ln -sFf $(CURRENT_DIR)/.tigrc $(HOME)/.tigrc
 
 fish:
+	mkdir -p $(HOME)/.config/fish
 	ln -sFf $(CURRENT_DIR)/fish $(HOME)/.config/fish
+
+alacritty:
+	mkdir -p $(HOME)/.config/alacritty
+	ln -sFf $(CURRENT_DIR)/alacritty $(HOME)/.config/alacritty
 
 .PHONY: zsh

@@ -4,6 +4,7 @@ export LANG=en_US.UTF-8
 export GREP_OPTIONS='--color=auto'
 export CLICOLOR=1
 export HISTCONTROL=ignoreboth:erasedups
+export VISUAL=vim
 
 if [ "$(uname)" == "Darwin" ]; then
 	export PATH=$HOME/.bin:/usr/local/bin:/usr/local/sbin:$PATH
@@ -20,14 +21,8 @@ ssh-add -A 2>/dev/null;
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-export VISUAL=vim
-
 # Case-insensitive globbing (used in pathname expansion)
 set completion-ignore-case On
-
-# Ruby
-alias be='bundle exec'
-alias bi='bundle install'
 
 # Android
 if [ -d "$HOME/Library/Android/sdk" ]; then
@@ -43,9 +38,9 @@ fi
 XCODE="$(xcode-select -p)"
 if [ -d $XCODE ]; then
 	source $XCODE/usr/share/git-core/git-completion.bash
+	source $XCODE/usr/share/git-core/git-prompt.sh
 fi
 
-alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
 # osx
 alias o='open .'
 alias ..='cd ..'
@@ -74,6 +69,8 @@ alias gt='gittower .'
 alias gst='git stash'
 alias gsta='git stash apply'
 alias gstc='git stash clear'
+alias gm='git merge --ff-only'
+alias gmn='git merge --no-ff'
 alias cleanup_branches='git branch --merged | egrep -v "(^\*|master|develop)" | xargs git branch -d'
 
 # system
@@ -102,33 +99,34 @@ alias bef='bundle exec fastlane'
 # UPDATE ALLL THE THINGS
 alias update_everything='gem update && gem clean && brew update && brew upgrade && brew prune && brew cleanup && sudo softwareupdate -ia'
 
-# Node
-alias nr='npm run'
-
-# fastlane
-alias f='bundle exec fastlane'
-
 # Reset dns cache
 alias flushdns='dscacheutil -flushcache && sudo killall -HUP mDNSResponder && echo "Be sure to reset Google Chrome as well: 'chrome://net-internals/#dns'"'
 
-# fzf
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-function p() {
-  cd ~/Code/`find ~/Code -type d -maxdepth 2 -depth 2 -print | cut -d '/' -f5,6 | fzf -1 -q "$1"`
-}
-
+# Ruby & NodeJS
 # asdf version manager
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
+alias be='bundle exec'
+alias bi='bundle install'
+alias f='bundle exec fastlane'
 
-# Prompt
 if [ "$SSH_CLIENT" ]; then
-  PS1="\[\e[31m\]\u@\h\[\e[m\]:\[\e[37m\]\W\[\e[m\]\\$ "
+  PS1='\[\e[31m\]\u@\h\[\e[m\]:\[\e[37m\]\W\[\e[m\]\\$ '
 else
-  PS1="\[\e[36m\]\W\[\e[m\]\\$ "
+  PS1='\[\e[37m\]\W$(__git_ps1 "(%s)")\\$\[\e[m\] '
 fi
 
 # force new line when the previous output didn't include it
 # https://unix.stackexchange.com/questions/60459/how-to-make-bash-put-prompt-on-a-new-line-after-cat-command
 shopt -s promptvars
 PS1='$(printf "%$((COLUMNS-1))s\r")'$PS1
+
+# jump around
+fasd_cache="$HOME/.fasd-init-bash"
+if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
+  fasd --init posix-alias bash-hook bash-ccomp bash-ccomp-install >| "$fasd_cache"
+fi
+source "$fasd_cache"
+unset fasd_cache
+alias j='fasd_cd -d'

@@ -1,1 +1,0 @@
-/Users/florian/.config/fisherman/menu/menu.fish

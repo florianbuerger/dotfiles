@@ -8,3 +8,8 @@ command alias r reveal load -a
 command script import ~/.lldb/ksdiff.py
 command script add -f ksdiff.ksdiff ksdiff
 ###
+#
+
+# better po in Swift projects
+command script import ~/Code/Vendor/swift_po/swift_po.py
+

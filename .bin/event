@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# -n only upcoming
+# -npn no property names
+# -nc no calendar names
+# -ic filter calendar names
+# -li limit
+
+/usr/local/bin/icalBuddy \
+	-npn \
+	-ic Personal,Work,florian@flightyapp.com,Calendar,Love \
+	-nc \
+	-eed \
+	-ps "|=|" \
+	-iep title,datetime \
+	-li 1 \
+	-tf "=%I:%M %p" \
+	-df "" \
+	-po "datetime,title" \
+	-n eventsToday \
+	| awk -F "=" '{print $3" at "$2}'

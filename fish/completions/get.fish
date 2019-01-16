@@ -1,1 +1,0 @@
-/Users/florian/.config/fisherman/get/completions/get.fish

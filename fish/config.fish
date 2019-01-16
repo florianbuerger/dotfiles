@@ -2,9 +2,8 @@ set fish_greeting
 
 set -x LANG en_US.UTF-8
 
-set -x EDITOR nvim
-set -x MANPAGER vimpager
+set -x EDITOR vim
 
-set -x FZF_DEFAULT_COMMAND 'ag -g ""'
+set -gx PATH ~/.bin /usr/local/opt/mysql@5.5/bin /usr/local/opt/qt@5.5/bin /usr/local/sbin $PATH
 
-set -gx PATH ~/.bin $PATH
+source ~/.asdf/asdf.fish
