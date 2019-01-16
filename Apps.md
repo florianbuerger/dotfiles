@@ -36,5 +36,6 @@
 - Things
 - TripMode
 - Turbo Boost Switcher Pro
+- Viscosity
 - Wipr
 - Xcode
