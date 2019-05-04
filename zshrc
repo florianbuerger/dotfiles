@@ -152,6 +152,7 @@ alias ggr='git log --graph --abbrev-commit --decorate --format=oneline HEAD..ori
 alias gt='gittower .'
 alias cleanup-branches='git branch --merged | egrep -v "(^\*|master|dev|beta|release)" | xargs git branch -d'
 alias gm='git merge'
+alias gp='git push'
 
 # ======================================
 #   KEY BINDINGS
