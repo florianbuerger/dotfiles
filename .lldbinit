@@ -1,7 +1,0 @@
-### Reveal LLDB commands support - DO NOT MODIFY
-command script import /Applications/Reveal.app/Contents/SharedSupport/Scripts/RevealServerCommands.py
-###
-
-command alias r reveal load -a
-
-command script import /usr/local/opt/chisel/libexec/fblldb.py

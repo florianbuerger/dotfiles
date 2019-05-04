@@ -8,3 +8,5 @@ set -gx PATH ~/.bin /usr/local/sbin $PATH
 set -g fish_user_paths "/usr/local/opt/node@10/bin" $fish_user_paths
 
 eval (direnv hook fish)
+
+source ~/.asdf/asdf.fish

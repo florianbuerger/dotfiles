@@ -1,3 +1,0 @@
-gem: --env-shebang --no-rdoc --no-ri
-install: --user-install
-update: --user-install

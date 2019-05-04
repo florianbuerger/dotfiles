@@ -2,55 +2,32 @@
 #   Plugins
 # ======================================
 
-export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
 
-zplug "MichaelAquilina/zsh-you-should-use"
-zplug "mafredri/zsh-async", from:github
-zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
+# zplug "MichaelAquilina/zsh-you-should-use"
 
-zplug "zsh-users/zsh-history-substring-search"
-zplug "paulirish/git-open", as:plugin, if:"[[ $(command -v git) ]]"
-
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-
-# Then, source plugins and add commands to $PATH
-zplug load
-
-PURE_PROMPT_SYMBOL="%%"
-PURE_CMD_MAX_EXEC_TIME=15
-
-if zplug check "zsh-users/zsh-history-substring-search"; then
-    bindkey '^[[A' history-substring-search-up
-    bindkey '^[[B' history-substring-search-down
-fi
+eval "$(fasd --init auto)"
+source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+source ~/.zsh/you-should-use/you-should-use.plugin.zsh
 
 # ======================================
 #   ENV
 # ======================================
 
-export LANG=en_US.UTF-8
-export LANGUAGE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export VISUAL='nvim'
 export CLICOLOR=1
 autoload colors; colors;
 
 path=(
-	~/.bin
-	/usr/local/opt/qt@5.5/bin
-	/usr/local/opt/mysql@5.5/bin
-	/usr/local/sbin
-	~/.cargo/bin
-	~/Code/Vendor/depot_tools
-	$path
+    ~/.bin
+    /usr/local/opt/coreutils/libexec/gnubin # prefer coreutils
+    /usr/local/opt/qt@5.5/bin
+    /usr/local/opt/mysql@5.5/bin
+    /usr/local/sbin
+    ~/.cargo/bin
+    ~/Code/Vendor/depot_tools
+    $path
 )
+
+eval `dircolors ~/.dircolors`
 
 # Load ssh agent
 [ -z "$SSH_AUTH_SOCK" ] && eval "$(ssh-agent -s)"
@@ -139,6 +116,7 @@ setopt HIST_REDUCE_BLANKS
 
 alias o='open .'
 alias ..='cd ..'
+alias ls='ls --color'
 alias la="ls -lhFAG"
 alias ll="ls -lahL"
 
@@ -187,13 +165,10 @@ bindkey '^[[5C' end-of-line
 bindkey '^[[3~' delete-char
 bindkey '^?' backward-delete-char
 
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-bindkey "^[[A" up-line-or-beginning-search # Up
-bindkey "^[[B" down-line-or-beginning-search # Down
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
+# Only useful in Terminal.app
 # update_terminal_cwd() {
 #     # Identify the directory using a "file:" scheme URL,
 #     # including the host name to disambiguate local vs.
@@ -210,6 +185,22 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 # update_terminal_cwd
 
 # ======================================
+#   Prompt
+# ======================================
+
+setopt prompt_subst
+autoload -U promptinit; promptinit
+
+# prompt defaults, unless these have already been overridden
+[ -z "$PROMPT_PURE_SUCCESS_COLOR" ] && PROMPT_PURE_SUCCESS_COLOR="%F{cyan}"
+[ -z "$PROMPT_PURE_NO_SUBMODULES" ] && PROMPT_PURE_NO_SUBMODULES="--ignore-submodules"
+[ -z "$PROMPT_PURE_DIR_COLOR" ] && PROMPT_PURE_DIR_COLOR="%F{red}"
+[ -z "$PURE_NO_SSH_USERNAME" ] && PURE_NO_SSH_USERNAME=1
+[ -z "$PURE_GIT_PULL" ] && PURE_GIT_PULL=0
+
+prompt pure
+
+# ======================================
 #   Languages
 # ======================================
 
@@ -220,15 +211,12 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 alias be='bundle exec'
 alias bi='bundle install'
 
-# Python
-path+=(~/Library/Python/2.7/bin)
-
 # Android
 export ANDROID_HOME='/Users/florian/Library/Android/sdk'
 path+=(
-	$ANDROID_HOME/tools/bin
-	$ANDROID_HOME/tools
-	$ANDROID_HOME/platform-tools
+    $ANDROID_HOME/tools/bin
+    $ANDROID_HOME/tools
+    $ANDROID_HOME/platform-tools
 )
 alias emulator=$ANDROID_HOME/tools/emulator
 
@@ -236,13 +224,18 @@ alias emulator=$ANDROID_HOME/tools/emulator
 #   TOOLS
 # ======================================
 
-[ -f ~/.zsh/ios-simulator.zsh ] && source ~/.zsh/ios-simulator.zsh
+alias a='fasd -a'        # any
+alias s='fasd -si'       # show / search / select
+alias d='fasd -d'        # directory
+alias f='fasd -f'        # file
+alias sd='fasd -sid'     # interactive directory selection
+alias sf='fasd -sif'     # interactive file selection
+alias z='fasd_cd -d'     # cd, same functionality as j in autojump
+alias zz='fasd_cd -d -i' # cd with interactive selection
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-function p() {
-  cd ~/Code/`find ~/Code -type d -maxdepth 2 -depth 2 -print | cut -d '/' -f5,6 | fzf -1 -q "$1"`
-}
+[ -f ~/.zsh/ios-simulator.zsh ] && source ~/.zsh/ios-simulator.zsh
 
 alias firefox-debug='/Applications/Firefox.app/Contents/MacOS/firefox -start-debugger-server'
 alias chrome-debug='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9223 "localhost:8080"'
 
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

@@ -5,13 +5,10 @@
 [core]
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	excludesfile = /Users/florian/.gitignore_global
-	editor = ~/.bin/subl -n -w
+	editor = vim #~/.bin/subl -n -w
 
 [push]
 	default = simple
-
-[merge]
-	tool = opendiff
 
 [filter "lfs"]
 	process = git-lfs filter-process
@@ -40,7 +37,19 @@
 
 [hub]
 	host = ghe-us.microsoft.com
+
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+
+[difftool]
+	prompt = false
 [diff]
-	tool = opendiff
+	tool = Kaleidoscope
+
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" \"$REMOTE\"
+
 [mergetool]
-	keepBackup = false
+	prompt = false
+[merge]
+	tool = Kaleidoscope
