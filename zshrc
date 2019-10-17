@@ -207,6 +207,7 @@ prompt pure
 
 # Generic version manager
 . $HOME/.asdf/asdf.sh
+alias x="xed ."
 
 # Ruby
 alias be='bundle exec'
