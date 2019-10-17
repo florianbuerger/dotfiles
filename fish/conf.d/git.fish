@@ -9,6 +9,7 @@ abbr -a gp git push
 abbr -a gs git status -sb
 abbr -a g git status -sb
 abbr -a gc git commit
+abbr -a gu git unmerged
 
 abbr -a gm git merge --ff-only
 abbr -a gmn git merge --no-ff

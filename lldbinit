@@ -1,12 +1,6 @@
-command alias r reveal load -a
-
-command script import /usr/local/opt/chisel/libexec/fblldb.py
-
 ### Reveal LLDB commands support - DO NOT MODIFY
-command script import /Applications/Reveal.app/Contents/SharedSupport/Scripts/RevealServerCommands.py
+command script import /Users/florian/Library/Application\ Support/Reveal/RevealServerCommands.py
 ###
 
-### Kaleidoscope LLDB commands support - DO NOT MODIFY
-command script import ~/.lldb/ksdiff.py
-command script add -f ksdiff.ksdiff ksdiff
-###
+command alias darkMode expression (void)[objc_getClass("UIApplication") _setDebugUserInterfaceStyleOverride:2];
+

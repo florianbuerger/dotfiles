@@ -2,49 +2,18 @@
 #   Plugins
 # ======================================
 
-
-# zplug "MichaelAquilina/zsh-you-should-use"
-
 eval "$(fasd --init auto)"
+eval "$(direnv hook zsh)"
 source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-source ~/.zsh/you-should-use/you-should-use.plugin.zsh
 
-# ======================================
-#   ENV
-# ======================================
-
-export CLICOLOR=1
-autoload colors; colors;
-
-path=(
-    ~/.bin
-    /usr/local/opt/coreutils/libexec/gnubin # prefer coreutils
-    /usr/local/opt/qt@5.5/bin
-    /usr/local/opt/mysql@5.5/bin
-    /usr/local/sbin
-    ~/.cargo/bin
-    ~/Code/Vendor/depot_tools
-    $path
-)
-
-eval `dircolors ~/.dircolors`
-
-# Load ssh agent
-[ -z "$SSH_AUTH_SOCK" ] && eval "$(ssh-agent -s)"
-
-# ======================================
-#   AUTOCOMPLETION
-# ======================================
-
-fpath=(
-	/usr/local/share/zsh-completions
-	/usr/local/share/zsh/site-functions
-	$HOME/.asdf/completions
-	$fpath
-)
-
+# ===================
+#    AUTOCOMPLETION
+# ===================
 autoload -Uz compinit
 compinit
+
+autoload bashcompinit
+bashcompinit
 
 zmodload -i zsh/complist
 
@@ -65,6 +34,17 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-
 
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
 
+# Don't complete uninteresting users
+zstyle ':completion:*:*:*:users' ignored-patterns \
+        adm amanda apache at avahi avahi-autoipd beaglidx bin cacti canna \
+        clamav daemon dbus distcache dnsmasq dovecot fax ftp games gdm \
+        gkrellmd gopher hacluster haldaemon halt hsqldb ident junkbust kdm \
+        ldap lp mail mailman mailnull man messagebus  mldonkey mysql nagios \
+        named netdump news nfsnobody nobody nscd ntp nut nx obsrun openvpn \
+        operator pcap polkitd postfix postgres privoxy pulse pvm quagga radvd \
+        rpc rpcuser rpm rtkit scard shutdown squid sshd statd svn sync tftp \
+        usbmux uucp vcsa wwwrun xfs '_*'
+
 zstyle '*' single-ignored show
 
 # Automatically update PATH entries
@@ -73,11 +53,12 @@ zstyle ':completion:*' rehash true
 # Keep directories and files separated
 zstyle ':completion:*' list-dirs-first true
 
+# ===================
+#    MISC SETTINGS
+# ===================
+
 # automatically remove duplicates from these arrays
 typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
-
-# Timer
-REPORTTIME=10 # print elapsed time when more than 10 seconds
 
 # Quote pasted URLs
 autoload -U url-quote-magic
@@ -116,7 +97,7 @@ setopt HIST_REDUCE_BLANKS
 
 alias o='open .'
 alias ..='cd ..'
-alias ls='ls --color'
+# alias ls='ls --color'
 alias la="ls -lhFAG"
 alias ll="ls -lahL"
 
@@ -140,19 +121,24 @@ alias bump='agvtool next-version -all'
 alias update_everything='gem update && gem clean && brew update && brew upgrade && brew prune && brew cleanup && sudo softwareupdate -ia'
 
 # Git
-alias git='hub'
 alias gs='git status -sb'
 alias gut='git'
 alias gd='git diff'
 alias gc='git commit'
 alias gco='git checkout'
 alias gca='git add -A && git commit'
+alias gcamend='gca --amend --no-edit'
 alias gg='git log --graph --abbrev-commit --decorate --format=oneline'
 alias ggr='git log --graph --abbrev-commit --decorate --format=oneline HEAD..origin/$(git rev-parse --abbrev-ref HEAD)'
 alias gt='gittower .'
 alias cleanup-branches='git branch --merged | egrep -v "(^\*|master|dev|beta|release)" | xargs git branch -d'
-alias gm='git merge'
+alias gm='git merge --ff-only'
+alias gmn='git merge --no-ff'
 alias gp='git push'
+
+alias e=nvim
+alias ci="mosh --ssh='ssh -p 7001' --server=/usr/local/bin/mosh-server MacPro-Xeon-Standard-1016@connect.remotemac.io -p 7001"
+alias t="tmux new-session -A -s main"
 
 # ======================================
 #   KEY BINDINGS
@@ -169,75 +155,107 @@ bindkey '^?' backward-delete-char
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
-# Only useful in Terminal.app
-# update_terminal_cwd() {
-#     # Identify the directory using a "file:" scheme URL,
-#     # including the host name to disambiguate local vs.
-#     # remote connections. Percent-escape spaces.
-#     local SEARCH=' '
-#     local REPLACE='%20'
-#     local PWD_URL="file://$HOSTNAME${PWD//$SEARCH/$REPLACE}"
-#     printf '\e]7;%s\a' "$PWD_URL"
-#     # echo -ne "\e]1;$PWD\a"
-# }
-# autoload add-zsh-hook
-# add-zsh-hook chpwd update_terminal_cwd
-# add-zsh-hook precmd vcs_info
-# update_terminal_cwd
-
 # ======================================
 #   Prompt
 # ======================================
 
-setopt prompt_subst
-autoload -U promptinit; promptinit
+if [ "$TERM_PROGRAM" = "Apple_Terminal" ] && [ -z "$INSIDE_EMACS" ]; then
+    update_terminal_cwd() {
+        # Identify the directory using a "file:" scheme URL,
+        # including the host name to disambiguate local vs.
+        # remote connections. Percent-escape spaces.
+        local SEARCH=' '
+        local REPLACE='%20'
+        local PWD_URL="file://$HOST${PWD//$SEARCH/$REPLACE}"
+        printf '\e]7;%s\a' "$PWD_URL"
+    }
+    autoload add-zsh-hook
+    add-zsh-hook chpwd update_terminal_cwd
+    update_terminal_cwd
+fi
 
-# prompt defaults, unless these have already been overridden
-[ -z "$PROMPT_PURE_SUCCESS_COLOR" ] && PROMPT_PURE_SUCCESS_COLOR="%F{cyan}"
-[ -z "$PROMPT_PURE_NO_SUBMODULES" ] && PROMPT_PURE_NO_SUBMODULES="--ignore-submodules"
-[ -z "$PROMPT_PURE_DIR_COLOR" ] && PROMPT_PURE_DIR_COLOR="%F{red}"
-[ -z "$PURE_NO_SSH_USERNAME" ] && PURE_NO_SSH_USERNAME=1
-[ -z "$PURE_GIT_PULL" ] && PURE_GIT_PULL=0
+autoload -U colors && colors
+setopt promptsubst
 
-prompt pure
+local ret_status="%(?:%{$fg_bold[green]%}$:%{$fg_bold[green]%}$)"
+PROMPT='${ret_status} %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
+
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}✗"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
+
+# Outputs current branch info in prompt format
+function git_prompt_info() {
+  local ref
+  if [[ "$(command git config --get customzsh.hide-status 2>/dev/null)" != "1" ]]; then
+    ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
+    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
+    echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  fi
+}
+
+# Checks if working tree is dirty
+function parse_git_dirty() {
+  local STATUS=''
+  local FLAGS
+  FLAGS=('--porcelain')
+
+  if [[ "$(command git config --get customzsh.hide-dirty)" != "1" ]]; then
+    FLAGS+='--ignore-submodules=dirty'
+    STATUS=$(command git status ${FLAGS} 2> /dev/null | tail -n1)
+  fi
+
+  if [[ -n $STATUS ]]; then
+    echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
+  else
+    echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
+  fi
+}
 
 # ======================================
 #   Languages
 # ======================================
 
-# Generic version manager
-. $HOME/.asdf/asdf.sh
+# iOS
+alias ios_sim_statusbar="xcrun simctl status_bar booted override --time '9:41' --cellularMode active --batteryState charged"
 alias x="xed ."
+[ -f $HOME/.zsh/ios-simulator.zsh ] && source $HOME/.zsh/ios-simulator.zsh
 
 # Ruby
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
 alias be='bundle exec'
 alias bi='bundle install'
 
 # Android
-export ANDROID_HOME='/Users/florian/Library/Android/sdk'
-path+=(
-    $ANDROID_HOME/tools/bin
-    $ANDROID_HOME/tools
-    $ANDROID_HOME/platform-tools
-)
 alias emulator=$ANDROID_HOME/tools/emulator
 
 # ======================================
 #   TOOLS
 # ======================================
 
-alias a='fasd -a'        # any
-alias s='fasd -si'       # show / search / select
-alias d='fasd -d'        # directory
-alias f='fasd -f'        # file
-alias sd='fasd -sid'     # interactive directory selection
-alias sf='fasd -sif'     # interactive file selection
 alias z='fasd_cd -d'     # cd, same functionality as j in autojump
-alias zz='fasd_cd -d -i' # cd with interactive selection
 
-[ -f ~/.zsh/ios-simulator.zsh ] && source ~/.zsh/ios-simulator.zsh
+# FZF
+[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
-alias firefox-debug='/Applications/Firefox.app/Contents/MacOS/firefox -start-debugger-server'
-alias chrome-debug='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9223 "localhost:8080"'
+# ctrl+o opens Visual Studio Code on current folder or file
+FZF_DEFAULT_OPTS="--height 80% --bind='ctrl-o:execute-silent(code {})+abort'"
 
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# If current selection is a text file shows its content,
+# if it's a directory shows its content, the rest is ignored
+FZF_CTRL_T_OPTS="--preview-window wrap --preview '
+if [[ -f {} ]]; then
+    file --mime {} | grep -q \"text\/.*;\" && bat --color \"always\" {} || (tput setaf 1; file --mime {})
+elif [[ -d {} ]]; then
+    exa -l --color always {}
+else;
+    tput setaf 1; echo YOU ARE NOT SUPPOSED TO SEE THIS!
+fi'"
+
+# netlify
+if [ -f '$HOME/.netlify/helper/path.zsh.inc' ]; then source '$HOME/.netlify/helper/path.zsh.inc'; fi
+
+# Load ssh agent
+[ -z "$SSH_AUTH_SOCK" ] && eval "$(ssh-agent -s)"

@@ -1,12 +1,18 @@
 set fish_greeting
 
-set -x LANG en_US.UTF-8
+set -x  PATH ~/.bin /Library/Frameworks/Python.framework/Versions/3.7/bin (brew --prefix)/sbin /usr/sbin $PATH
+set -x  LANG en_US.UTF-8
+set -x  EDITOR nvim
 
-set -x EDITOR vim
+alias ls=exa
+alias ll='exa -l'
 
-set -gx PATH ~/.bin /usr/local/sbin $PATH
-set -g fish_user_paths "/usr/local/opt/node@10/bin" $fish_user_paths
+# Generic version manager
+source ~/.asdf/asdf.fish
 
 eval (direnv hook fish)
+ 
+alias ci="mosh --ssh='ssh -p 7001' --server=/usr/local/bin/mosh-server MacPro-Xeon-Standard-1016@connect.remotemac.io -p 7001"
 
-source ~/.asdf/asdf.fish
+test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
+
