@@ -4,8 +4,7 @@ set -x  PATH ~/.bin /Library/Frameworks/Python.framework/Versions/3.7/bin (brew 
 set -x  LANG en_US.UTF-8
 set -x  EDITOR nvim
 
-alias ls=exa
-alias ll='exa -l'
+alias t="tmux new -A -s main"
 
 # Generic version manager
 source ~/.asdf/asdf.fish

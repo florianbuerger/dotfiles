@@ -19,9 +19,9 @@ zmodload -i zsh/complist
 
 WORDCHARS=''
 
-unsetopt menu_complete   # do not autoselect the first completion entry
+unsetopt menu_complete # do not autoselect the first completion entry
 unsetopt flowcontrol
-setopt auto_menu         # show completion menu on successive tab press
+setopt auto_menu # show completion menu on successive tab press
 setopt complete_in_word
 setopt always_to_end
 
@@ -36,14 +36,14 @@ zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w 
 
 # Don't complete uninteresting users
 zstyle ':completion:*:*:*:users' ignored-patterns \
-        adm amanda apache at avahi avahi-autoipd beaglidx bin cacti canna \
-        clamav daemon dbus distcache dnsmasq dovecot fax ftp games gdm \
-        gkrellmd gopher hacluster haldaemon halt hsqldb ident junkbust kdm \
-        ldap lp mail mailman mailnull man messagebus  mldonkey mysql nagios \
-        named netdump news nfsnobody nobody nscd ntp nut nx obsrun openvpn \
-        operator pcap polkitd postfix postgres privoxy pulse pvm quagga radvd \
-        rpc rpcuser rpm rtkit scard shutdown squid sshd statd svn sync tftp \
-        usbmux uucp vcsa wwwrun xfs '_*'
+    adm amanda apache at avahi avahi-autoipd beaglidx bin cacti canna \
+    clamav daemon dbus distcache dnsmasq dovecot fax ftp games gdm \
+    gkrellmd gopher hacluster haldaemon halt hsqldb ident junkbust kdm \
+    ldap lp mail mailman mailnull man messagebus mldonkey mysql nagios \
+    named netdump news nfsnobody nobody nscd ntp nut nx obsrun openvpn \
+    operator pcap polkitd postfix postgres privoxy pulse pvm quagga radvd \
+    rpc rpcuser rpm rtkit scard shutdown squid sshd statd svn sync tftp \
+    usbmux uucp vcsa wwwrun xfs '_*'
 
 zstyle '*' single-ignored show
 
@@ -72,7 +72,7 @@ setopt NO_BG_NICE # dont nice background tasks
 setopt NO_HUP
 setopt NO_LIST_BEEP
 setopt LOCAL_OPTIONS # allow functions to have local options
-setopt LOCAL_TRAPS # allow functions to have local traps
+setopt LOCAL_TRAPS   # allow functions to have local traps
 setopt COMPLETE_IN_WORD
 setopt extended_glob
 
@@ -84,11 +84,11 @@ HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
 setopt HIST_VERIFY
-setopt SHARE_HISTORY # share history between sessions
-setopt EXTENDED_HISTORY # add timestamps to history
-setopt APPEND_HISTORY # adds history
-setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
-setopt HIST_IGNORE_ALL_DUPS  # dont record dupes in history
+setopt SHARE_HISTORY                    # share history between sessions
+setopt EXTENDED_HISTORY                 # add timestamps to history
+setopt APPEND_HISTORY                   # adds history
+setopt INC_APPEND_HISTORY SHARE_HISTORY # adds history incrementally and share it across sessions
+setopt HIST_IGNORE_ALL_DUPS             # dont record dupes in history
 setopt HIST_REDUCE_BLANKS
 
 # ======================================
@@ -100,6 +100,7 @@ alias ..='cd ..'
 # alias ls='ls --color'
 alias la="ls -lhFAG"
 alias ll="ls -lahL"
+alias glow="glow -s light -w 80"
 
 # Mac OS X
 alias screensaver='/System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine'
@@ -161,7 +162,8 @@ bindkey '^[[B' history-substring-search-down
 
 autoload -U colors && colors
 autoload -Uz vcs_info
-autoload -U promptinit; promptinit
+autoload -U promptinit
+promptinit
 setopt promptsubst
 
 if [ "$TERM_PROGRAM" = "Apple_Terminal" ] && [ -z "$INSIDE_EMACS" ]; then
@@ -182,14 +184,14 @@ fi
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git*' actionformats "%{$fg[yellow]%}%b (%a)%{$reset_color%}"
 zstyle ':vcs_info:git*' formats "%{$fg[yellow]%}%b%{$reset_color%}"
-precmd () { 
-  vcs_info 
+precmd() {
+    vcs_info
 }
 
-PROMPT_PATH=%{$fg[cyan]%}%1~%{$reset_color%}
+PROMPT_PATH=
 PROMPT_SYMBOL=%#
 
-PROMPT='$PROMPT_PATH$PROMPT_SYMBOL '
+PROMPT='%{%F{blue}%}%1~%{$reset_color%}%# '
 RPROMPT='${vcs_info_msg_0_}'
 
 # ======================================
@@ -214,7 +216,12 @@ alias emulator=$ANDROID_HOME/tools/emulator
 #   TOOLS
 # ======================================
 
-alias z='fasd_cd -d'     # cd, same functionality as j in autojump
+alias z='fasd_cd -d' # cd, same functionality as j in autojump
+
+# open man pages in Preview, usage help <comand>
+function help() {
+    man -t $1 | open -f -a /System/Applications/Preview.app
+}
 
 # FZF
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh

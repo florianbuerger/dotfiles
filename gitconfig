@@ -32,7 +32,6 @@
 	append = town append
 	hack = town hack
 	kill = town kill
-	new-pull-request = town new-pull-request
 	prepend = town prepend
 	prune-branches = town prune-branches
 	rename-branch = town rename-branch
@@ -40,6 +39,7 @@
 	ship = town ship
 	sync = town sync
 	opendiff = difftool --no-prompt --tool opendiff --dir-diff
+	pr = town new-pull-request
 
 [status]
 	showUntrackedFiles = all
@@ -48,45 +48,15 @@
 	status = always
 	ui = true
 
-[hub]
-	host = ghe-us.microsoft.com
-
-[color "decorate"]
-	head = bold white
-	branch = bold magenta
-	remotebranch = blue
-	tag = bold red
-
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-
 [difftool]
 	prompt = false
-[diff]
-	tool = Kaleidoscope
-	noprefix = true
-
-[mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" \"$REMOTE\"
 
 [mergetool]
 	prompt = false
 	keepBackup = false
-[merge]
-	tool = Kaleidoscope
-[color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
-[color "diff"]
-	meta = 11
-	frag = magenta bold
-	commit = yellow bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
 
 # This next lines include Netlify's Git Credential Helper configuration in your Git configuration.
 [include]
   path = /Users/florian/.netlify/helper/git-config
+[merge]
+	tool = opendiff
