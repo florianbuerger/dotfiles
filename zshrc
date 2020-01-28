@@ -192,7 +192,12 @@ precmd() {
 PROMPT_PATH=
 PROMPT_SYMBOL=%#
 
-PROMPT='%{%F{cyan}%}%1~%{$reset_color%}%# '
+if [[ -n "$SSH_CLIENT" ]]; then
+    PROMPT='%F{green}%n%f@%F{magenta}%m%f::%1~%{$reset_color%}%# '
+else
+    PROMPT='%{%F{cyan}%}%1~%{$reset_color%}%# '
+fi
+
 RPROMPT='${vcs_info_msg_0_}'
 
 # ======================================
