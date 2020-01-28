@@ -122,7 +122,8 @@ alias bump='agvtool next-version -all'
 alias update_everything='gem update && gem clean && brew update && brew upgrade && brew prune && brew cleanup && sudo softwareupdate -ia'
 
 # Git
-alias gs='git status -sb'
+alias g='git status -sb'
+alias gs='git switch'
 alias gut='git'
 alias gd='git diff'
 alias gc='git commit'
@@ -137,9 +138,9 @@ alias gm='git merge --ff-only'
 alias gmn='git merge --no-ff'
 alias gp='git push'
 
-alias e=nvim
+alias e=code
 alias ci="mosh --ssh='ssh -p 7001' --server=/usr/local/bin/mosh-server MacPro-Xeon-Standard-1016@connect.remotemac.io -p 7001"
-alias t="tmux new-session -A -s main"
+alias rm="trash"
 
 # ======================================
 #   KEY BINDINGS
@@ -191,7 +192,7 @@ precmd() {
 PROMPT_PATH=
 PROMPT_SYMBOL=%#
 
-PROMPT='%{%F{blue}%}%1~%{$reset_color%}%# '
+PROMPT='%{%F{cyan}%}%1~%{$reset_color%}%# '
 RPROMPT='${vcs_info_msg_0_}'
 
 # ======================================
@@ -243,5 +244,7 @@ fi'"
 # netlify
 if [ -f '$HOME/.netlify/helper/path.zsh.inc' ]; then source '$HOME/.netlify/helper/path.zsh.inc'; fi
 
-# Load ssh agent
-[ -z "$SSH_AUTH_SOCK" ] && eval "$(ssh-agent -s)"
+# ssh agent (via keychain -> brew install keychain)
+eval `keychain --eval --agents ssh --inherit any id_rsa --quiet`
+
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
