@@ -15,3 +15,6 @@ set background=light
 set wrap
 set linebreak
 set nolist  " list disables linebreak
+
+imap jk <Esc>
+nmap ; :
