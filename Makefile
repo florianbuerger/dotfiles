@@ -51,4 +51,4 @@ alacritty:
 	mkdir -p '$(HOME)/.config'
 	ln -sFf '$(CURRENT_DIR)/alacritty' $(HOME)/.config/alacritty
 
-.PHONY: zsh vim bin
+.PHONY: zsh vim bin fish

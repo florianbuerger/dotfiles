@@ -9,3 +9,4 @@ fish_history
 config/fish/fishd.*
 fish/fishd.*
 /.vim/.netrwhist
+/fish/fish_variables
