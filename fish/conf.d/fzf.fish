@@ -5,7 +5,7 @@ set FZF_DEFAULT_OPTS "--height 80% --bind='ctrl-o:execute-silent(code {})+abort'
 # if it's a directory shows its content, the rest is ignored
 set FZF_CTRL_T_OPTS "--preview-window wrap --preview '
 if test -f {};
-    file --mime {} | grep -q \"text\/.*;\" && bat --color \"always\" {} || (tput setaf 1; file --mime {})
+    file --mime {} | grep -q \"text\/.*;\" && bat --theme=GitHub --color \"always\" {} || (tput setaf 1; file --mime {})
 else if test -d {};
     exa -l --color always {}
 else;

@@ -1,7 +1,7 @@
 function fish_prompt
     echo ''
 
-    set_color blue
+    set_color cyan
 	# echo -n (basename $PWD)
     echo -n (prompt_pwd)
     # echo -n ' '

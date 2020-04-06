@@ -4,3 +4,4 @@ command script import /Users/florian/Library/Application\ Support/Reveal/RevealS
 
 command alias darkMode expression (void)[objc_getClass("UIApplication") _setDebugUserInterfaceStyleOverride:2];
 
+# log enable -f /tmp/log.txt lldb expr types

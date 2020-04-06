@@ -2,16 +2,18 @@ set fish_greeting
 
 set -x  PATH ~/.bin /Library/Frameworks/Python.framework/Versions/3.7/bin (brew --prefix)/sbin /usr/sbin $PATH
 set -x  LANG en_US.UTF-8
-set -x  EDITOR nvim
+set -x  EDITOR vim
 
 alias t="tmux new -A -s main"
+alias cat="bat --theme=ansi-light"
+alias ll="exa -l --color always"
+alias la="exa -la --color always"
 
 # Generic version manager
 source ~/.asdf/asdf.fish
 
 eval (direnv hook fish)
  
-alias ci="mosh --ssh='ssh -p 7001' --server=/usr/local/bin/mosh-server MacPro-Xeon-Standard-1016@connect.remotemac.io -p 7001"
+alias ci="mosh --ssh='ssh -p 7001' --server=/usr/local/bin/mosh-server MacPro-Xeon-Standard-1016@connect.remotemac.io"
 
 test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
-
