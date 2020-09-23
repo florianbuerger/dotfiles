@@ -1,6 +1,11 @@
 " Disable compatibility mode
 set nocompatible
 
+" Teach vim to fish...
+if &shell =~# 'fish$'
+    set shell=sh
+endif
+
 " Enable syntax highlight
 syntax on
 colorscheme delek
