@@ -9,6 +9,7 @@ git:
 zsh:
 	ln -sFf '$(CURRENT_DIR)/zshrc' $(HOME)/.zshrc
 	ln -sFf '$(CURRENT_DIR)/zshenv' $(HOME)/.zshenv
+	ln -sFf '$(CURRENT_DIR)/zprofile' $(HOME)/.zprofile
 	ln -sFf '$(CURRENT_DIR)/zsh' $(HOME)/.zsh
 	ln -sFf '$(CURRENT_DIR)/dircolors' $(HOME)/.dircolors
 	ln -sFf '$(CURRENT_DIR)/hushlogin' $(HOME)/.hushlogin

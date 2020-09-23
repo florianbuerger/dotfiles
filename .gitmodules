@@ -1,3 +1,9 @@
 [submodule "zsh/you-should-use"]
 	path = zsh/you-should-use
 	url = https://github.com/MichaelAquilina/zsh-you-should-use.git
+[submodule "vim/pack/mac/start/commentary"]
+	path = vim/pack/mac/start/commentary
+	url = https://tpope.io/vim/commentary.git
+[submodule "vim/pack/mac/start/vim-endwise"]
+	path = vim/pack/mac/start/vim-endwise
+	url = git://github.com/tpope/vim-endwise.git
