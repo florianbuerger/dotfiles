@@ -1,6 +1,6 @@
 abbr -a gco git checkout
 abbr -a gs git switch
-abbr -a gca 'git add -A && git commit'
+abbr -a gca 'git add -A && git commit -v'
 abbr -a gcam 'git add -A && git commit -m'
 abbr -a gd git diff
 abbr -a gdc git diff --cached
