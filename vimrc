@@ -1,13 +1,11 @@
-" Teach vim to fish...
-if &shell =~# 'fish$'
-    set shell=sh
-endif
+set nocompatible
+filetype plugin indent on
 
 " Enable syntax highlight
 syntax on
-colorscheme delek
+set background=light
 
-filetype plugin indent on
+set ruler
 set number
 
 " Sane wrapping
@@ -30,7 +28,6 @@ set expandtab                         " expand tabs into spaces
 set smarttab                          " smart tabulation and backspace
 
 " Then I use an additional block to set indentation for exceptions.
-
 if has("autocmd")
   augroup styles
     autocmd!
@@ -42,36 +39,32 @@ if has("autocmd")
   augroup END
 endif
 
-set mouse=a
+" show filename
+set title
 
-" To get hover working in the terminal we need to set ttymouse. See
-"
-" :help ttymouse
-"
-" for the appropriate setting for your terminal. Note that despite the
-" automated tests using xterm as the terminal, a setting of ttymouse=xterm
-" does not work correctly beyond a certain column number (citation needed)
-" hence we use ttymouse=sgr
-set ttymouse=sgr
+" show (partial) command
+set showcmd
 
-" Suggestion: By default, govim populates the quickfix window with diagnostics
-" reported by gopls after a period of inactivity, the time period being
-" defined by updatetime (help updatetime). Here we suggest a short updatetime
-" time in order that govim/Vim are more responsive/IDE-like
-set updatetime=500
+" start scrolling three lines before border
+set scrolloff=3
 
-" Suggestion: To make govim/Vim more responsive/IDE-like, we suggest a short
-" balloondelay
-set balloondelay=250
+set cul
+autocmd InsertEnter,InsertLeave * set nocul!
 
-" Suggestion: Turn on the sign column so you can see error marks on lines
-" where there are quickfix errors. Some users who already show line number
-" might prefer to instead have the signs shown in the number column; in which
-" case set signcolumn=number
-set signcolumn=yes
+" nicer netrw
+let g:netrw_banner=0
+let g:netrw_liststyle=3
+let g:netrw_list_hide='.*\.swp$,\.DS_Store'
 
-" Suggestion: show info for completion candidates in a popup menu
-if has("patch-8.1.1904")
-  set completeopt+=popup
-  set completepopup=align:menu,border:off,highlight:Pmenu
-endif
+" strip trailing spaces
+fun! <SID>StripTrailingWhitespaces()
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
+endfun
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+" Share clipboard with macOS
+set clipboard=unnamed
+

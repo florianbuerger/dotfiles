@@ -5,7 +5,7 @@
 [core]
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	excludesfile = /Users/florian/.gitignore_global
-	editor = vim
+	editor = cedar
 	pager = diff-so-fancy | less --tabs=4 -RFX
 
 [push]
@@ -59,4 +59,12 @@
 [include]
   path = /Users/florian/.netlify/helper/git-config
 [merge]
-	tool = opendiff
+	tool = Kaleidoscope
+[diff]
+	colorMoved = default
+	tool = Kaleidoscope
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"

@@ -1,6 +1,0 @@
-bind status P !git push origin
-bind main P !git push origin
-
-color cursor		black	green
-color title-blur	black	blue
-color title-focus	black	blue

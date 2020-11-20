@@ -1,0 +1,667 @@
+#compdef _git-town git-town
+
+
+function _git-town {
+  local -a commands
+
+  _arguments -C \
+    '--debug[Developer tool to print git commands run under the hood]' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "abort:Aborts the last run git-town command"
+      "alias:Adds or removes default global aliases"
+      "append:Creates a new feature branch as a child of the current branch"
+      "completions:Generates auto-completion scripts for Bash, zsh, fish, and PowerShell"
+      "config:Displays your Git Town configuration"
+      "continue:Restarts the last run git-town command after having resolved conflicts"
+      "diff-parent:Shows the changes committed to a feature branch"
+      "discard:Discards the saved state of the previous git-town command"
+      "hack:Creates a new feature branch off the main development branch"
+      "help:Help about any command"
+      "kill:Removes an obsolete feature branch"
+      "main-branch:Displays or sets your main development branch"
+      "new-branch-push-flag:Displays or sets your new branch push flag"
+      "new-pull-request:Creates a new pull request"
+      "offline:Displays or sets offline mode"
+      "perennial-branches:Displays your perennial branches"
+      "prepend:Creates a new feature branch as the parent of the current branch"
+      "prune-branches:Deletes local branches whose tracking branch no longer exists"
+      "pull-branch-strategy:Displays or sets your pull branch strategy"
+      "rename-branch:Renames a branch both locally and remotely"
+      "repo:Opens the repository homepage"
+      "set-parent-branch:Prompts to set the parent branch for the current branch"
+      "ship:Deliver a completed feature branch"
+      "skip:Restarts the last run git-town command by skipping the current branch"
+      "sync:Updates the current branch with all relevant changes"
+      "undo:Undoes the last run git-town command"
+      "version:Displays the version"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  abort)
+    _git-town_abort
+    ;;
+  alias)
+    _git-town_alias
+    ;;
+  append)
+    _git-town_append
+    ;;
+  completions)
+    _git-town_completions
+    ;;
+  config)
+    _git-town_config
+    ;;
+  continue)
+    _git-town_continue
+    ;;
+  diff-parent)
+    _git-town_diff-parent
+    ;;
+  discard)
+    _git-town_discard
+    ;;
+  hack)
+    _git-town_hack
+    ;;
+  help)
+    _git-town_help
+    ;;
+  kill)
+    _git-town_kill
+    ;;
+  main-branch)
+    _git-town_main-branch
+    ;;
+  new-branch-push-flag)
+    _git-town_new-branch-push-flag
+    ;;
+  new-pull-request)
+    _git-town_new-pull-request
+    ;;
+  offline)
+    _git-town_offline
+    ;;
+  perennial-branches)
+    _git-town_perennial-branches
+    ;;
+  prepend)
+    _git-town_prepend
+    ;;
+  prune-branches)
+    _git-town_prune-branches
+    ;;
+  pull-branch-strategy)
+    _git-town_pull-branch-strategy
+    ;;
+  rename-branch)
+    _git-town_rename-branch
+    ;;
+  repo)
+    _git-town_repo
+    ;;
+  set-parent-branch)
+    _git-town_set-parent-branch
+    ;;
+  ship)
+    _git-town_ship
+    ;;
+  skip)
+    _git-town_skip
+    ;;
+  sync)
+    _git-town_sync
+    ;;
+  undo)
+    _git-town_undo
+    ;;
+  version)
+    _git-town_version
+    ;;
+  esac
+}
+
+function _git-town_abort {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_alias {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_append {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_completions {
+  _arguments \
+    '(-h --help)'{-h,--help}'[help for completions]' \
+    '--no-descriptions[disable completions description for shells that support it]' \
+    '--debug[Developer tool to print git commands run under the hood]' \
+    '1: :("bash" "zsh" "fish" "powershell")'
+}
+
+
+function _git-town_config {
+  local -a commands
+
+  _arguments -C \
+    '--debug[Developer tool to print git commands run under the hood]' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "reset:Resets your Git Town configuration"
+      "setup:Prompts to setup your Git Town configuration"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  reset)
+    _git-town_config_reset
+    ;;
+  setup)
+    _git-town_config_setup
+    ;;
+  esac
+}
+
+function _git-town_config_reset {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_config_setup {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_continue {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_diff-parent {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_discard {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_hack {
+  _arguments \
+    '(-p --prompt)'{-p,--prompt}'[Prompt for the parent branch]' \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_help {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_kill {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_main-branch {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_new-branch-push-flag {
+  _arguments \
+    '--global[Displays or sets your global new branch push flag]' \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_new-pull-request {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_offline {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+
+function _git-town_perennial-branches {
+  local -a commands
+
+  _arguments -C \
+    '--debug[Developer tool to print git commands run under the hood]' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "update:Prompts to update your perennial branches"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  update)
+    _git-town_perennial-branches_update
+    ;;
+  esac
+}
+
+function _git-town_perennial-branches_update {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_prepend {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_prune-branches {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_pull-branch-strategy {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_rename-branch {
+  _arguments \
+    '--force[Force rename of perennial branch]' \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_repo {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_set-parent-branch {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_ship {
+  _arguments \
+    '(-m --message)'{-m,--message}'[Specify the commit message for the squash commit]:' \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_skip {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_sync {
+  _arguments \
+    '--all[Sync all local branches]' \
+    '--dry-run[Print the commands but don'\''t run them]' \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_undo {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_version {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+#compdef _git-town git-town
+
+
+function _git-town {
+  local -a commands
+
+  _arguments -C \
+    '--debug[Developer tool to print git commands run under the hood]' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "abort:Aborts the last run git-town command"
+      "alias:Adds or removes default global aliases"
+      "append:Creates a new feature branch as a child of the current branch"
+      "completions:Generates auto-completion scripts for Bash, zsh, fish, and PowerShell"
+      "config:Displays your Git Town configuration"
+      "continue:Restarts the last run git-town command after having resolved conflicts"
+      "diff-parent:Shows the changes committed to a feature branch"
+      "discard:Discards the saved state of the previous git-town command"
+      "hack:Creates a new feature branch off the main development branch"
+      "help:Help about any command"
+      "kill:Removes an obsolete feature branch"
+      "main-branch:Displays or sets your main development branch"
+      "new-branch-push-flag:Displays or sets your new branch push flag"
+      "new-pull-request:Creates a new pull request"
+      "offline:Displays or sets offline mode"
+      "perennial-branches:Displays your perennial branches"
+      "prepend:Creates a new feature branch as the parent of the current branch"
+      "prune-branches:Deletes local branches whose tracking branch no longer exists"
+      "pull-branch-strategy:Displays or sets your pull branch strategy"
+      "rename-branch:Renames a branch both locally and remotely"
+      "repo:Opens the repository homepage"
+      "set-parent-branch:Prompts to set the parent branch for the current branch"
+      "ship:Deliver a completed feature branch"
+      "skip:Restarts the last run git-town command by skipping the current branch"
+      "sync:Updates the current branch with all relevant changes"
+      "undo:Undoes the last run git-town command"
+      "version:Displays the version"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  abort)
+    _git-town_abort
+    ;;
+  alias)
+    _git-town_alias
+    ;;
+  append)
+    _git-town_append
+    ;;
+  completions)
+    _git-town_completions
+    ;;
+  config)
+    _git-town_config
+    ;;
+  continue)
+    _git-town_continue
+    ;;
+  diff-parent)
+    _git-town_diff-parent
+    ;;
+  discard)
+    _git-town_discard
+    ;;
+  hack)
+    _git-town_hack
+    ;;
+  help)
+    _git-town_help
+    ;;
+  kill)
+    _git-town_kill
+    ;;
+  main-branch)
+    _git-town_main-branch
+    ;;
+  new-branch-push-flag)
+    _git-town_new-branch-push-flag
+    ;;
+  new-pull-request)
+    _git-town_new-pull-request
+    ;;
+  offline)
+    _git-town_offline
+    ;;
+  perennial-branches)
+    _git-town_perennial-branches
+    ;;
+  prepend)
+    _git-town_prepend
+    ;;
+  prune-branches)
+    _git-town_prune-branches
+    ;;
+  pull-branch-strategy)
+    _git-town_pull-branch-strategy
+    ;;
+  rename-branch)
+    _git-town_rename-branch
+    ;;
+  repo)
+    _git-town_repo
+    ;;
+  set-parent-branch)
+    _git-town_set-parent-branch
+    ;;
+  ship)
+    _git-town_ship
+    ;;
+  skip)
+    _git-town_skip
+    ;;
+  sync)
+    _git-town_sync
+    ;;
+  undo)
+    _git-town_undo
+    ;;
+  version)
+    _git-town_version
+    ;;
+  esac
+}
+
+function _git-town_abort {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_alias {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_append {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_completions {
+  _arguments \
+    '(-h --help)'{-h,--help}'[help for completions]' \
+    '--no-descriptions[disable completions description for shells that support it]' \
+    '--debug[Developer tool to print git commands run under the hood]' \
+    '1: :("bash" "zsh" "fish" "powershell")'
+}
+
+
+function _git-town_config {
+  local -a commands
+
+  _arguments -C \
+    '--debug[Developer tool to print git commands run under the hood]' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "reset:Resets your Git Town configuration"
+      "setup:Prompts to setup your Git Town configuration"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  reset)
+    _git-town_config_reset
+    ;;
+  setup)
+    _git-town_config_setup
+    ;;
+  esac
+}
+
+function _git-town_config_reset {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_config_setup {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_continue {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_diff-parent {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_discard {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_hack {
+  _arguments \
+    '(-p --prompt)'{-p,--prompt}'[Prompt for the parent branch]' \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_help {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_kill {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_main-branch {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_new-branch-push-flag {
+  _arguments \
+    '--global[Displays or sets your global new branch push flag]' \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_new-pull-request {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_offline {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+
+function _git-town_perennial-branches {
+  local -a commands
+
+  _arguments -C \
+    '--debug[Developer tool to print git commands run under the hood]' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "update:Prompts to update your perennial branches"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  update)
+    _git-town_perennial-branches_update
+    ;;
+  esac
+}
+
+function _git-town_perennial-branches_update {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_prepend {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_prune-branches {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_pull-branch-strategy {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_rename-branch {
+  _arguments \
+    '--force[Force rename of perennial branch]' \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_repo {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_set-parent-branch {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_ship {
+  _arguments \
+    '(-m --message)'{-m,--message}'[Specify the commit message for the squash commit]:' \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_skip {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_sync {
+  _arguments \
+    '--all[Sync all local branches]' \
+    '--dry-run[Print the commands but don'\''t run them]' \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_undo {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
+function _git-town_version {
+  _arguments \
+    '--debug[Developer tool to print git commands run under the hood]'
+}
+
