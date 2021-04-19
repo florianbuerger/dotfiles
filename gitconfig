@@ -1,12 +1,11 @@
 [user]
-	name = Florian Buerger
+	name = Florian Bürger
 	email = florian@florianbuerger.com
 
 [core]
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	excludesfile = /Users/florian/.gitignore_global
-	editor = cedar
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	editor = vim
 
 [push]
 	default = simple
@@ -23,23 +22,11 @@
 [alias]
 	prune = fetch --prune
 	undo = reset --soft HEAD^
-	stash-all = stash save --include-untracked
  	glog = log --graph --pretty=format:\"%C(yellow)%h%Creset %ad  %s%C(cyan)%d%Creset %C(green)[%an]%Creset\" --date=short
 	branch-name = "!git rev-parse --abbrev-ref HEAD"
 	publish = "!git push -u origin $(git branch-name)"
 	unmerged = "branch --no-merged"
 	amend = "commit -a --amend"
-	append = town append
-	hack = town hack
-	kill = town kill
-	prepend = town prepend
-	prune-branches = town prune-branches
-	rename-branch = town rename-branch
-	repo = town repo
-	ship = town ship
-	sync = town sync
-	opendiff = difftool --no-prompt --tool opendiff --dir-diff
-	pr = town new-pull-request
 
 [status]
 	showUntrackedFiles = all
@@ -58,13 +45,42 @@
 # This next lines include Netlify's Git Credential Helper configuration in your Git configuration.
 [include]
   path = /Users/florian/.netlify/helper/git-config
+
 [merge]
 	tool = Kaleidoscope
+
 [diff]
 	colorMoved = default
 	tool = Kaleidoscope
+
 [mergetool "Kaleidoscope"]
 	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
 	trustExitCode = true
+
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	func = 146 bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[init]
+	defaultBranch = main
+[commit]
+	gpgsign = true
+[gpg]
+	program = /usr/local/MacGPG2/bin/gpg2
+[tag]
+	forceSignAnnotated = true
+[maintenance]
+	repo = /Users/florian/Developer/Fika-iOS

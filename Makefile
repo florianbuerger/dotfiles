@@ -8,7 +8,7 @@ git:
 
 zsh:
 	ln -sFf '$(CURRENT_DIR)/zshrc' $(HOME)/.zshrc
-	ln -sFf '$(CURRENT_DIR)/zsh' $(HOME)/.zsh
+	ln -sFf '$(CURRENT_DIR)/zshenv' $(HOME)/.zshenv
 	touch $(HOME)/.hushlogin
 
 ruby:
@@ -25,4 +25,4 @@ vim:
 	ln -sFf '$(CURRENT_DIR)/vim' $(HOME)/.vim
 	ln -sFf '$(CURRENT_DIR)/vimrc' $(HOME)/.vimrc
 
-.PHONY: bin lldb
+.PHONY: bin lldb zsh
