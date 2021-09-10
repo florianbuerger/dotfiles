@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# Delete all local branches that have been merged into main.
+# This will automatically ignore main and the current branch
+
+main=$(git-main-branch-name)
+
+deleted_branches=$(git branch --list --merged "$main" \
+  | grep -v '^\*' \
+  | grep -v 'main' \
+  | grep -v 'master' \
+  | awk '{$1=$1;print}'
+)
+
+if [ "$deleted_branches" != "" ]; then
+  for branch in $deleted_branches; do
+    git branch -d "$branch"
+  done
+fi

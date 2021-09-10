@@ -1,6 +1,7 @@
 [user]
-	name = Florian Bürger
+	name = Florian Bürger
 	email = florian@florianbuerger.com
+	signingkey = 1A665BC35405241BB06274DBCF91DAAFF38DACCD
 
 [core]
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
@@ -76,3 +77,5 @@
 
 [difftool "kitty"]
     cmd = kitty +kitten diff $LOCAL $REMOTE
+[pull]
+	rebase = true
