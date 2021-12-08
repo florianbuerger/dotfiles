@@ -2,11 +2,9 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # rbenv
-eval "$(rbenv init -)"
+eval "$(rbenv init - zsh)"
 
 fpath=(~/.zsh/functions /opt/homebrew/share/zsh/site-functions $fpath)
-
-source $HOME/Developer/Vendor/zsh-autoswitch-virtualenv/autoswitch_virtualenv.plugin.zsh
 
 # completions
 autoload -Uz compinit
@@ -65,6 +63,7 @@ alias gp='git push'
 alias gt='gittower .'
 alias ghw='gh pr view --web'
 alias ghm='gh pr merge --squash --delete-branch && git pull'
+alias gship='gh pr merge --merge --delete-branch && git pull'
 
 alias ic='cd ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/'
 
@@ -75,10 +74,10 @@ alias clear-quarantine='sudo xattr -r -d com.apple.quarantine'
 alias lsregister=/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister
 alias fix-xcode-plugins="lsregister -f `xcode-select -p |  awk -F/ '{print "/"$2"/"$3}'`"
 alias deriveddata=osascript -e "tell application \"Finder\" to move POSIX file \"/Users/florian/Library/Developer/Xcode/DerivedData\" to trash" -e "tell application \"Finder\" to empty trash"
+alias xb='sudo xcode-select -s /Applications/Xcode-beta.app; xcode-select -p'
+alias xr='sudo xcode-select -s /Applications/Xcode.app; xcode-select -p'
 
-# ====
-# Misc
-# ===
+. ~/.fastlane/completions/completion.sh
 
 if [[ -f $HOME/.secrets ]]; then
     source $HOME/.secrets
